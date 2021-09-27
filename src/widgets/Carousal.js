@@ -18,10 +18,10 @@ const MOCK_DATA = [
 
 export default function Carousal() {
   return (
-    <Carousel className="h-500">
+    <Carousel className="h-20">
       {MOCK_DATA.map((item) => (
-        <Carousel.Item>
-          <img className="d-block w-100 h-500" src={item.img} alt={item.name} />
+        <Carousel.Item key={item.id}>
+          <img className="d-block w-100 h-20" src={item.img} alt={item.name} />
           <Carousel.Caption>
             <h3>{item.desc}</h3>
           </Carousel.Caption>

@@ -1,20 +1,23 @@
 import NavBar from "./widgets/NavBar";
-import Carousal from "./widgets/Carousal";
-import CardComponent from "./components/CardComponents";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import WebRouters from "./WebRouters";
+import { BrowserRouter } from "react-router-dom";
+import CustomAlert from "./widgets/CustomAlert";
+import { useSelector } from "react-redux";
+import { alert$ } from "./selectors/Dashboard.selectors";
 
 function App() {
+  const alert = useSelector(alert$);
+
   return (
-    <>
-      <NavBar />
-      <div className="custom-container">
-        <Carousal />
-        <div className="m-2">
-          <CardComponent />
-        </div>
+    <BrowserRouter>
+      {alert && <CustomAlert />}
+      <div className="full-width">
+        <NavBar />
+        <WebRouters />
       </div>
-    </>
+    </BrowserRouter>
   );
 }
 

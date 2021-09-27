@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   NavDropdown,
   Navbar,
@@ -8,51 +8,65 @@ import {
   InputGroup,
   Badge,
 } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import { FaHeart, FaShoppingCart, FaSearch } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { productsInCart$ } from "../selectors/Dashboard.selectors";
 
-export default class NavBar extends Component {
-  render() {
-    return (
-      <Navbar
-        collapseOnSelect
-        expand="lg"
-        bg="dark"
-        variant="dark"
-        fixed="top"
-        className="mb-1"
-      >
-        <Navbar.Brand href="#home">E-Cart</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Form className="d-flex">
-            <InputGroup>
-              <Form.Control type="search" placeholder="Search" />
-              <Button
-                variant="light"
-                id="search-button"
-                className="search-button"
-              >
-                <FaSearch />
-              </Button>
-            </InputGroup>
-          </Form>
-          <Nav className="ml-auto">
-            <NavDropdown title="Arpit" id="nav-dropdown">
-              <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
-              <NavDropdown.Item href="#logout">Logout</NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="#fav">
+const NavBar = () => {
+  const productsInCart = useSelector(productsInCart$);
+  return (
+    <Navbar
+      collapseOnSelect
+      expand="lg"
+      bg="dark"
+      variant="dark"
+      fixed="top"
+      className="mb-1"
+    >
+      <LinkContainer to="/">
+        <Navbar.Brand>E-Cart</Navbar.Brand>
+      </LinkContainer>
+      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Collapse id="responsive-navbar-nav">
+        <Form className="d-flex">
+          <InputGroup>
+            <Form.Control type="search" placeholder="Search" />
+            <Button
+              variant="light"
+              id="search-button"
+              className="search-button"
+            >
+              <FaSearch />
+            </Button>
+          </InputGroup>
+        </Form>
+        <Nav className="ml-auto">
+          <NavDropdown title="Arpit" id="nav-dropdown">
+            <LinkContainer to="#profile">
+              <NavDropdown.Item>Profile</NavDropdown.Item>
+            </LinkContainer>
+            <LinkContainer to="#logout">
+              <NavDropdown.Item>Logout</NavDropdown.Item>
+            </LinkContainer>
+          </NavDropdown>
+          <LinkContainer to="#fav">
+            <Nav.Link>
               <FaHeart />
             </Nav.Link>
-            <Nav.Link href="#cart">
+          </LinkContainer>
+          <LinkContainer to="/cart">
+            <Nav.Link>
               <FaShoppingCart color="#0762f5" />
-              <Badge pill className="cart-count">
-                0
+              <Badge pill className="cart-count" bg="light">
+                {productsInCart.length}
               </Badge>
             </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
-    );
-  }
-}
+          </LinkContainer>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+  );
+};
+
+export default NavBar;
