@@ -9,7 +9,7 @@ export default function CustomAlert() {
   const message = useSelector(alert$);
 
   useEffect(() => {
-    if (message) setTimeout(() => dispatch(setAlert()), 2000);
+    if (message) setTimeout(() => dispatch(setAlert()), 3000);
   }, [dispatch, message]);
 
   return (
