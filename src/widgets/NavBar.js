@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   NavDropdown,
   Navbar,
@@ -10,11 +10,17 @@ import {
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FaHeart, FaShoppingCart, FaSearch } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { productsInCart$ } from "../selectors/Dashboard.selectors";
+import { setSearchItem } from "../reducers";
+
+const emptyString = "";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
   const productsInCart = useSelector(productsInCart$);
+  const [itemToBeSearch, setItemToBeSearch] = useState(emptyString);
+
   return (
     <Navbar
       collapseOnSelect
@@ -31,11 +37,12 @@ const NavBar = () => {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Form className="d-flex">
           <InputGroup>
-            <Form.Control type="search" placeholder="Search" />
+            <Form.Control type="search" placeholder="Search" onChange={(e) => setItemToBeSearch(e.target.value)} value={itemToBeSearch} />
             <Button
               variant="light"
               id="search-button"
               className="search-button"
+              onClick={() => dispatch(setSearchItem(itemToBeSearch))}
             >
               <FaSearch />
             </Button>

@@ -3,19 +3,23 @@ import { Row, Col, Button, Card, Image, Form } from "react-bootstrap";
 import {
   productsInCart$,
   countOfItems$,
-} from "../selectors/Dashboard.selectors";
+} from "../selectors";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  removeFromCart,
   countOfItems,
   removeCountOfItems,
   setAlert,
-} from "../reducers/Dashboard.slice";
+} from "../reducers";
+import { fetchCart, removeFromCart } from "../infra";
 
 const CartComponent = () => {
   const dispatch = useDispatch();
   const productsInCart = useSelector(productsInCart$);
   const itemsCount = useSelector(countOfItems$);
+
+  useEffect(() => {
+    dispatch(fetchCart())
+  }, [dispatch])
 
   useEffect(() => {
     if (Object.keys(itemsCount).length === 0)
@@ -37,6 +41,11 @@ const CartComponent = () => {
       )
       .toFixed(2);
 
+  const handleRemoveFromCart = (id) => {
+    dispatch(removeCountOfItems(id));
+    dispatch(removeFromCart(id)).then(() => dispatch(fetchCart()))
+  }
+
   return (
     <div className="custom-container">
       <Row className="d-flex flex-row pt-40">
@@ -53,13 +62,13 @@ const CartComponent = () => {
                       <Row className="mb-3" key={item.id}>
                         <Col>
                           <Image
-                            src={item.image}
-                            alt={item.title}
+                            src={item.avatar}
+                            alt={item.name}
                             className="cart-image"
                           />
                         </Col>
                         <Col>
-                          <p className="info">{item.title}</p>
+                          <p className="info">{item.name}</p>
                           <p className="info">Price: $ {item.price}</p>
                         </Col>
                         <Col>
@@ -84,10 +93,7 @@ const CartComponent = () => {
                           <Button
                             variant="light"
                             className="delete-button"
-                            onClickCapture={() => {
-                              dispatch(removeCountOfItems(item.id));
-                              dispatch(removeFromCart(item.id));
-                            }}
+                            onClickCapture={() => handleRemoveFromCart(item.id)}
                           >
                             Delete
                           </Button>
@@ -125,7 +131,7 @@ const CartComponent = () => {
                       <Row key={item.id}>
                         <Col sm={12} md={7}>
                           <p>
-                            {item.title} x {itemsCount[item.id]}
+                            {item.name} x {itemsCount[item.id]}
                           </p>
                         </Col>
                         <Col sm={12} md={5}>

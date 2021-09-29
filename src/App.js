@@ -5,7 +5,7 @@ import WebRouters from "./WebRouters";
 import { BrowserRouter } from "react-router-dom";
 import CustomAlert from "./widgets/CustomAlert";
 import { useSelector } from "react-redux";
-import { alert$ } from "./selectors/Dashboard.selectors";
+import { alert$ } from "./selectors";
 
 function App() {
   const alert = useSelector(alert$);
