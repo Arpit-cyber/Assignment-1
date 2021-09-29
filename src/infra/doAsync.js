@@ -1,20 +1,19 @@
 import axios from 'axios';
+import { decreaseLoader, increaseLoader } from '../reducers/Loader.slice';
 
 const doAsync = ({
     url,
     method = 'get',
-    body,
+    body = {},
+    loaderName,
     dispatch,
 }) => {
-
     if (!url) {
         throw new Error('URL is required');
     }
 
-    // if (Boolean(busyIndicationName)) {
-    //     dispatch(incrementBusyIndicator(busyIndicationName));
-    // }
-
+    if (Boolean(loaderName)) dispatch(increaseLoader(loaderName));
+    
     const makeRequest = async () => {
         return await axios({
             method,
@@ -22,9 +21,9 @@ const doAsync = ({
             data: body,
         })
             .then((res) => {
-                // if (Boolean(busyIndicationName)) {
-                //     dispatch(decrementBusyIndicator(busyIndicationName));
-                // }
+                if (Boolean(loaderName)) {
+                    dispatch(decreaseLoader(loaderName));
+                }
 
                 return res.data;
             })

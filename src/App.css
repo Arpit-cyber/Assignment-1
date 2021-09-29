@@ -36,6 +36,13 @@
   margin-top: 20px;
 }
 
+.skeleton-custom-card {
+  width: 100%;
+  padding: 10px;
+  box-shadow: 8px 10px 8px #888888;
+  margin-top: 20px;
+}
+
 .custom-container {
   margin: 56px 5px 5px 5px;
 }
