@@ -158,3 +158,8 @@ p {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.form-control:focus {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
