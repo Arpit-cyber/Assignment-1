@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { itemToBeSearch$, products$, isProductLoading$ } from "../selectors";
 import Carousal from "../widgets/Carousal";
 import CardComponent from "./CardComponents";
-import { fetchProducts, fetchSales } from "../infra";
+import { fetchCart, fetchFavoriteProducts, fetchOrders, fetchProducts, fetchSales } from "../infra";
 import HomeComponentSkeleton from "../skeletons/HomeComponentSkeleton";
 
 export default function HomeComponent() {
@@ -17,6 +17,9 @@ export default function HomeComponent() {
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchSales());
+    dispatch(fetchCart());
+    dispatch(fetchOrders());
+    dispatch(fetchFavoriteProducts());
   }, [dispatch]);
 
   useEffect(() => {
@@ -29,8 +32,7 @@ export default function HomeComponent() {
   }, [itemToBeSearch, products])
 
   return (
-    <div className="custom-container">
-      {isProductLoading ? <HomeComponentSkeleton /> : 
+      isProductLoading ? <HomeComponentSkeleton /> : 
         <>
           <Carousal />
             <div className="m-2">
@@ -43,7 +45,5 @@ export default function HomeComponent() {
               </Row>
             </div>
         </>
-      }
-    </div>
   );
 }

@@ -10,7 +10,7 @@ import {
   removeCountOfItems,
   setAlert,
 } from "../reducers";
-import { fetchCart, removeFromCart } from "../infra";
+import { fetchCart, removeFromCart, placeOrder } from "../infra";
 
 const CartComponent = () => {
   const dispatch = useDispatch();
@@ -46,8 +46,19 @@ const CartComponent = () => {
     dispatch(removeFromCart(id)).then(() => dispatch(fetchCart()))
   }
 
+  const handlePlaceOrder = () => {
+    const order = {
+      orderName: `Order`,
+      orderItems: productsInCart,
+      totalAmount: getTotalAmount(),
+      orderAt: new Date().toISOString(),
+    }
+
+    dispatch(placeOrder(order))
+    productsInCart.forEach((order) => handleRemoveFromCart(order.id))
+  }
+
   return (
-    <div className="custom-container">
       <Row className="d-flex flex-row pt-40">
         <Col md={2} />
         <Col sm={12} md={5} className="mb-2">
@@ -106,7 +117,7 @@ const CartComponent = () => {
                     className="order-button border-0"
                     variant="danger"
                     onClick={() => {
-                      dispatch(removeFromCart());
+                      handlePlaceOrder()
                       dispatch(setAlert("Order placed"));
                     }}
                   >
@@ -158,7 +169,6 @@ const CartComponent = () => {
         </Col>
         <Col md={1} />
       </Row>
-    </div>
   );
 };
 

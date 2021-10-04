@@ -12,39 +12,31 @@ export default function HomeComponentSkeleton() {
             <Card className="skeleton-custom-card" key="s1">
               <Skeleton height="80px" />
               <Card.Body className="d-flex flex-column justify-content-between">
-                <Skeleton count={2} height={38} />
-                <div className="d-flex flex-row justify-content-between">
-                  <Skeleton count={2} height={38} width={38} />
-                </div>
+                <Skeleton count={3} height={38} />
               </Card.Body>
             </Card>
           </Col>
           <Col sm={12} md={4} lg={3} key={2}>
-            <Card className="skeleton-custom-card" key="s1">
+            <Card className="skeleton-custom-card" key="s2">
               <Skeleton height="80px" />
               <Card.Body className="d-flex flex-column justify-content-between">
-                <Skeleton count={2} height={38} />
-                <div className="d-flex flex-row justify-content-between">
-                  <Skeleton count={2} height={38} width={38} />
-                </div>
+                <Skeleton count={3} height={38} />
               </Card.Body>
             </Card>
           </Col>
           <Col sm={12} md={4} lg={3} key={3}>
-            <Card className="skeleton-custom-card" key="s1">
+            <Card className="skeleton-custom-card" key="s3">
               <Skeleton height="80px" />
               <Card.Body className="d-flex flex-column justify-content-between">
-                <Skeleton count={2} height={38} />
-                <Skeleton height={38} />
+                <Skeleton count={3} height={38} />
               </Card.Body>
             </Card>
           </Col>
           <Col sm={12} md={4} lg={3} key={3}>
-            <Card className="skeleton-custom-card" key="s1">
+            <Card className="skeleton-custom-card" key="s4">
               <Skeleton height="80px" />
               <Card.Body className="d-flex flex-column justify-content-between">
-                <Skeleton count={2} height={38} />
-                <Skeleton height={38} />
+                <Skeleton count={3} height={38} />
               </Card.Body>
             </Card>
           </Col>

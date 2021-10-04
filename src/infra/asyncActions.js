@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { CART_URL, FETCH_CART, FETCH_PRODUCTS, FETCH_SALES, PRODUCT_URL, SALES_URL } from '../constants';
+import { CART_URL, FAVORITE_PRODUCTS_URL, FETCH_CART, FETCH_FAVORITE_PRODUCTS, FETCH_ORDERS, FETCH_PRODUCTS, FETCH_SALES, ORDERS_URL, PRODUCT_URL, SALES_URL } from '../constants';
 import { doAsync } from './doAsync';
 
 export const fetchProducts = createAsyncThunk(
@@ -17,6 +17,26 @@ export const fetchSales = createAsyncThunk(
     async (thungArgs, thunkAPI) =>  await doAsync({
             url: SALES_URL,
             loaderName: FETCH_SALES,
+            ...thungArgs,
+            ...thunkAPI
+        })
+);
+
+export const fetchOrders = createAsyncThunk(
+    'orders',
+    async (thungArgs, thunkAPI) =>  await doAsync({
+            url: ORDERS_URL,
+            loaderName: FETCH_ORDERS,
+            ...thungArgs,
+            ...thunkAPI
+        })
+);
+
+export const fetchFavoriteProducts = createAsyncThunk(
+    'fetchFavoriteProducts',
+    async (thungArgs, thunkAPI) =>  await doAsync({
+            url: FAVORITE_PRODUCTS_URL,
+            loaderName: FETCH_FAVORITE_PRODUCTS,
             ...thungArgs,
             ...thunkAPI
         })
@@ -51,6 +71,41 @@ export const removeFromCart = createAsyncThunk(
             url: `${CART_URL}/${productId}`,
             method: 'delete',
             ...thunkArgs,
+            ...thunkAPI
+        }),
+);
+
+export const placeOrder = createAsyncThunk(
+    'placeOrder',
+    async (order, thungArgs, thunkAPI) =>
+        await doAsync({
+            url: ORDERS_URL,
+            method: 'post',
+            body: order,
+            ...thungArgs,
+            ...thunkAPI
+        }),
+);
+
+export const markFavorite = createAsyncThunk(
+    'markFavorite',
+    async (product, thungArgs, thunkAPI) =>
+        await doAsync({
+            url: FAVORITE_PRODUCTS_URL,
+            method: 'post',
+            body: product,
+            ...thungArgs,
+            ...thunkAPI
+        }),
+);
+
+export const removeFavorite = createAsyncThunk(
+    'removeFavorite',
+    async (id, thungArgs, thunkAPI) =>
+        await doAsync({
+            url: `${FAVORITE_PRODUCTS_URL}/${id}`,
+            method: 'delete',
+            ...thungArgs,
             ...thunkAPI
         }),
 );

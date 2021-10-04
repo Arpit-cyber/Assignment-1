@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCart, fetchProducts, fetchSales } from "../infra";
+import { fetchCart, fetchFavoriteProducts, fetchOrders, fetchProducts, fetchSales } from "../infra";
 
 const initialState = {
   products: [],
@@ -7,7 +7,9 @@ const initialState = {
   numberOfItems: {},
   alert: "",
   sales: [],
-  itemToBeSearch: ""
+  itemToBeSearch: "",
+  orders: [],
+  favoriteProducts: []
 };
 
 export const DashboardSlice = createSlice({
@@ -56,6 +58,12 @@ export const DashboardSlice = createSlice({
     });
     builder.addCase(fetchCart.fulfilled, (s, a) => {
       s.cart = a.payload;
+    });
+    builder.addCase(fetchOrders.fulfilled, (s, a) => {
+      s.orders = a.payload;
+    });
+    builder.addCase(fetchFavoriteProducts.fulfilled, (s, a) => {
+      s.favoriteProducts = a.payload;
     });
   }
 });

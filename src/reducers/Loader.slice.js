@@ -12,7 +12,6 @@ export const LoaderSlice = createSlice({
     initialState,
     reducers: {
         increaseLoader(s, a) {
-            console.log('a.payload ', a.payload);
             if(a.payload) s[a.payload] = (s[a.payload] || 0) + 1
             else s.global = (s.global || 0) + 1
         },
