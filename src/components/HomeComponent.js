@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Image } from "react-bootstrap";
 import classnames from 'classnames';
 import { useDispatch, useSelector } from "react-redux";
@@ -31,12 +31,12 @@ export default function HomeComponent() {
     dispatch(fetchCart());
     dispatch(fetchOrders());
     dispatch(fetchFavoriteProducts());
-  }, [dispatch]);
+  }, [dispatch, paginationFilters]);
 
-  const pageCounts = useMemo(() => {
+  const pageCounts = () => {
     const maxPages = Math.ceil(21 / 8);
     return Array.from({length: maxPages}, (_, i) => i + 1)
-  }, [productsToBeDisplayed])
+  }
 
   useEffect(() => {
     products && setProductsToBeDisplayed(products)
