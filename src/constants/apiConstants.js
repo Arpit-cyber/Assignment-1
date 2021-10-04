@@ -1,3 +1,5 @@
-export const PRODUCT_URL = 'https://6152e4f1c465200017d1a837.mockapi.io/products';
-export const CART_URL = "https://6152e4f1c465200017d1a837.mockapi.io/cart";
-export const SALES_URL = "https://6152e4f1c465200017d1a837.mockapi.io/sales";
+export const PRODUCT_URL = 'http://localhost:8000/products';
+export const CART_URL = "http://localhost:8000/cart";
+export const SALES_URL = "http://localhost:8000/sales";
+export const ORDERS_URL = "http://localhost:8000/orders";
+export const FAVORITE_PRODUCTS_URL = "http://localhost:8000/favoriteProducts";

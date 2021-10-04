@@ -7,12 +7,14 @@ import {
   Button,
   InputGroup,
   Badge,
+  Image
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FaHeart, FaShoppingCart, FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { productsInCart$ } from "../selectors/Dashboard.selectors";
 import { setSearchItem } from "../reducers";
+import { Icons } from '../assets'
 
 const emptyString = "";
 
@@ -49,7 +51,19 @@ const NavBar = () => {
           </InputGroup>
         </Form>
         <Nav className="ml-auto">
-          <NavDropdown title="Arpit" id="nav-dropdown">
+          <NavDropdown 
+            title={
+              <Image
+                src={Icons.userAvatar}
+                alt="user-picture"
+                className="user-avatar"
+              />
+            } 
+            id="nav-dropdown"
+          >
+            <LinkContainer to="/orders">
+              <NavDropdown.Item>Orders</NavDropdown.Item>
+            </LinkContainer>
             <LinkContainer to="#profile">
               <NavDropdown.Item>Profile</NavDropdown.Item>
             </LinkContainer>
@@ -57,7 +71,7 @@ const NavBar = () => {
               <NavDropdown.Item>Logout</NavDropdown.Item>
             </LinkContainer>
           </NavDropdown>
-          <LinkContainer to="#fav">
+          <LinkContainer to="/favorite">
             <Nav.Link>
               <FaHeart />
             </Nav.Link>

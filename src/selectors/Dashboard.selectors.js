@@ -9,6 +9,10 @@ export const sales$ = createSelector(dashboard$, (s) => s.sales);
 
 export const productsInCart$ = createSelector(dashboard$, (s) => s.cart);
 
+export const orders$ = createSelector(dashboard$, (s) => s.orders);
+
+export const favoriteProducts$ = createSelector(dashboard$, (s) => s.favoriteProducts);
+
 export const countOfItems$ = createSelector(dashboard$, (s) => s.numberOfItems);
 
 export const alert$ = createSelector(dashboard$, (s) => s.alert);

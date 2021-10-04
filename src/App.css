@@ -44,7 +44,7 @@
 }
 
 .custom-container {
-  margin: 56px 5px 5px 5px;
+  margin: 65px 5px 5px 5px;
 }
 
 .ml-auto {
@@ -169,4 +169,58 @@ p {
 .form-control:focus {
   border-color: transparent !important;
   box-shadow: none !important;
+}
+
+.user-avatar {
+  width: 30px; 
+  height: 30px; 
+  border-radius: 50%; 
+}
+
+.order-container {
+  margin-top: 80px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.orders-card-heading {
+  margin-bottom: 15px;
+}
+
+.orders-price-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.orders-toggle-button > button {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.date-picker-input {
+  width: 15%;
+  margin: 0 10px 10px;
+}
+
+.filter-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+
+.star {
+  width: 15px;
+}
+
+.star-container {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fav-icon {
+  cursor: pointer;
+  color: red;
 }
