@@ -4,8 +4,8 @@ import { doAsync } from './doAsync';
 
 export const fetchProducts = createAsyncThunk(
     'products',
-    async (thungArgs, thunkAPI) =>  await doAsync({
-            url: PRODUCT_URL,
+    async (filters, thungArgs, thunkAPI) =>  await doAsync({
+            url: `${PRODUCT_URL}?_page=${filters.page}&_limit=${filters.limit}`,
             loaderName: FETCH_PRODUCTS,
             ...thungArgs,
             ...thunkAPI

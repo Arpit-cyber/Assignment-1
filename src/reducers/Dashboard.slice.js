@@ -9,33 +9,22 @@ const initialState = {
   sales: [],
   itemToBeSearch: "",
   orders: [],
-  favoriteProducts: []
+  favoriteProducts: [],
+  filters: {
+    page: 1,
+    limit: 8
+  }
 };
 
 export const DashboardSlice = createSlice({
   name: "Dashboard",
   initialState,
   reducers: {
-    setProducts(s, a) {
-      s.products = a.payload || initialState.products;
-    },
-    setSales(s, a) {
-      s.sales = a.payload || initialState.sales;
+    setPaginationFilters(s, a) {
+      s.filters = a.payload || initialState.filters;
     },
     setSearchItem(s, a) {
       s.itemToBeSearch = a.payload || initialState.itemToBeSearch;
-    },
-    addToCart(s, a) {
-      s.cart = a.payload
-        ? s.cart.every((e) => e.id !== a.payload.id)
-          ? [...s.cart, a.payload]
-          : s.cart
-        : initialState.cart;
-    },
-    removeFromCart(s, a) {
-      s.cart = a.payload
-        ? s.cart.filter((e) => e.id !== a.payload)
-        : initialState.cart;
     },
     countOfItems(s, a) {
       s.numberOfItems = a.payload
@@ -51,7 +40,7 @@ export const DashboardSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.fulfilled, (s, a) => {
-      s.products = a.payload;
+      s.products = a.payload; 
     });
     builder.addCase(fetchSales.fulfilled, (s, a) => {
       s.sales = a.payload;
@@ -69,12 +58,9 @@ export const DashboardSlice = createSlice({
 });
 
 export const {
-  setProducts,
-  addToCart,
-  removeFromCart,
+  setPaginationFilters,
   countOfItems,
   removeCountOfItems,
   setAlert,
-  setSales,
   setSearchItem
 } = DashboardSlice.actions;
