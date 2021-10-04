@@ -31,12 +31,12 @@ export default function HomeComponent() {
     dispatch(fetchCart());
     dispatch(fetchOrders());
     dispatch(fetchFavoriteProducts());
-  }, [dispatch]);
+  }, [dispatch, paginationFilters]);
 
   const pageCounts = useMemo(() => {
     const maxPages = Math.ceil(21 / 8);
     return Array.from({length: maxPages}, (_, i) => i + 1)
-  }, [productsToBeDisplayed])
+  }, [])
 
   useEffect(() => {
     products && setProductsToBeDisplayed(products)
