@@ -27,10 +27,9 @@ const NavBar = () => {
     <Navbar
       collapseOnSelect
       expand="lg"
-      bg="dark"
-      variant="dark"
       fixed="top"
-      className="mb-1"
+      className="mb-1 bg-purple"
+      variant="dark"
     >
       <LinkContainer to="/">
         <Navbar.Brand>E-Cart</Navbar.Brand>

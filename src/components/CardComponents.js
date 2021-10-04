@@ -19,7 +19,7 @@ const CardComponent = ({ product }) => {
     })
   }
 
-  const isFavorite = useMemo(() => favoriteProducts.some((item) => item.id === product.id), [favoriteProducts]);
+  const isFavorite = useMemo(() => favoriteProducts.some((item) => item.id === product.id), [favoriteProducts, product]);
 
   const handleMarkFavorite = () => dispatch(markFavorite(product)).then(() => dispatch(fetchFavoriteProducts()))
   
