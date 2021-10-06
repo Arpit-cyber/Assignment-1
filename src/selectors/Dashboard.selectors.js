@@ -13,6 +13,8 @@ export const orders$ = createSelector(dashboard$, (s) => s.orders);
 
 export const favoriteProducts$ = createSelector(dashboard$, (s) => s.favoriteProducts);
 
+export const viewedProducts$ = createSelector(dashboard$, (s) => s.viewedProducts);
+
 export const filters$ = createSelector(dashboard$, (s) => s.filters);
 
 export const countOfItems$ = createSelector(dashboard$, (s) => s.numberOfItems);

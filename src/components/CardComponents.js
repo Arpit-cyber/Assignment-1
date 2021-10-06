@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Card, Button, Image } from "react-bootstrap";
 import { FaShoppingCart, FaShoppingBag, FaHeart, FaRegHeart } from "react-icons/fa";
 import { setAlert } from "../reducers";
-import { addToCart, fetchCart, fetchFavoriteProducts, markFavorite, removeFavorite } from "../infra";
+import { addToCart, fetchCart, fetchFavoriteProducts, markFavorite, removeFavorite, viewedProduct } from "../infra";
 import Rating from "react-rating";
 import { Icons } from "../assets";
 import { favoriteProducts$ } from "../selectors";
@@ -13,6 +13,7 @@ const CardComponent = ({ product }) => {
   const favoriteProducts = useSelector(favoriteProducts$);
 
   const handleAddCart = (product) => {
+    dispatch(viewedProduct(product))
     dispatch(addToCart(product)).then(() => {
       dispatch(fetchCart());
       dispatch(setAlert("Item added to cart!"));

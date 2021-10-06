@@ -6,8 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchOrders } from '../infra';
 import { orders$ } from '../selectors';
 import Skeleton from 'react-loading-skeleton';
+import moment from 'moment';
+import orderBy from 'lodash/orderBy'
 
-const MOCK_ARRAY = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+const MOCK_ARRAY = [1,2,3,4,5,6,7,8,9,10,11];
 
 const OrdersComponent = () => {
     const dispatch = useDispatch();
@@ -15,7 +17,7 @@ const OrdersComponent = () => {
     const [filteredOrders, setFilteredOrders] = useState(orders);
 
     useEffect(() => {
-        if (orders.length) setFilteredOrders(orders);
+        if (orders.length) setFilteredOrders(orderBy(orders, "orderAt", "asc"));
         else dispatch(fetchOrders());
     }, [dispatch, orders])
 
@@ -27,19 +29,29 @@ const OrdersComponent = () => {
 
     return (
         <div className="order-container">
-            <div className="filter-container">
-                <h5>Filter by Date : </h5>
-                <div className="date-picker-input">
-                    <DateRangePicker initialSettings={{ startDate: new Date('2020'), endDate: new Date() }} onCallback={handleCallback}>
-                        <Form.Control type="text" />
-                    </DateRangePicker>
-                </div>
-            </div>
+            <Row>
+                <Col sm={12} md={6}>
+                    <h5 className="d-flex align-items-center">Previous Orders</h5>
+                </Col>
+                <Col sm={12} md={6} className="filter-container">
+                    <h5>Filter by Date : </h5>
+                    <div className="date-picker-input">
+                        <DateRangePicker initialSettings={{ startDate: new Date('2020'), endDate: new Date() }} onCallback={handleCallback}>
+                            <Form.Control type="text" />
+                        </DateRangePicker>
+                    </div>
+                </Col>
+            </Row>
             <Accordion>
                 {arrayToDisplay.map((order) => {
                     return (
-                        filteredOrders.length > 0 ? <Accordion.Item eventKey={order.id} key={order.id}>
-                        <Accordion.Header className="orders-toggle-button">{`${order.orderName} ${order.id}`}</Accordion.Header>
+                        filteredOrders.length > 0 ? <Accordion.Item eventKey={order.id} key={order.id} className="custom-accordion-item">
+                        <Accordion.Header className="orders-toggle-button">
+                            <div className="custom-accordion-header">
+                                <span>{`Order Id : ${order.id}`}</span>
+                                <span>{`Order On : ${moment(order.orderAt).format("MMM Do YYYY")}`}</span>
+                            </div>
+                        </Accordion.Header>
                         <Accordion.Body>
                             <h5 className="orders-card-heading">Items :</h5>
                             <Card>
@@ -72,7 +84,7 @@ const OrdersComponent = () => {
                                 <p className="info">Rs. {order.totalAmount}</p>
                             </div>
                         </Accordion.Body>
-                    </Accordion.Item> : <Skeleton height="54.2px" />
+                    </Accordion.Item> : <Skeleton height="54.2px" className="mb-20" />
                     )
                 })}
             </Accordion>

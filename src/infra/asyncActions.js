@@ -1,15 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { CART_URL, FAVORITE_PRODUCTS_URL, FETCH_CART, FETCH_FAVORITE_PRODUCTS, FETCH_ORDERS, FETCH_PRODUCTS, FETCH_SALES, ORDERS_URL, PRODUCT_URL, SALES_URL } from '../constants';
+import { CART_URL, FAVORITE_PRODUCTS_URL, FETCH_CART, FETCH_FAVORITE_PRODUCTS, FETCH_ORDERS, FETCH_PRODUCTS, FETCH_SALES, FETCH_VIEWED_PRODUCTS, ORDERS_URL, PRODUCT_URL, SALES_URL, VIEWED_PRODUCT_URL } from '../constants';
 import { doAsync } from './doAsync';
 
 export const fetchProducts = createAsyncThunk(
     'products',
-    async (filters, thungArgs, thunkAPI) =>  await doAsync({
-            url: `${PRODUCT_URL}?_page=${filters.page}&_limit=${filters.limit}`,
+    async (filters = {}, thungArgs, thunkAPI) =>  {
+        const qs = Object.keys(filters).length ? `?_page=${filters.page}&_limit=${filters.limit}` : '';
+
+        return await doAsync({
+            url: `${PRODUCT_URL}${qs}`,
             loaderName: FETCH_PRODUCTS,
             ...thungArgs,
             ...thunkAPI
         })
+    }
 );
 
 export const fetchSales = createAsyncThunk(
@@ -17,6 +21,16 @@ export const fetchSales = createAsyncThunk(
     async (thungArgs, thunkAPI) =>  await doAsync({
             url: SALES_URL,
             loaderName: FETCH_SALES,
+            ...thungArgs,
+            ...thunkAPI
+        })
+);
+
+export const fetchViewedProducts = createAsyncThunk(
+    'fetchViewedProducts',
+    async (thungArgs, thunkAPI) =>  await doAsync({
+            url: VIEWED_PRODUCT_URL,
+            loaderName: FETCH_VIEWED_PRODUCTS,
             ...thungArgs,
             ...thunkAPI
         })
@@ -57,6 +71,18 @@ export const addToCart = createAsyncThunk(
     async (product, thungArgs, thunkAPI) =>
         await doAsync({
             url: CART_URL,
+            method: 'post',
+            body: product,
+            ...thungArgs,
+            ...thunkAPI
+        }),
+);
+
+export const viewedProduct = createAsyncThunk(
+    'viewedProduct',
+    async (product, thungArgs, thunkAPI) =>
+        await doAsync({
+            url: VIEWED_PRODUCT_URL,
             method: 'post',
             body: product,
             ...thungArgs,

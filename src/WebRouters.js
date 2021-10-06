@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import AnalysisComponent from "./components/AnalysisComponent";
 import CartComponent from "./components/CartComponent";
 import FavoriteComponent from "./components/FavoriteComponent";
 import HomeComponent from "./components/HomeComponent";
@@ -20,6 +21,9 @@ const WebRouters = () => {
         </Route>
         <Route path="/favorite">
           <FavoriteComponent />
+        </Route>
+        <Route path="/analysis">
+          <AnalysisComponent />
         </Route>
       </Switch>
     </div>

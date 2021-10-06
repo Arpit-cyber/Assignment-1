@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCart, fetchFavoriteProducts, fetchOrders, fetchProducts, fetchSales } from "../infra";
+import { fetchCart, fetchFavoriteProducts, fetchOrders, fetchProducts, fetchSales, fetchViewedProducts } from "../infra";
 
 const initialState = {
   products: [],
@@ -13,7 +13,8 @@ const initialState = {
   filters: {
     page: 1,
     limit: 8
-  }
+  },
+  viewedProducts: []
 };
 
 export const DashboardSlice = createSlice({
@@ -53,6 +54,9 @@ export const DashboardSlice = createSlice({
     });
     builder.addCase(fetchFavoriteProducts.fulfilled, (s, a) => {
       s.favoriteProducts = a.payload;
+    });
+    builder.addCase(fetchViewedProducts.fulfilled, (s, a) => {
+      s.viewedProducts = a.payload;
     });
   }
 });
