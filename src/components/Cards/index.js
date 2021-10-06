@@ -1,11 +1,12 @@
 import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Card, Button, Image } from "react-bootstrap";
-import { FaShoppingCart, FaShoppingBag, FaHeart, FaRegHeart } from "react-icons/fa";
+import Card from "react-bootstrap/Card";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { addToCart, fetchCart, fetchFavoriteProducts, markFavorite, removeFavorite, viewedProduct } from "../../services";
-import Rating from "react-rating";
-import { Icons } from "../../resources";
 import { favoriteProducts$, setAlert } from "../../store";
+import { AddButton } from "../common/AddButton";
+import { BuyButton } from "../common/BuyButton";
+import { CustomRating } from "../common/Rating";
 
 export const CardComponent = ({ product }) => {
   const dispatch = useDispatch();
@@ -39,25 +40,11 @@ export const CardComponent = ({ product }) => {
         </div>
         <div className="star-container">
           <Card.Text className="f-12">Price: ₹ {product.price}</Card.Text>
-          <Rating 
-            stop={5}
-            fractions={2}
-            initialRating={product.rating} 
-            emptySymbol={<Image src={Icons.starLight} alt="star-light" className="star" />}
-            fullSymbol={<Image src={Icons.starFill} alt="star-fill" className="star" />}
-            readonly 
-          />
+          <CustomRating rating={product.rating} readonly={true} />
         </div>
         <div className="d-flex flex-row justify-content-between">
-          <Button
-            variant="warning"
-            onClick={() => handleAddCart(product)}
-          >
-            <FaShoppingCart /> Add
-          </Button>
-          <Button className="bg-orange text-white border-0" variant="danger">
-            <FaShoppingBag /> Buy
-          </Button>
+          <AddButton onClick={() => handleAddCart(product)} />
+          <BuyButton />
         </div>
       </Card.Body>
     </Card>
