@@ -1028,6 +1028,16 @@
       "price": 999,
       "rating": 3.5,
       "category": "earphones"
+    },
+    {
+      "id": "4",
+      "createdAt": "2020-08-20T00:24:53.689Z",
+      "name": "Ear Phones",
+      "avatar": "https://m.media-amazon.com/images/I/61+tzvHZi+L._SL1500_.jpg",
+      "description": "Wired Headset",
+      "price": 999,
+      "rating": 3.5,
+      "category": "earphones"
     }
   ]
 }
