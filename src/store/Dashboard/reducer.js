@@ -14,7 +14,9 @@ const initialState = {
     page: 1,
     limit: 8
   },
-  viewedProducts: []
+  viewedProducts: [],
+  selectedModal: "",
+  itemToBeRemvoedFromCart: ""
 };
 
 export const DashboardSlice = createSlice({
@@ -26,6 +28,12 @@ export const DashboardSlice = createSlice({
     },
     setSearchItem(s, a) {
       s.itemToBeSearch = a.payload || initialState.itemToBeSearch;
+    },
+    setItemToBeRemovedFromCart(s, a) {
+      s.itemToBeRemvoedFromCart = a.payload || initialState.itemToBeRemvoedFromCart;
+    },
+    setSelectedModal(s, a) {
+      s.selectedModal = a.payload || initialState.selectedModal;
     },
     countOfItems(s, a) {
       s.numberOfItems = a.payload
@@ -66,5 +74,7 @@ export const {
   countOfItems,
   removeCountOfItems,
   setAlert,
-  setSearchItem
+  setSearchItem,
+  setSelectedModal,
+  setItemToBeRemovedFromCart
 } = DashboardSlice.actions;

@@ -36,7 +36,7 @@ export const OrdersComponent = () => {
                 <Col sm={12} md={6} className="filter-container">
                     <h5>Filter by Date : </h5>
                     <div className="date-picker-input">
-                        <DateRangePicker initialSettings={{ startDate: new Date('2020'), endDate: new Date() }} onCallback={handleCallback}>
+                        <DateRangePicker initialSettings={{ startDate: new Date('2021'), endDate: new Date() }} onCallback={handleCallback}>
                             <Form.Control type="text" />
                         </DateRangePicker>
                     </div>
@@ -84,7 +84,7 @@ export const OrdersComponent = () => {
                                 <p className="info">Rs. {order.totalAmount}</p>
                             </div>
                         </Accordion.Body>
-                    </Accordion.Item> : <Skeleton height="54.2px" className="mb-20" />
+                    </Accordion.Item> : <Skeleton height="54.2px" className="mb-20" key={order} />
                     )
                 })}
             </Accordion>

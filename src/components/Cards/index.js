@@ -2,8 +2,8 @@ import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "react-bootstrap/Card";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
-import { addToCart, fetchCart, fetchFavoriteProducts, markFavorite, removeFavorite, viewedProduct } from "../../services";
-import { favoriteProducts$, setAlert } from "../../store";
+import { addToCart, fetchCart, fetchFavoriteProducts, markFavorite, removeFavorite, updateProductInCart, viewedProduct } from "../../services";
+import { favoriteProducts$, setAlert, productsInCart$ } from "../../store";
 import { AddButton } from "../common/AddButton";
 import { BuyButton } from "../common/BuyButton";
 import { CustomRating } from "../common/Rating";
@@ -11,13 +11,36 @@ import { CustomRating } from "../common/Rating";
 export const CardComponent = ({ product }) => {
   const dispatch = useDispatch();
   const favoriteProducts = useSelector(favoriteProducts$);
+  const productsInCart = useSelector(productsInCart$);
+  const productDetailsInCart = productsInCart.find((e) => e.id === product.id)
+  
+  const handleAddCart = () => {
+    const isProductAlreadyInCart = productsInCart.some((item) => item.id === product.id);
 
-  const handleAddCart = (product) => {
-    dispatch(viewedProduct(product))
-    dispatch(addToCart(product)).then(() => {
-      dispatch(fetchCart());
-      dispatch(setAlert("Item added to cart!"));
-    })
+    if(isProductAlreadyInCart) {
+      const data = {
+        id: productDetailsInCart.id,
+        product: { ...productDetailsInCart, count: productDetailsInCart.count + 1 }
+      }
+      dispatch(updateProductInCart(data)).then(() => dispatch(fetchCart()))
+    } else {
+      const updatedProduct = { ...product, count: 1 }
+      const productDetails = {
+        createdAt: product.createdAt,
+        name: product.name,
+        avatar: product.avatar,
+        description: product.description,
+        price: product.price,
+        rating: product.rating,
+        category: product.category
+      }
+      dispatch(viewedProduct(productDetails))
+      dispatch(addToCart(updatedProduct)).then(() => {
+        dispatch(fetchCart());
+      })
+    }
+
+    dispatch(setAlert("Item added to cart!"));
   }
 
   const isFavorite = useMemo(() => favoriteProducts.some((item) => item.id === product.id), [favoriteProducts, product]);
@@ -43,7 +66,7 @@ export const CardComponent = ({ product }) => {
           <CustomRating rating={product.rating} readonly={true} />
         </div>
         <div className="d-flex flex-row justify-content-between">
-          <AddButton onClick={() => handleAddCart(product)} />
+          {<AddButton onClick={handleAddCart} isDisabled={productDetailsInCart?.count === 5} />}
           <BuyButton />
         </div>
       </Card.Body>

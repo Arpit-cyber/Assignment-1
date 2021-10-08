@@ -2,61 +2,33 @@ import React, { useEffect } from "react";
 import { Row, Col, Button, Card, Image, Form } from "react-bootstrap";
 import {
   productsInCart$,
-  countOfItems$,
-  countOfItems,
-  removeCountOfItems,
-  setAlert,
+  setItemToBeRemovedFromCart,
+  setSelectedModal,
 } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCart, removeFromCart, placeOrder } from "../../services";
+import { fetchCart, updateProductInCart } from "../../services";
+import { MODALS } from '../../constants'
 
 export const CartComponent = () => {
   const dispatch = useDispatch();
   const productsInCart = useSelector(productsInCart$);
-  const itemsCount = useSelector(countOfItems$);
 
   useEffect(() => {
     dispatch(fetchCart())
   }, [dispatch])
 
-  useEffect(() => {
-    if (Object.keys(itemsCount).length === 0)
-      productsInCart.forEach((item) =>
-        dispatch(
-          countOfItems({
-            [item.id]: 1,
-          })
-        )
-      );
-  }, [dispatch, itemsCount, productsInCart]);
-
   const getTotalAmount = () =>
     productsInCart
       .reduce(
         (accumulator, current) =>
-          accumulator + current.price * itemsCount[current.id],
+          accumulator + (current.price * current.count),
         0
       )
       .toFixed(2);
 
   const handleRemoveFromCart = (id) => {
-    dispatch(removeCountOfItems(id));
-    dispatch(removeFromCart(id)).then(() => {
-      dispatch(fetchCart())
-      dispatch(setAlert("Item removed from cart!"));
-    })
-  }
-
-  const handlePlaceOrder = () => {
-    const order = {
-      orderName: `Order`,
-      orderItems: productsInCart,
-      totalAmount: getTotalAmount(),
-      orderAt: new Date().toISOString(),
-    }
-
-    dispatch(placeOrder(order))
-    productsInCart.forEach((order) => handleRemoveFromCart(order.id))
+    dispatch(setSelectedModal(MODALS.DELETE_CONFIRMATION))
+    dispatch(setItemToBeRemovedFromCart(id))
   }
 
   return (
@@ -89,15 +61,13 @@ export const CartComponent = () => {
                             key={item.id}
                             min={1}
                             max={5}
-                            defaultValue={1}
                             className="width-60"
-                            value={itemsCount[item.id]}
+                            value={item.count}
                             onChange={(e) =>
-                              dispatch(
-                                countOfItems({
-                                  [item.id]: parseInt(e.target.value),
-                                })
-                              )
+                              dispatch(updateProductInCart({
+                                id: item.id,
+                                product: { ...item, count: parseInt(e.target.value) }
+                              })).then(() => dispatch(fetchCart()))
                             }
                           />
                         </Col>
@@ -117,10 +87,7 @@ export const CartComponent = () => {
                   <Button
                     className="order-button border-0"
                     variant="danger"
-                    onClick={() => {
-                      handlePlaceOrder()
-                      dispatch(setAlert("Order placed"));
-                    }}
+                    onClick={() => dispatch(setSelectedModal(MODALS.PLACE_ORDER))}
                   >
                     Place Order
                   </Button>
@@ -143,11 +110,11 @@ export const CartComponent = () => {
                       <Row key={item.id}>
                         <Col sm={12} md={7}>
                           <p>
-                            {item.name} x {itemsCount[item.id]}
+                            {item.name} x {item.count}
                           </p>
                         </Col>
                         <Col sm={12} md={5}>
-                          <p>$: {itemsCount[item.id] * item.price}</p>
+                          <p>$: {item.count * item.price}</p>
                         </Col>
                       </Row>
                       <hr />

@@ -124,9 +124,11 @@ export const Dashboard = () => {
         <div className="pagination-container">
           {pageCounts.map((e) => (
             <div
+              key={e}
               className={classnames("pagination-item", {
                 "pagination-item-active": paginationFilters.page === e,
-              })}
+              })
+            }
               onClick={() => {
                 dispatch(setPaginationFilters({ page: e, limit: 8 }));
                 dispatch(fetchProducts({ page: e, limit: 8 }));
