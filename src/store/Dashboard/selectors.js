@@ -11,8 +11,6 @@ export const productsInCart$ = createSelector(dashboard$, (s) => s.cart);
 
 export const orders$ = createSelector(dashboard$, (s) => s.orders);
 
-export const favoriteProducts$ = createSelector(dashboard$, (s) => s.favoriteProducts);
-
 export const viewedProducts$ = createSelector(dashboard$, (s) => s.viewedProducts);
 
 export const paginationFilters$ = createSelector(dashboard$, (s) => s.paginationFilters);

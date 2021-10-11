@@ -66,7 +66,21 @@ body {
 }
 
 .custom-container {
-  margin-top: calc(100vh - 91vh);
+  margin-top: 62px;
+}
+
+.centered-cart {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 12%);
+}
+
+.centered-wishlist {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-49%, 0%);
 }
 
 .ml-auto {
@@ -121,6 +135,10 @@ body {
 
 .ml-95 {
   margin-left: 95px;
+}
+
+.ml-10 {
+  margin-left: 10px;
 }
 
 p {
@@ -246,6 +264,26 @@ p {
   align-items: center;
 }
 
+.fav-container {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  box-shadow: 0 1px 2rem rgb(128 128 128 / 35%);
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.fav-container:hover {
+  transform: scale(1.1);
+}
+
 .fav-icon {
   cursor: pointer;
   color: red;
@@ -267,21 +305,40 @@ p {
   margin: 30px 0;
 }
 
-.pagination-item {
+.pagination-item-wrapper {
   display: flex;
-  width: 20px;
-  height: 20px;
+  justify-content: space-around;
+  width: 13% !important;
+  align-items: baseline;
+}
+
+.pagination-item {
+  font-size: 15px !important;
+  cursor: pointer;
+  background-color: rgba(75,40,109);
+  color: #fff;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
+  display: flex;
   text-align: center;
   flex-direction: column;
   justify-content: center;
-  margin: 0 5px;
-  cursor: pointer;
 }
 
-.pagination-item-active {
-  background-color: rgb(75, 40, 109);
-  color: white;
+.pagination-item-arrow {
+  background-color: transparent !important;
+  border: none !important;
+  font-size: 24px !important;
+}
+
+.pagination-item-arrow:hover {
+  transform: scale(1.1);
+  color: rgba(75,40,109) !important;
+}
+
+.pagination-item-arrow:focus {
+  box-shadow: none !important;
 }
 
 .fav-heading {
@@ -384,7 +441,7 @@ p {
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 10000;
+  z-index: 10;
 }
 
 .mh-5 {
@@ -408,4 +465,66 @@ p {
 
 .search-button:focus {
   box-shadow: none !important;
+}
+
+.product-counter {
+  background-color: #fff !important;
+  border: 1px solid lightgrey !important;
+}
+
+.product-counter-text {
+  cursor: text !important;
+}
+
+.product-counter:focus {
+  box-shadow: none !important;
+}
+
+.text-align-end {
+  text-align: end !important;
+}
+
+.delete-product-icon {
+  padding-left: 0 !important;
+  background-color: transparent !important;
+  align-items: center;
+  display: flex !important;
+  width: fit-content;
+  color: orangered !important;
+  font-size: 25px !important;
+}
+
+.cart-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.custom-button-group {
+  max-width: 20% !important;
+}
+
+@media screen and (max-width: 1200px) {
+  .custom-button-group {
+    margin-top: 10px !important;
+  }
+}
+
+.custom-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 1025px) {
+  .custom-column {
+    flex-direction: row !important;
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .custom-column {
+    width: inherit !important;
+  }
 }

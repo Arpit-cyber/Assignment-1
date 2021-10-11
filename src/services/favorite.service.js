@@ -1,35 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { FAVORITE_PRODUCTS_URL, FETCH_FAVORITE_PRODUCTS } from '../constants';
+import { PRODUCT_URL } from '../constants';
 import { doAsync } from './util/doAsync';
 
-export const fetchFavoriteProducts = createAsyncThunk(
-    'fetchFavoriteProducts',
-    async (thungArgs, thunkAPI) =>  await doAsync({
-            url: FAVORITE_PRODUCTS_URL,
-            loaderName: FETCH_FAVORITE_PRODUCTS,
-            ...thungArgs,
-            ...thunkAPI
-        })
-);
-
-export const markFavorite = createAsyncThunk(
+export const markAndRemoveFavorite = createAsyncThunk(
     'markFavorite',
-    async (product, thungArgs, thunkAPI) =>
+    async ({ id, product }, thungArgs, thunkAPI) =>
         await doAsync({
-            url: FAVORITE_PRODUCTS_URL,
-            method: 'post',
+            url: `${PRODUCT_URL}/${id}`,
+            method: 'put',
             body: product,
-            ...thungArgs,
-            ...thunkAPI
-        }),
-);
-
-export const removeFavorite = createAsyncThunk(
-    'removeFavorite',
-    async (id, thungArgs, thunkAPI) =>
-        await doAsync({
-            url: `${FAVORITE_PRODUCTS_URL}/${id}`,
-            method: 'delete',
             ...thungArgs,
             ...thunkAPI
         }),

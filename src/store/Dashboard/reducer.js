@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCart, fetchFavoriteProducts, fetchOrders, fetchProducts, fetchSales, fetchViewedProducts } from "../../services";
+import { fetchCart, fetchOrders, fetchProducts, fetchSales, fetchViewedProducts } from "../../services";
 
 const initialState = {
   products: [],
@@ -9,7 +9,6 @@ const initialState = {
   sales: [],
   itemToBeSearch: "",
   orders: [],
-  favoriteProducts: [],
   paginationFilters: {
     page: 1,
     limit: 8
@@ -24,6 +23,9 @@ export const DashboardSlice = createSlice({
   name: "Dashboard",
   initialState,
   reducers: {
+    updateProducts(s, a) {
+      s.products = a.payload || initialState.products;
+    },
     setPaginationFilters(s, a) {
       s.paginationFilters = a.payload || initialState.paginationFilters;
     },
@@ -64,9 +66,6 @@ export const DashboardSlice = createSlice({
     builder.addCase(fetchOrders.fulfilled, (s, a) => {
       s.orders = a.payload;
     });
-    builder.addCase(fetchFavoriteProducts.fulfilled, (s, a) => {
-      s.favoriteProducts = a.payload;
-    });
     builder.addCase(fetchViewedProducts.fulfilled, (s, a) => {
       s.viewedProducts = a.payload;
     });
@@ -81,5 +80,6 @@ export const {
   setSearchItem,
   setSelectedModal,
   setItemToBeRemovedFromCart,
-  setFilters
+  setFilters,
+  updateProducts
 } = DashboardSlice.actions;

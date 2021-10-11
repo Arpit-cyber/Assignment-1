@@ -1,39 +1,81 @@
 import React, { useEffect } from "react";
-import { Row, Col, Button, Card, Image, Form } from "react-bootstrap";
+import { Row, Col, Button, Card, Image, ButtonGroup } from "react-bootstrap";
+import { MdDeleteForever } from "react-icons/md";
 import {
   productsInCart$,
   setItemToBeRemovedFromCart,
   setSelectedModal,
 } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCart, updateProductInCart } from "../../services";
-import { MODALS } from '../../constants'
+import {
+  fetchCart,
+  fetchProducts,
+  markAndRemoveFavorite,
+  updateProductInCart,
+} from "../../services";
+import { MODALS } from "../../constants";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 export const CartComponent = () => {
   const dispatch = useDispatch();
   const productsInCart = useSelector(productsInCart$);
 
   useEffect(() => {
-    dispatch(fetchCart())
-  }, [dispatch])
+    dispatch(fetchCart());
+  }, [dispatch]);
 
   const getTotalAmount = () =>
     productsInCart
       .reduce(
-        (accumulator, current) =>
-          accumulator + (current.price * current.count),
+        (accumulator, current) => accumulator + current.price * current.count,
         0
       )
       .toFixed(2);
 
   const handleRemoveFromCart = (id) => {
-    dispatch(setSelectedModal(MODALS.DELETE_CONFIRMATION))
-    dispatch(setItemToBeRemovedFromCart(id))
+    dispatch(setSelectedModal(MODALS.DELETE_CONFIRMATION));
+    dispatch(setItemToBeRemovedFromCart(id));
+  };
+
+  const handleIncrement = (item) => {
+    dispatch(
+      updateProductInCart({
+        id: item.id,
+        product: {
+          ...item,
+          count: item?.count < 5 ? item?.count + 1 : item?.count,
+        },
+      })
+    ).then(() => dispatch(fetchCart()));
+  };
+
+  const handleDecrement = (item) => {
+    dispatch(
+      updateProductInCart({
+        id: item.id,
+        product: {
+          ...item,
+          count: item?.count > 1 ? item?.count - 1 : item?.count,
+        },
+      })
+    ).then(() => dispatch(fetchCart()));
+  };
+
+  const handleMarkAndRemoveFavorite = (product) => {
+    dispatch(markAndRemoveFavorite({ id: product.id, product })).then(() =>
+      dispatch(fetchProducts())
+    );
+    dispatch(
+      updateProductInCart({
+        id: product.id,
+        product,
+      })
+    ).then(() => dispatch(fetchCart()));
   }
 
   return (
-      <Row className="d-flex flex-row pt-40 mh-5">
-        <Col md={2} />
+    <div className="mh-5 ">
+      <Row className="justify-content-center centered-cart">
         <Col sm={12} md={5} className="mb-2">
           <Card>
             <Card.Body className="cart-card-body">
@@ -41,7 +83,7 @@ export const CartComponent = () => {
               <hr />
               {productsInCart.length > 0 ? (
                 <>
-                  {productsInCart.map((item) => (
+                  {productsInCart.map((item, i) => (
                     <>
                       <Row className="mb-3" key={item.id}>
                         <Col>
@@ -51,46 +93,73 @@ export const CartComponent = () => {
                             className="cart-image"
                           />
                         </Col>
-                        <Col>
-                          <p className="info">{item.name}</p>
-                          <p className="info">Price: $ {item.price}</p>
+                        <Col className="d-flex justify-content-between flex-column">
+                          <div>
+                            <p className="info m-0">{item.name}</p>
+                            <p className="info">{item.description}</p>
+                          </div>
+                          <div className="cart-buttons">
+                            <Button
+                              variant="light"
+                              className="delete-product-icon"
+                              onClickCapture={() => handleRemoveFromCart(item.id)}
+                            >
+                              <MdDeleteForever />
+                            </Button>
+                            <div className="ml-10">
+                              {item?.isFav ? (
+                                <FaHeart
+                                  className="fav-icon"
+                                  onClick={() =>
+                                    handleMarkAndRemoveFavorite({
+                                      ...item,
+                                      isFav: false,
+                                    })
+                                  }
+                                />
+                              ) : (
+                                <FaRegHeart
+                                  className="fav-icon"
+                                  onClick={() =>
+                                    handleMarkAndRemoveFavorite({
+                                      ...item,
+                                      isFav: true,
+                                    })
+                                  }
+                                />
+                              )}
+                            </div>
+                          </div>
                         </Col>
-                        <Col>
-                          <Form.Control
-                            type="number"
-                            key={item.id}
-                            min={1}
-                            max={5}
-                            className="width-60"
-                            value={item.count}
-                            onChange={(e) =>
-                              dispatch(updateProductInCart({
-                                id: item.id,
-                                product: { ...item, count: parseInt(e.target.value) }
-                              })).then(() => dispatch(fetchCart()))
-                            }
-                          />
-                        </Col>
-                        <Col>
-                          <Button
-                            variant="light"
-                            className="delete-button"
-                            onClickCapture={() => handleRemoveFromCart(item.id)}
-                          >
-                            Delete
-                          </Button>
+                        <Col xm={12} md={4} lg={3} className="custom-column">
+                          <ButtonGroup className="custom-button-group">
+                            <Button
+                              variant="light"
+                              className="product-counter"
+                              onClick={() => handleDecrement(item)}
+                            >
+                              -
+                            </Button>
+                            <Button
+                              variant="light"
+                              className="product-counter product-counter-text"
+                            >
+                              {item.count}
+                            </Button>
+                            <Button
+                              variant="light"
+                              className="product-counter"
+                              onClick={() => handleIncrement(item)}
+                            >
+                              +
+                            </Button>
+                          </ButtonGroup>
+                          <p className="info">$ {item.price}</p>
                         </Col>
                       </Row>
-                      <hr />
+                      {productsInCart.length - 1 !== i && <hr />}
                     </>
                   ))}
-                  <Button
-                    className="order-button border-0"
-                    variant="danger"
-                    onClick={() => dispatch(setSelectedModal(MODALS.PLACE_ORDER))}
-                  >
-                    Place Order
-                  </Button>
                 </>
               ) : (
                 <p>Please add Item to Cart</p>
@@ -120,7 +189,18 @@ export const CartComponent = () => {
                       <hr />
                     </>
                   ))}
-                  <p>Total Amount $: {getTotalAmount()}</p>
+                  <div className="d-flex justify-content-center align-items-center">
+                    <p>Total Amount $: {getTotalAmount()}</p>
+                    <Button
+                      className="order-button border-0"
+                      variant="danger"
+                      onClick={() =>
+                        dispatch(setSelectedModal(MODALS.PLACE_ORDER))
+                      }
+                    >
+                      Place Order
+                    </Button>
+                  </div>
                 </>
               ) : (
                 <Row>
@@ -135,7 +215,7 @@ export const CartComponent = () => {
             </Card.Body>
           </Card>
         </Col>
-        <Col md={1} />
       </Row>
+    </div>
   );
 };
