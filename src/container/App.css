@@ -315,8 +315,6 @@ p {
 .pagination-item {
   font-size: 15px !important;
   cursor: pointer;
-  background-color: rgba(75,40,109);
-  color: #fff;
   width: 25px;
   height: 25px;
   border-radius: 50%;
@@ -326,10 +324,22 @@ p {
   justify-content: center;
 }
 
+.pagination-item-active {
+  background-color: rgba(75,40,109);
+  color: #fff;
+}
+
 .pagination-item-arrow {
   background-color: transparent !important;
   border: none !important;
   font-size: 24px !important;
+}
+
+.pagination-item-arrow:disabled {
+  cursor: no-drop !important;
+  pointer-events: all !important;
+  transform: scale(1) !important;
+  color: inherit !important;
 }
 
 .pagination-item-arrow:hover {

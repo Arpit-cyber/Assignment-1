@@ -4,7 +4,6 @@ import Select from 'react-select';
 
 export const CustomDropdown = ({ options, placeholder, value, onChange }) => (
   <Select
-    isMulti
     options={options}
     placeholder={placeholder}
     value={value}

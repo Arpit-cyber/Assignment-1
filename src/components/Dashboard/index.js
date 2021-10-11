@@ -10,18 +10,17 @@ import {
   setFilters,
   filters$,
 } from "../../store";
+import classnames from "classnames";
 import { Carousal } from "../Carousal";
 import { CardComponent } from "../Cards";
-import {
-  fetchCart,
-  fetchProducts,
-  fetchSales,
-} from "../../services";
+import { fetchCart, fetchProducts, fetchSales } from "../../services";
 import { CustomDropdown } from "../Dropdown";
 import { Icons } from "../../resources";
 import Skeleton from "react-loading-skeleton";
 
 const MOCK_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8];
+
+const MOCK_PAGINATION = [1, 2, 3];
 
 const MOCK_FILTERS = [
   { label: "Laptop", value: "laptop" },
@@ -38,9 +37,12 @@ export const Dashboard = () => {
   const filters = useSelector(filters$);
 
   useEffect(() => {
-    dispatch(fetchProducts(paginationFilters));
     dispatch(fetchSales());
     dispatch(fetchCart());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchProducts(paginationFilters));
   }, [dispatch, paginationFilters]);
 
   const pageCounts = Math.ceil(21 / 8);
@@ -97,25 +99,34 @@ export const Dashboard = () => {
   const handleFetchProducts = (filter) => {
     dispatch(setPaginationFilters(filter));
     dispatch(fetchProducts(filter));
-  }
+  };
 
   const handlePrev = () => {
     const filter = {
+      ...paginationFilters,
       page: paginationFilters?.page > 1 ? paginationFilters?.page - 1 : 1,
-      limit: 8,
     };
 
-    handleFetchProducts(filter)
+    handleFetchProducts(filter);
   };
 
   const handleNext = () => {
     const filter = {
+      ...paginationFilters,
       page:
         paginationFilters?.page < pageCounts ? paginationFilters?.page + 1 : 1,
-      limit: 8,
     };
 
-    handleFetchProducts(filter)
+    handleFetchProducts(filter);
+  };
+
+  const handlePageClick = (page) => {
+    const filter = {
+      ...paginationFilters,
+      page,
+    };
+
+    handleFetchProducts(filter);
   };
 
   return (
@@ -131,8 +142,17 @@ export const Dashboard = () => {
         <CustomDropdown
           options={MOCK_FILTERS}
           placeholder="Filter By Category"
-          value={filters}
-          onChange={(selectedOptions) => dispatch(setFilters(selectedOptions))}
+          value={MOCK_FILTERS.find(
+            (e) => e.value === paginationFilters?.category
+          )}
+          onChange={(selectedOption) =>
+            handleFetchProducts({
+              ...paginationFilters,
+              page: 1,
+              name: "",
+              category: selectedOption.value,
+            })
+          }
         />
       )}
       <div className="m-2">
@@ -151,7 +171,16 @@ export const Dashboard = () => {
             >
               &larr;
             </Button>
-            <div className="pagination-item">{paginationFilters?.page}</div>
+            {MOCK_PAGINATION.map((e) => (
+              <div
+                className={classnames("pagination-item", {
+                  "pagination-item-active": e === paginationFilters?.page,
+                })}
+                onClick={() => handlePageClick(e)}
+              >
+                {e}
+              </div>
+            ))}
             <Button
               variant="light"
               className="pagination-item-arrow"
