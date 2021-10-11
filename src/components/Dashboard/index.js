@@ -7,7 +7,6 @@ import {
   products$,
   isProductLoading$,
   paginationFilters$,
-  setFilters,
   filters$,
 } from "../../store";
 import classnames from "classnames";
