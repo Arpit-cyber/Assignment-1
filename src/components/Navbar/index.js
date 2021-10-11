@@ -11,14 +11,16 @@ import {
 import { LinkContainer } from "react-router-bootstrap";
 import { FaHeart, FaShoppingCart, FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { productsInCart$, setFilters, setPaginationFilters, setSearchItem } from "../../store";
+import { paginationFilters$, productsInCart$, setFilters, setPaginationFilters, setSearchItem } from "../../store";
 import { Icons } from '../../resources'
+import { fetchProducts } from "../../services";
 
 const emptyString = "";
 
 const NavBar = () => {
   const dispatch = useDispatch();
   const productsInCart = useSelector(productsInCart$);
+  const paginationFilters = useSelector(paginationFilters$);
   const [itemToBeSearch, setItemToBeSearch] = useState(emptyString);
 
   const handleReset = () => {
@@ -31,8 +33,20 @@ const NavBar = () => {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      dispatch(setSearchItem(itemToBeSearch))
+      handleFetchProducts()
     }
+  }
+
+  const handleFetchProducts = () => {
+    const filter = {
+      ...paginationFilters,
+      page: 1,
+      name: itemToBeSearch,
+      category: ""
+    }
+
+    dispatch(setPaginationFilters(filter));
+    dispatch(fetchProducts(filter));
   }
 
   return (
@@ -61,7 +75,7 @@ const NavBar = () => {
               variant="light"
               id="search-button"
               className="search-button"
-              onClick={() => dispatch(setSearchItem(itemToBeSearch))}
+              onClick={handleFetchProducts}
             >
               <FaSearch />
             </Button>

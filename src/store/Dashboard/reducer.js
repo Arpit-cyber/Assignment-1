@@ -11,7 +11,9 @@ const initialState = {
   orders: [],
   paginationFilters: {
     page: 1,
-    limit: 8
+    limit: 8,
+    category: "",
+    name: ""
   },
   filters: [],
   viewedProducts: [],
