@@ -19,7 +19,7 @@ export const FavoriteComponent = () => {
     const arrayToDisplay = favoriteProducts.length > 0 ? favoriteProducts : MOCK_ARRAY;
 
     return (
-        <div className="m-2">
+        <div className="mh-5">
             <h4 className="fav-heading">My Wishlist</h4>
             <Row>
             {arrayToDisplay.map((product) => (

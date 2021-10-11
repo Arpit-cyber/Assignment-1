@@ -15,6 +15,7 @@ import { MODALS } from '../constants'
 import { selectedModal$ } from '../store'
 import { useSelector } from 'react-redux';
 import { PlaceOrder } from '../components/PlaceOrder';
+import { ProductDetails } from '../components/ProductDetails';
 
 function App() {
   const selectedModal = useSelector(selectedModal$);
@@ -42,6 +43,9 @@ function App() {
             </Route>
             <Route path="/analysis">
               <AnalysisComponent />
+            </Route>
+            <Route path="/products/:id">
+              <ProductDetails />
             </Route>
           </Switch>
         </div>

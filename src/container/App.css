@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
 }
@@ -8,11 +10,6 @@
 body {
   font-size: 14px;
   font-family: 'Roboto';
-}
-
-.search-button {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
 }
 
 .bg-purple {
@@ -50,6 +47,14 @@ body {
   height: 500px;
   box-shadow: 8px 10px 8px #888888;
   margin-top: 20px;
+  transition: all .2s ease-out;
+}
+
+.custom-card:hover {
+  transform: scale(1.1);
+  position: relative;
+  z-index: 100;
+  box-shadow: 0rem 0rem 2rem rgb(0 0 0 / 30%);
 }
 
 .skeleton-custom-card {
@@ -61,7 +66,7 @@ body {
 }
 
 .custom-container {
-  margin: 65px 5px 5px 5px;
+  margin-top: calc(100vh - 91vh);
 }
 
 .ml-auto {
@@ -195,8 +200,7 @@ p {
 }
 
 .order-container {
-  margin-top: 80px;
-  margin-bottom: 20px;
+  margin: 80px 5px 20px 5px;
   border-radius: 10px;
   overflow: hidden;
 }
@@ -368,4 +372,40 @@ p {
 .place-order-message-container > p {
   padding-top: 10px !important;
   margin-bottom: 0;
+}
+
+.nav-search-container {
+  display: flex;
+  position: relative;
+}
+
+.custom-navbar {
+  position: fixed !important;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+}
+
+.mh-5 {
+  margin: 0 5px;
+}
+
+.search-input-field {
+  width: 100%;
+}
+
+.search-input-field:focus {
+  border: 1px solid #fff !important;
+}
+
+.search-button {
+  position: absolute;
+  left: 80%;
+  background-color: #fff !important;
+  border-left: none !important;
+}
+
+.search-button:focus {
+  box-shadow: none !important;
 }

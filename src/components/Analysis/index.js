@@ -46,7 +46,7 @@ export const AnalysisComponent = () => {
     ]
 
     return (
-        <div>
+        <div className="mh-5">
             <h5 className="centered-heading">Analysis Report</h5>
             <div className="chart-container">
                 <BarChart data={dataForBarChart} title="Most Viewed Product" horizontalAxisTitle="Views" verticalAxisTitle="Products" />

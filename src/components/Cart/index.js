@@ -32,7 +32,7 @@ export const CartComponent = () => {
   }
 
   return (
-      <Row className="d-flex flex-row pt-40">
+      <Row className="d-flex flex-row pt-40 mh-5">
         <Col md={2} />
         <Col sm={12} md={5} className="mb-2">
           <Card>

@@ -7,7 +7,9 @@ import {
   itemToBeSearch$,
   products$,
   isProductLoading$,
-  filters$,
+  paginationFilters$,
+  setFilters,
+  filters$
 } from "../../store";
 import { Carousal } from "../Carousal";
 import { CardComponent } from "../Cards";
@@ -31,11 +33,11 @@ const MOCK_FILTERS = [
 export const Dashboard = () => {
   const dispatch = useDispatch();
   const products = useSelector(products$);
-  const paginationFilters = useSelector(filters$);
+  const paginationFilters = useSelector(paginationFilters$);
   const isProductLoading = useSelector(isProductLoading$);
   const itemToBeSearch = useSelector(itemToBeSearch$);
   const [productsToBeDisplayed, setProductsToBeDisplayed] = useState(products);
-  const [filters, setFilters] = useState([]);
+  const filters = useSelector(filters$)
 
   useEffect(() => {
     dispatch(fetchProducts(paginationFilters));
@@ -99,7 +101,7 @@ export const Dashboard = () => {
   };
 
   return (
-    <>
+    <div className="mh-5">
       {isProductLoading ? (
         <Skeleton height={320} className="mb-20" />
       ) : (
@@ -112,7 +114,7 @@ export const Dashboard = () => {
           options={MOCK_FILTERS}
           placeholder="Filter By Category"
           value={filters}
-          onChange={(selectedOptions) => setFilters(selectedOptions)}
+          onChange={(selectedOptions) => dispatch(setFilters(selectedOptions))}
         />
       )}
       <div className="m-2">
@@ -139,6 +141,6 @@ export const Dashboard = () => {
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 };

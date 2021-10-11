@@ -10,10 +10,11 @@ const initialState = {
   itemToBeSearch: "",
   orders: [],
   favoriteProducts: [],
-  filters: {
+  paginationFilters: {
     page: 1,
     limit: 8
   },
+  filters: [],
   viewedProducts: [],
   selectedModal: "",
   itemToBeRemvoedFromCart: ""
@@ -24,6 +25,9 @@ export const DashboardSlice = createSlice({
   initialState,
   reducers: {
     setPaginationFilters(s, a) {
+      s.paginationFilters = a.payload || initialState.paginationFilters;
+    },
+    setFilters(s, a) {
       s.filters = a.payload || initialState.filters;
     },
     setSearchItem(s, a) {
@@ -76,5 +80,6 @@ export const {
   setAlert,
   setSearchItem,
   setSelectedModal,
-  setItemToBeRemovedFromCart
+  setItemToBeRemovedFromCart,
+  setFilters
 } = DashboardSlice.actions;

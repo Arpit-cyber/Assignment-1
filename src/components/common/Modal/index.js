@@ -9,7 +9,7 @@ export const CustomModal = ({ onHide, onSubmit, title, message, confirmButtonTex
 
     useEffect(() => {
         dispatch(showModal());
-    }, [])
+    }, [dispatch])
 
     return (
         <Modal show={show} onHide={onHide} centered>
