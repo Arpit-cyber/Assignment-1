@@ -5,14 +5,13 @@ import {
   Form,
   Nav,
   Button,
-  InputGroup,
   Badge,
   Image
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FaHeart, FaShoppingCart, FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { productsInCart$, setSearchItem } from "../../store";
+import { productsInCart$, setFilters, setPaginationFilters, setSearchItem } from "../../store";
 import { Icons } from '../../resources'
 
 const emptyString = "";
@@ -22,22 +21,42 @@ const NavBar = () => {
   const productsInCart = useSelector(productsInCart$);
   const [itemToBeSearch, setItemToBeSearch] = useState(emptyString);
 
+  const handleReset = () => {
+    setItemToBeSearch(emptyString)
+    dispatch(setPaginationFilters())
+    dispatch(setFilters())
+    dispatch(setSearchItem())
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      dispatch(setSearchItem(itemToBeSearch))
+    }
+  }
+
   return (
     <Navbar
       collapseOnSelect
       expand="lg"
-      fixed="top"
-      className="mb-1 bg-purple"
+      className="mb-1 bg-purple custom-navbar"
       variant="dark"
     >
-      <LinkContainer to="/">
+      <LinkContainer to="/" onClick={handleReset}>
         <Navbar.Brand>E-Cart</Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Form className="d-flex">
-          <InputGroup>
-            <Form.Control type="search" placeholder="Search" onChange={(e) => setItemToBeSearch(e.target.value)} value={itemToBeSearch} />
+          <div className="nav-search-container">
+            <Form.Control 
+              type="search" 
+              placeholder="Search" 
+              className="search-input-field" 
+              onChange={(e) => setItemToBeSearch(e.target.value)}
+              onKeyDown={handleKeyDown}
+              value={itemToBeSearch} 
+            />
             <Button
               variant="light"
               id="search-button"
@@ -46,7 +65,7 @@ const NavBar = () => {
             >
               <FaSearch />
             </Button>
-          </InputGroup>
+          </div>
         </Form>
         <Nav className="ml-auto">
           <NavDropdown 

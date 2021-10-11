@@ -1,67 +1,81 @@
 import React, { useEffect } from "react";
-import { Row, Col, Button, Card, Image, Form } from "react-bootstrap";
+import { Row, Col, Button, Card, Image, ButtonGroup } from "react-bootstrap";
+import { MdDeleteForever } from "react-icons/md";
 import {
   productsInCart$,
-  countOfItems$,
-  countOfItems,
-  removeCountOfItems,
-  setAlert,
+  setItemToBeRemovedFromCart,
+  setSelectedModal,
 } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCart, removeFromCart, placeOrder } from "../../services";
+import {
+  fetchCart,
+  fetchProducts,
+  markAndRemoveFavorite,
+  updateProductInCart,
+} from "../../services";
+import { MODALS } from "../../constants";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 export const CartComponent = () => {
   const dispatch = useDispatch();
   const productsInCart = useSelector(productsInCart$);
-  const itemsCount = useSelector(countOfItems$);
 
   useEffect(() => {
-    dispatch(fetchCart())
-  }, [dispatch])
-
-  useEffect(() => {
-    if (Object.keys(itemsCount).length === 0)
-      productsInCart.forEach((item) =>
-        dispatch(
-          countOfItems({
-            [item.id]: 1,
-          })
-        )
-      );
-  }, [dispatch, itemsCount, productsInCart]);
+    dispatch(fetchCart());
+  }, [dispatch]);
 
   const getTotalAmount = () =>
     productsInCart
       .reduce(
-        (accumulator, current) =>
-          accumulator + current.price * itemsCount[current.id],
+        (accumulator, current) => accumulator + current.price * current.count,
         0
       )
       .toFixed(2);
 
   const handleRemoveFromCart = (id) => {
-    dispatch(removeCountOfItems(id));
-    dispatch(removeFromCart(id)).then(() => {
-      dispatch(fetchCart())
-      dispatch(setAlert("Item removed from cart!"));
-    })
-  }
+    dispatch(setSelectedModal(MODALS.DELETE_CONFIRMATION));
+    dispatch(setItemToBeRemovedFromCart(id));
+  };
 
-  const handlePlaceOrder = () => {
-    const order = {
-      orderName: `Order`,
-      orderItems: productsInCart,
-      totalAmount: getTotalAmount(),
-      orderAt: new Date().toISOString(),
-    }
+  const handleIncrement = (item) => {
+    dispatch(
+      updateProductInCart({
+        id: item.id,
+        product: {
+          ...item,
+          count: item?.count < 5 ? item?.count + 1 : item?.count,
+        },
+      })
+    ).then(() => dispatch(fetchCart()));
+  };
 
-    dispatch(placeOrder(order))
-    productsInCart.forEach((order) => handleRemoveFromCart(order.id))
+  const handleDecrement = (item) => {
+    dispatch(
+      updateProductInCart({
+        id: item.id,
+        product: {
+          ...item,
+          count: item?.count > 1 ? item?.count - 1 : item?.count,
+        },
+      })
+    ).then(() => dispatch(fetchCart()));
+  };
+
+  const handleMarkAndRemoveFavorite = (product) => {
+    dispatch(markAndRemoveFavorite({ id: product.id, product })).then(() =>
+      dispatch(fetchProducts())
+    );
+    dispatch(
+      updateProductInCart({
+        id: product.id,
+        product,
+      })
+    ).then(() => dispatch(fetchCart()));
   }
 
   return (
-      <Row className="d-flex flex-row pt-40">
-        <Col md={2} />
+    <div className="mh-5 ">
+      <Row className="justify-content-center centered-cart">
         <Col sm={12} md={5} className="mb-2">
           <Card>
             <Card.Body className="cart-card-body">
@@ -69,7 +83,7 @@ export const CartComponent = () => {
               <hr />
               {productsInCart.length > 0 ? (
                 <>
-                  {productsInCart.map((item) => (
+                  {productsInCart.map((item, i) => (
                     <>
                       <Row className="mb-3" key={item.id}>
                         <Col>
@@ -79,51 +93,73 @@ export const CartComponent = () => {
                             className="cart-image"
                           />
                         </Col>
-                        <Col>
-                          <p className="info">{item.name}</p>
-                          <p className="info">Price: $ {item.price}</p>
+                        <Col className="d-flex justify-content-between flex-column">
+                          <div>
+                            <p className="info m-0">{item.name}</p>
+                            <p className="info">{item.description}</p>
+                          </div>
+                          <div className="cart-buttons">
+                            <Button
+                              variant="light"
+                              className="delete-product-icon"
+                              onClickCapture={() => handleRemoveFromCart(item.id)}
+                            >
+                              <MdDeleteForever />
+                            </Button>
+                            <div className="ml-10">
+                              {item?.isFav ? (
+                                <FaHeart
+                                  className="fav-icon"
+                                  onClick={() =>
+                                    handleMarkAndRemoveFavorite({
+                                      ...item,
+                                      isFav: false,
+                                    })
+                                  }
+                                />
+                              ) : (
+                                <FaRegHeart
+                                  className="fav-icon"
+                                  onClick={() =>
+                                    handleMarkAndRemoveFavorite({
+                                      ...item,
+                                      isFav: true,
+                                    })
+                                  }
+                                />
+                              )}
+                            </div>
+                          </div>
                         </Col>
-                        <Col>
-                          <Form.Control
-                            type="number"
-                            key={item.id}
-                            min={1}
-                            max={5}
-                            defaultValue={1}
-                            className="width-60"
-                            value={itemsCount[item.id]}
-                            onChange={(e) =>
-                              dispatch(
-                                countOfItems({
-                                  [item.id]: parseInt(e.target.value),
-                                })
-                              )
-                            }
-                          />
-                        </Col>
-                        <Col>
-                          <Button
-                            variant="light"
-                            className="delete-button"
-                            onClickCapture={() => handleRemoveFromCart(item.id)}
-                          >
-                            Delete
-                          </Button>
+                        <Col xm={12} md={4} lg={3} className="custom-column">
+                          <ButtonGroup className="custom-button-group">
+                            <Button
+                              variant="light"
+                              className="product-counter"
+                              onClick={() => handleDecrement(item)}
+                            >
+                              -
+                            </Button>
+                            <Button
+                              variant="light"
+                              className="product-counter product-counter-text"
+                            >
+                              {item.count}
+                            </Button>
+                            <Button
+                              variant="light"
+                              className="product-counter"
+                              onClick={() => handleIncrement(item)}
+                            >
+                              +
+                            </Button>
+                          </ButtonGroup>
+                          <p className="info">$ {item.price}</p>
                         </Col>
                       </Row>
-                      <hr />
+                      {productsInCart.length - 1 !== i && <hr />}
                     </>
                   ))}
-                  <Button
-                    className="order-button border-0"
-                    variant="danger"
-                    onClick={() => {
-                      handlePlaceOrder()
-                      dispatch(setAlert("Order placed"));
-                    }}
-                  >
-                    Place Order
-                  </Button>
                 </>
               ) : (
                 <p>Please add Item to Cart</p>
@@ -143,17 +179,28 @@ export const CartComponent = () => {
                       <Row key={item.id}>
                         <Col sm={12} md={7}>
                           <p>
-                            {item.name} x {itemsCount[item.id]}
+                            {item.name} x {item.count}
                           </p>
                         </Col>
                         <Col sm={12} md={5}>
-                          <p>$: {itemsCount[item.id] * item.price}</p>
+                          <p>$: {item.count * item.price}</p>
                         </Col>
                       </Row>
                       <hr />
                     </>
                   ))}
-                  <p>Total Amount $: {getTotalAmount()}</p>
+                  <div className="d-flex justify-content-center align-items-center">
+                    <p>Total Amount $: {getTotalAmount()}</p>
+                    <Button
+                      className="order-button border-0"
+                      variant="danger"
+                      onClick={() =>
+                        dispatch(setSelectedModal(MODALS.PLACE_ORDER))
+                      }
+                    >
+                      Place Order
+                    </Button>
+                  </div>
                 </>
               ) : (
                 <Row>
@@ -168,7 +215,7 @@ export const CartComponent = () => {
             </Card.Body>
           </Card>
         </Col>
-        <Col md={1} />
       </Row>
+    </div>
   );
 };

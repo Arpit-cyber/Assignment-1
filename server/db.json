@@ -8,7 +8,9 @@
       "description": "DuoPods Wireless Headset",
       "price": 1999,
       "rating": 4.5,
-      "category": "earphones"
+      "category": "earphones",
+      "isFav": true,
+      "count": 1
     },
     {
       "id": "2",
@@ -18,7 +20,8 @@
       "description": "Wireless Headset",
       "price": 3999,
       "rating": 5,
-      "category": "earphones"
+      "category": "earphones",
+      "isFav": true
     },
     {
       "id": "3",
@@ -28,7 +31,9 @@
       "description": "Wireless Headset",
       "price": 999,
       "rating": 3.5,
-      "category": "earphones"
+      "category": "earphones",
+      "count": 1,
+      "isFav": true
     },
     {
       "id": "4",
@@ -38,7 +43,8 @@
       "description": "Wired Headset",
       "price": 999,
       "rating": 3.5,
-      "category": "earphones"
+      "category": "earphones",
+      "isFav": true
     },
     {
       "id": "5",
@@ -58,7 +64,8 @@
       "description": "HP laptop",
       "price": 69990,
       "rating": 4.5,
-      "category": "laptop"
+      "category": "laptop",
+      "isFav": true
     },
     {
       "id": "7",
@@ -108,7 +115,8 @@
       "description": "Wired Headset",
       "price": 999,
       "rating": 3.5,
-      "category": "earphones"
+      "category": "earphones",
+      "isFav": true
     },
     {
       "id": "12",
@@ -148,7 +156,8 @@
       "description": "DuoPods Wireless Headset",
       "price": 1999,
       "rating": 4.5,
-      "category": "earphones"
+      "category": "earphones",
+      "isFav": true
     },
     {
       "id": "16",
@@ -208,10 +217,59 @@
       "description": "Dell laptop",
       "price": 89990,
       "rating": 5,
-      "category": "laptop"
+      "category": "laptop",
+      "isFav": true
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "id": "1",
+      "createdAt": "2020-08-25T00:24:53.689Z",
+      "name": "Ear Pods",
+      "avatar": "https://image.made-in-china.com/43f34j00DYhRmqyPndkt/Bluetooth-Headset-Earpod-for-iPhone.webp",
+      "description": "DuoPods Wireless Headset",
+      "price": 1999,
+      "rating": 4.5,
+      "category": "earphones",
+      "isFav": false,
+      "count": 4
+    },
+    {
+      "id": "3",
+      "createdAt": "2020-08-26T00:24:53.689Z",
+      "name": "Boat Ear Phones",
+      "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
+      "description": "Wireless Headset",
+      "price": 999,
+      "rating": 3.5,
+      "category": "earphones",
+      "count": 1,
+      "isFav": true
+    },
+    {
+      "id": "6",
+      "createdAt": "2020-08-25T07:24:25.544Z",
+      "name": "HP Laptop",
+      "avatar": "https://hk-media.apjonlinecdn.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/c/0/c06746305_1.png",
+      "description": "HP laptop",
+      "price": 69990,
+      "rating": 4.5,
+      "category": "laptop",
+      "isFav": true,
+      "count": 2
+    },
+    {
+      "id": "16",
+      "createdAt": "2020-08-24T00:24:53.689Z",
+      "name": "Mivi Ear Phones 2",
+      "avatar": "https://m.media-amazon.com/images/I/61d4hVRb+dS._SL1500_.jpg",
+      "description": "Wireless Headset",
+      "price": 3999,
+      "rating": 5,
+      "category": "earphones",
+      "count": 1
+    }
+  ],
   "orders": [
     {
       "orderName": "Order",
@@ -784,6 +842,64 @@
       "totalAmount": "74988.00",
       "orderAt": "2021-10-04T12:48:09.121Z",
       "id": 19
+    },
+    {
+      "orderName": "Order",
+      "orderItems": [
+        {
+          "id": "2",
+          "createdAt": "2020-08-24T00:24:53.689Z",
+          "name": "Mivi Ear Phones",
+          "avatar": "https://m.media-amazon.com/images/I/61d4hVRb+dS._SL1500_.jpg",
+          "description": "Wireless Headset",
+          "price": 3999,
+          "rating": 5,
+          "category": "earphones"
+        },
+        {
+          "id": "3",
+          "createdAt": "2020-08-26T00:24:53.689Z",
+          "name": "Boat Ear Phones",
+          "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
+          "description": "Wireless Headset",
+          "price": 999,
+          "rating": 3.5,
+          "category": "earphones"
+        }
+      ],
+      "totalAmount": "4998.00",
+      "orderAt": "2021-10-08T05:17:39.721Z",
+      "id": 20
+    },
+    {
+      "orderName": "Order",
+      "orderItems": [
+        {
+          "id": "1",
+          "createdAt": "2020-08-25T00:24:53.689Z",
+          "name": "Ear Pods",
+          "avatar": "https://image.made-in-china.com/43f34j00DYhRmqyPndkt/Bluetooth-Headset-Earpod-for-iPhone.webp",
+          "description": "DuoPods Wireless Headset",
+          "price": 1999,
+          "rating": 4.5,
+          "category": "earphones",
+          "count": 3
+        },
+        {
+          "id": "3",
+          "createdAt": "2020-08-26T00:24:53.689Z",
+          "name": "Boat Ear Phones",
+          "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
+          "description": "Wireless Headset",
+          "price": 999,
+          "rating": 3.5,
+          "category": "earphones",
+          "count": 2
+        }
+      ],
+      "totalAmount": "7995.00",
+      "orderAt": "2021-10-08T09:26:15.277Z",
+      "id": 21
     }
   ],
   "sales": [
@@ -806,238 +922,296 @@
       "id": "3"
     }
   ],
-  "favoriteProducts": [
+  "viewedProduct": [
     {
-      "id": "1",
       "createdAt": "2020-08-25T00:24:53.689Z",
       "name": "Ear Pods",
       "avatar": "https://image.made-in-china.com/43f34j00DYhRmqyPndkt/Bluetooth-Headset-Earpod-for-iPhone.webp",
       "description": "DuoPods Wireless Headset",
       "price": 1999,
       "rating": 4.5,
-      "category": "earphones"
+      "category": "earphones",
+      "id": 1
     },
     {
-      "id": "2",
-      "createdAt": "2020-08-24T00:24:53.689Z",
-      "name": "Mivi Ear Phones",
-      "avatar": "https://m.media-amazon.com/images/I/61d4hVRb+dS._SL1500_.jpg",
+      "createdAt": "2020-08-25T00:24:53.689Z",
+      "name": "Ear Pods",
+      "avatar": "https://image.made-in-china.com/43f34j00DYhRmqyPndkt/Bluetooth-Headset-Earpod-for-iPhone.webp",
+      "description": "DuoPods Wireless Headset",
+      "price": 1999,
+      "rating": 4.5,
+      "category": "earphones",
+      "id": 2
+    },
+    {
+      "createdAt": "2020-08-25T00:24:53.689Z",
+      "name": "Ear Pods",
+      "avatar": "https://image.made-in-china.com/43f34j00DYhRmqyPndkt/Bluetooth-Headset-Earpod-for-iPhone.webp",
+      "description": "DuoPods Wireless Headset",
+      "price": 1999,
+      "rating": 4.5,
+      "category": "earphones",
+      "id": 3
+    },
+    {
+      "createdAt": "2020-08-26T00:24:53.689Z",
+      "name": "Boat Ear Phones",
+      "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
       "description": "Wireless Headset",
-      "price": 3999,
-      "rating": 5,
-      "category": "earphones"
+      "price": 999,
+      "rating": 3.5,
+      "category": "earphones",
+      "id": 4
     },
     {
-      "id": "6",
       "createdAt": "2020-08-25T07:24:25.544Z",
       "name": "HP Laptop",
       "avatar": "https://hk-media.apjonlinecdn.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/c/0/c06746305_1.png",
       "description": "HP laptop",
       "price": 69990,
       "rating": 4.5,
-      "category": "laptop"
+      "category": "laptop",
+      "id": 5
     },
     {
-      "id": "19",
-      "createdAt": "2020-08-25T07:24:25.544Z",
-      "name": "Apple Laptop",
-      "avatar": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-pro-13-og-202011?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1604347427000",
-      "description": "Apple MacBook Pro Core",
-      "price": 169990,
-      "rating": 4.5,
-      "category": "laptop"
-    }
-  ],
-  "viewedProduct": [
-    {
-      "id": "2",
-      "createdAt": "2020-08-24T00:24:53.689Z",
-      "name": "Mivi Ear Phones",
-      "avatar": "https://m.media-amazon.com/images/I/61d4hVRb+dS._SL1500_.jpg",
-      "description": "Wireless Headset",
-      "price": 3999,
-      "rating": 5,
-      "category": "earphones"
-    },
-    {
-      "id": "1",
-      "createdAt": "2020-08-25T00:24:53.689Z",
-      "name": "Ear Pods",
-      "avatar": "https://image.made-in-china.com/43f34j00DYhRmqyPndkt/Bluetooth-Headset-Earpod-for-iPhone.webp",
-      "description": "DuoPods Wireless Headset",
-      "price": 1999,
-      "rating": 4.5,
-      "category": "earphones"
-    },
-    {
-      "id": "1",
-      "createdAt": "2020-08-25T00:24:53.689Z",
-      "name": "Ear Pods",
-      "avatar": "https://image.made-in-china.com/43f34j00DYhRmqyPndkt/Bluetooth-Headset-Earpod-for-iPhone.webp",
-      "description": "DuoPods Wireless Headset",
-      "price": 1999,
-      "rating": 4.5,
-      "category": "earphones"
-    },
-    {
-      "id": "1",
-      "createdAt": "2020-08-25T00:24:53.689Z",
-      "name": "Ear Pods",
-      "avatar": "https://image.made-in-china.com/43f34j00DYhRmqyPndkt/Bluetooth-Headset-Earpod-for-iPhone.webp",
-      "description": "DuoPods Wireless Headset",
-      "price": 1999,
-      "rating": 4.5,
-      "category": "earphones"
-    },
-    {
-      "id": "1",
-      "createdAt": "2020-08-25T00:24:53.689Z",
-      "name": "Ear Pods",
-      "avatar": "https://image.made-in-china.com/43f34j00DYhRmqyPndkt/Bluetooth-Headset-Earpod-for-iPhone.webp",
-      "description": "DuoPods Wireless Headset",
-      "price": 1999,
-      "rating": 4.5,
-      "category": "earphones"
-    },
-    {
-      "id": "1",
-      "createdAt": "2020-08-25T00:24:53.689Z",
-      "name": "Ear Pods",
-      "avatar": "https://image.made-in-china.com/43f34j00DYhRmqyPndkt/Bluetooth-Headset-Earpod-for-iPhone.webp",
-      "description": "DuoPods Wireless Headset",
-      "price": 1999,
-      "rating": 4.5,
-      "category": "earphones"
-    },
-    {
-      "id": "3",
-      "createdAt": "2020-08-26T00:24:53.689Z",
-      "name": "Boat Ear Phones",
-      "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
-      "description": "Wireless Headset",
-      "price": 999,
-      "rating": 3.5,
-      "category": "earphones"
-    },
-    {
-      "id": "3",
-      "createdAt": "2020-08-26T00:24:53.689Z",
-      "name": "Boat Ear Phones",
-      "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
-      "description": "Wireless Headset",
-      "price": 999,
-      "rating": 3.5,
-      "category": "earphones"
-    },
-    {
-      "id": "3",
-      "createdAt": "2020-08-26T00:24:53.689Z",
-      "name": "Boat Ear Phones",
-      "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
-      "description": "Wireless Headset",
-      "price": 999,
-      "rating": 3.5,
-      "category": "earphones"
-    },
-    {
-      "id": "3",
-      "createdAt": "2020-08-26T00:24:53.689Z",
-      "name": "Boat Ear Phones",
-      "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
-      "description": "Wireless Headset",
-      "price": 999,
-      "rating": 3.5,
-      "category": "earphones"
-    },
-    {
-      "id": "3",
-      "createdAt": "2020-08-26T00:24:53.689Z",
-      "name": "Boat Ear Phones",
-      "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
-      "description": "Wireless Headset",
-      "price": 999,
-      "rating": 3.5,
-      "category": "earphones"
-    },
-    {
-      "id": "11",
-      "createdAt": "2020-08-20T00:24:53.689Z",
-      "name": "Ear Phones 1",
-      "avatar": "https://m.media-amazon.com/images/I/61+tzvHZi+L._SL1500_.jpg",
-      "description": "Wired Headset",
-      "price": 999,
-      "rating": 3.5,
-      "category": "earphones"
-    },
-    {
-      "id": "11",
-      "createdAt": "2020-08-20T00:24:53.689Z",
-      "name": "Ear Phones 1",
-      "avatar": "https://m.media-amazon.com/images/I/61+tzvHZi+L._SL1500_.jpg",
-      "description": "Wired Headset",
-      "price": 999,
-      "rating": 3.5,
-      "category": "earphones"
-    },
-    {
-      "id": "11",
-      "createdAt": "2020-08-20T00:24:53.689Z",
-      "name": "Ear Phones 1",
-      "avatar": "https://m.media-amazon.com/images/I/61+tzvHZi+L._SL1500_.jpg",
-      "description": "Wired Headset",
-      "price": 999,
-      "rating": 3.5,
-      "category": "earphones"
-    },
-    {
-      "id": "11",
-      "createdAt": "2020-08-20T00:24:53.689Z",
-      "name": "Ear Phones 1",
-      "avatar": "https://m.media-amazon.com/images/I/61+tzvHZi+L._SL1500_.jpg",
-      "description": "Wired Headset",
-      "price": 999,
-      "rating": 3.5,
-      "category": "earphones"
-    },
-    {
-      "id": "11",
-      "createdAt": "2020-08-20T00:24:53.689Z",
-      "name": "Ear Phones 1",
-      "avatar": "https://m.media-amazon.com/images/I/61+tzvHZi+L._SL1500_.jpg",
-      "description": "Wired Headset",
-      "price": 999,
-      "rating": 3.5,
-      "category": "earphones"
-    },
-    {
-      "id": "11",
-      "createdAt": "2020-08-20T00:24:53.689Z",
-      "name": "Ear Phones 1",
-      "avatar": "https://m.media-amazon.com/images/I/61+tzvHZi+L._SL1500_.jpg",
-      "description": "Wired Headset",
-      "price": 999,
-      "rating": 3.5,
-      "category": "earphones"
-    },
-    {
-      "id": "11",
-      "createdAt": "2020-08-20T00:24:53.689Z",
-      "name": "Ear Phones 1",
-      "avatar": "https://m.media-amazon.com/images/I/61+tzvHZi+L._SL1500_.jpg",
-      "description": "Wired Headset",
-      "price": 999,
-      "rating": 3.5,
-      "category": "earphones"
-    },
-    {
-      "id": "4",
       "createdAt": "2020-08-20T00:24:53.689Z",
       "name": "Ear Phones",
       "avatar": "https://m.media-amazon.com/images/I/61+tzvHZi+L._SL1500_.jpg",
       "description": "Wired Headset",
       "price": 999,
       "rating": 3.5,
-      "category": "earphones"
+      "category": "earphones",
+      "id": 6
+    },
+    {
+      "createdAt": "2020-08-25T00:24:53.689Z",
+      "name": "Ear Pods 1",
+      "avatar": "https://image.made-in-china.com/43f34j00DYhRmqyPndkt/Bluetooth-Headset-Earpod-for-iPhone.webp",
+      "description": "DuoPods Wireless Headset",
+      "price": 1999,
+      "rating": 4.5,
+      "category": "earphones",
+      "id": 7
+    },
+    {
+      "createdAt": "2020-08-25T07:24:25.544Z",
+      "name": "Dell Laptop",
+      "avatar": "https://i.dell.com/is/image/DellContent//content/dam/global-site-design/product_images/dell_client_products/notebooks/latitude_notebooks/14_3420/media_gallery/peripherals_laptop_latitude_3420nt_gallery_1.psd?fmt=pjpg&pscan=auto&scl=1&wid=3319&hei=2405&qlt=85,0&resMode=sharp2&op_usm=1.75,0.3,2,0&size=3319,2405",
+      "description": "Dell laptop",
+      "price": 89990,
+      "rating": 5,
+      "category": "laptop",
+      "id": 8
+    },
+    {
+      "createdAt": "2020-08-20T00:24:53.689Z",
+      "name": "Ear Phones 2",
+      "avatar": "https://m.media-amazon.com/images/I/61+tzvHZi+L._SL1500_.jpg",
+      "description": "Wired Headset",
+      "price": 999,
+      "rating": 3.5,
+      "category": "earphones",
+      "id": 9
+    },
+    {
+      "createdAt": "2020-08-26T00:24:53.689Z",
+      "name": "Boat Ear Phones 2",
+      "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
+      "description": "Wireless Headset",
+      "price": 999,
+      "rating": 3.5,
+      "category": "earphones",
+      "id": 10
+    },
+    {
+      "createdAt": "2020-08-25T07:24:25.544Z",
+      "name": "HP Laptop 2",
+      "avatar": "https://hk-media.apjonlinecdn.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/c/0/c06746305_1.png",
+      "description": "HP laptop",
+      "price": 69990,
+      "rating": 4.5,
+      "category": "laptop",
+      "id": 11
+    },
+    {
+      "createdAt": "2020-08-25T07:24:25.544Z",
+      "name": "Dell Laptop 2",
+      "avatar": "https://i.dell.com/is/image/DellContent//content/dam/global-site-design/product_images/dell_client_products/notebooks/latitude_notebooks/14_3420/media_gallery/peripherals_laptop_latitude_3420nt_gallery_1.psd?fmt=pjpg&pscan=auto&scl=1&wid=3319&hei=2405&qlt=85,0&resMode=sharp2&op_usm=1.75,0.3,2,0&size=3319,2405",
+      "description": "Dell laptop",
+      "price": 89990,
+      "rating": 5,
+      "category": "laptop",
+      "id": 12
+    },
+    {
+      "createdAt": "2020-08-25T07:24:25.544Z",
+      "name": "Dell Laptop 1",
+      "avatar": "https://i.dell.com/is/image/DellContent//content/dam/global-site-design/product_images/dell_client_products/notebooks/latitude_notebooks/14_3420/media_gallery/peripherals_laptop_latitude_3420nt_gallery_1.psd?fmt=pjpg&pscan=auto&scl=1&wid=3319&hei=2405&qlt=85,0&resMode=sharp2&op_usm=1.75,0.3,2,0&size=3319,2405",
+      "description": "Dell laptop",
+      "price": 89990,
+      "rating": 5,
+      "category": "laptop",
+      "id": 13
+    },
+    {
+      "createdAt": "2020-08-26T00:24:53.689Z",
+      "name": "Boat Ear Phones 1",
+      "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
+      "description": "Wireless Headset",
+      "price": 999,
+      "rating": 3.5,
+      "category": "earphones",
+      "id": 14
+    },
+    {
+      "createdAt": "2020-08-24T00:24:53.689Z",
+      "name": "Mivi Ear Phones 1",
+      "avatar": "https://m.media-amazon.com/images/I/61d4hVRb+dS._SL1500_.jpg",
+      "description": "Wireless Headset",
+      "price": 3999,
+      "rating": 5,
+      "category": "earphones",
+      "id": 15
+    },
+    {
+      "createdAt": "2020-08-25T07:24:25.544Z",
+      "name": "HP Laptop 1",
+      "avatar": "https://hk-media.apjonlinecdn.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/c/0/c06746305_1.png",
+      "description": "HP laptop",
+      "price": 69990,
+      "rating": 4.5,
+      "category": "laptop",
+      "id": 16
+    },
+    {
+      "createdAt": "2020-08-25T07:24:25.544Z",
+      "name": "Apple Laptop 1",
+      "avatar": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/macbook-pro-13-og-202011?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1604347427000",
+      "description": "Apple MacBook Pro Core",
+      "price": 169990,
+      "rating": 4.5,
+      "category": "laptop",
+      "id": 17
+    },
+    {
+      "createdAt": "2020-08-25T00:24:53.689Z",
+      "name": "Ear Pods 2",
+      "avatar": "https://image.made-in-china.com/43f34j00DYhRmqyPndkt/Bluetooth-Headset-Earpod-for-iPhone.webp",
+      "description": "DuoPods Wireless Headset",
+      "price": 1999,
+      "rating": 4.5,
+      "category": "earphones",
+      "id": 18
+    },
+    {
+      "createdAt": "2020-08-20T00:24:53.689Z",
+      "name": "Ear Phones 1",
+      "avatar": "https://m.media-amazon.com/images/I/61+tzvHZi+L._SL1500_.jpg",
+      "description": "Wired Headset",
+      "price": 999,
+      "rating": 3.5,
+      "category": "earphones",
+      "id": 19
+    },
+    {
+      "createdAt": "2020-08-24T00:24:53.689Z",
+      "name": "Mivi Ear Phones 2",
+      "avatar": "https://m.media-amazon.com/images/I/61d4hVRb+dS._SL1500_.jpg",
+      "description": "Wireless Headset",
+      "price": 3999,
+      "rating": 5,
+      "category": "earphones",
+      "id": 20
+    },
+    {
+      "createdAt": "2020-08-26T00:24:53.689Z",
+      "name": "Boat Ear Phones",
+      "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
+      "description": "Wireless Headset",
+      "price": 999,
+      "rating": 3.5,
+      "category": "earphones",
+      "id": 21
+    },
+    {
+      "createdAt": "2020-08-26T00:24:53.689Z",
+      "name": "Boat Ear Phones",
+      "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
+      "description": "Wireless Headset",
+      "price": 999,
+      "rating": 3.5,
+      "category": "earphones",
+      "id": 22
+    },
+    {
+      "createdAt": "2020-08-26T00:24:53.689Z",
+      "name": "Boat Ear Phones",
+      "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
+      "description": "Wireless Headset",
+      "price": 999,
+      "rating": 3.5,
+      "category": "earphones",
+      "id": 23
+    },
+    {
+      "createdAt": "2020-08-24T00:24:53.689Z",
+      "name": "Mivi Ear Phones",
+      "avatar": "https://m.media-amazon.com/images/I/61d4hVRb+dS._SL1500_.jpg",
+      "description": "Wireless Headset",
+      "price": 3999,
+      "rating": 5,
+      "category": "earphones",
+      "id": 24
+    },
+    {
+      "createdAt": "2020-08-26T00:24:53.689Z",
+      "name": "Boat Ear Phones",
+      "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
+      "description": "Wireless Headset",
+      "price": 999,
+      "rating": 3.5,
+      "category": "earphones",
+      "id": 25
+    },
+    {
+      "createdAt": "2020-08-25T00:24:53.689Z",
+      "name": "Ear Pods",
+      "avatar": "https://image.made-in-china.com/43f34j00DYhRmqyPndkt/Bluetooth-Headset-Earpod-for-iPhone.webp",
+      "description": "DuoPods Wireless Headset",
+      "price": 1999,
+      "rating": 4.5,
+      "category": "earphones",
+      "id": 26
+    },
+    {
+      "createdAt": "2020-08-26T00:24:53.689Z",
+      "name": "Boat Ear Phones",
+      "avatar": "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/6b237ddc-f894-4dfd-a474-2435f93e6611.png?v=1625046507",
+      "description": "Wireless Headset",
+      "price": 999,
+      "rating": 3.5,
+      "category": "earphones",
+      "id": 27
+    },
+    {
+      "createdAt": "2020-08-25T07:24:25.544Z",
+      "name": "HP Laptop",
+      "avatar": "https://hk-media.apjonlinecdn.com/catalog/product/cache/b3b166914d87ce343d4dc5ec5117b502/c/0/c06746305_1.png",
+      "description": "HP laptop",
+      "price": 69990,
+      "rating": 4.5,
+      "category": "laptop",
+      "id": 28
+    },
+    {
+      "createdAt": "2020-08-24T00:24:53.689Z",
+      "name": "Mivi Ear Phones 2",
+      "avatar": "https://m.media-amazon.com/images/I/61d4hVRb+dS._SL1500_.jpg",
+      "description": "Wireless Headset",
+      "price": 3999,
+      "rating": 5,
+      "category": "earphones",
+      "id": 29
     }
   ]
 }

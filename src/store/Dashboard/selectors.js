@@ -11,9 +11,9 @@ export const productsInCart$ = createSelector(dashboard$, (s) => s.cart);
 
 export const orders$ = createSelector(dashboard$, (s) => s.orders);
 
-export const favoriteProducts$ = createSelector(dashboard$, (s) => s.favoriteProducts);
-
 export const viewedProducts$ = createSelector(dashboard$, (s) => s.viewedProducts);
+
+export const paginationFilters$ = createSelector(dashboard$, (s) => s.paginationFilters);
 
 export const filters$ = createSelector(dashboard$, (s) => s.filters);
 
@@ -22,3 +22,7 @@ export const countOfItems$ = createSelector(dashboard$, (s) => s.numberOfItems);
 export const alert$ = createSelector(dashboard$, (s) => s.alert);
 
 export const itemToBeSearch$ = createSelector(dashboard$, (s) => s.itemToBeSearch);
+
+export const selectedModal$ = createSelector(dashboard$, (s) => s.selectedModal);
+
+export const itemToBeRemvoedFromCart$ = createSelector(dashboard$, (s) => s.itemToBeRemvoedFromCart);

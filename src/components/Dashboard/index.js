@@ -1,19 +1,19 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { Row, Col, Image, Card } from "react-bootstrap";
-import classnames from "classnames";
+import React, { useEffect, useState } from "react";
+import { Row, Col, Image, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setPaginationFilters,
   itemToBeSearch$,
   products$,
   isProductLoading$,
+  paginationFilters$,
+  setFilters,
   filters$,
 } from "../../store";
 import { Carousal } from "../Carousal";
 import { CardComponent } from "../Cards";
 import {
   fetchCart,
-  fetchFavoriteProducts,
   fetchProducts,
   fetchSales,
 } from "../../services";
@@ -31,23 +31,19 @@ const MOCK_FILTERS = [
 export const Dashboard = () => {
   const dispatch = useDispatch();
   const products = useSelector(products$);
-  const paginationFilters = useSelector(filters$);
+  const paginationFilters = useSelector(paginationFilters$);
   const isProductLoading = useSelector(isProductLoading$);
   const itemToBeSearch = useSelector(itemToBeSearch$);
   const [productsToBeDisplayed, setProductsToBeDisplayed] = useState(products);
-  const [filters, setFilters] = useState([]);
+  const filters = useSelector(filters$);
 
   useEffect(() => {
     dispatch(fetchProducts(paginationFilters));
     dispatch(fetchSales());
     dispatch(fetchCart());
-    dispatch(fetchFavoriteProducts());
   }, [dispatch, paginationFilters]);
 
-  const pageCounts = useMemo(() => {
-    const maxPages = Math.ceil(21 / 8);
-    return Array.from({ length: maxPages }, (_, i) => i + 1);
-  }, []);
+  const pageCounts = Math.ceil(21 / 8);
 
   useEffect(() => {
     products && setProductsToBeDisplayed(products);
@@ -98,8 +94,32 @@ export const Dashboard = () => {
     ));
   };
 
+  const handleFetchProducts = (filter) => {
+    dispatch(setPaginationFilters(filter));
+    dispatch(fetchProducts(filter));
+  }
+
+  const handlePrev = () => {
+    const filter = {
+      page: paginationFilters?.page > 1 ? paginationFilters?.page - 1 : 1,
+      limit: 8,
+    };
+
+    handleFetchProducts(filter)
+  };
+
+  const handleNext = () => {
+    const filter = {
+      page:
+        paginationFilters?.page < pageCounts ? paginationFilters?.page + 1 : 1,
+      limit: 8,
+    };
+
+    handleFetchProducts(filter)
+  };
+
   return (
-    <>
+    <div className="mh-5">
       {isProductLoading ? (
         <Skeleton height={320} className="mb-20" />
       ) : (
@@ -112,7 +132,7 @@ export const Dashboard = () => {
           options={MOCK_FILTERS}
           placeholder="Filter By Category"
           value={filters}
-          onChange={(selectedOptions) => setFilters(selectedOptions)}
+          onChange={(selectedOptions) => dispatch(setFilters(selectedOptions))}
         />
       )}
       <div className="m-2">
@@ -122,21 +142,27 @@ export const Dashboard = () => {
       </div>
       {productsToBeDisplayed?.length > 0 && (
         <div className="pagination-container">
-          {pageCounts.map((e) => (
-            <div
-              className={classnames("pagination-item", {
-                "pagination-item-active": paginationFilters.page === e,
-              })}
-              onClick={() => {
-                dispatch(setPaginationFilters({ page: e, limit: 8 }));
-                dispatch(fetchProducts({ page: e, limit: 8 }));
-              }}
+          <div className="pagination-item-wrapper">
+            <Button
+              variant="light"
+              className="pagination-item-arrow"
+              onClick={handlePrev}
+              disabled={paginationFilters?.page === 1}
             >
-              <span>{e}</span>
-            </div>
-          ))}
+              &larr;
+            </Button>
+            <div className="pagination-item">{paginationFilters?.page}</div>
+            <Button
+              variant="light"
+              className="pagination-item-arrow"
+              onClick={handleNext}
+              disabled={paginationFilters?.page === pageCounts}
+            >
+              &rarr;
+            </Button>
+          </div>
         </div>
       )}
-    </>
+    </div>
   );
 };

@@ -24,6 +24,18 @@ export const addToCart = createAsyncThunk(
         }),
 );
 
+export const updateProductInCart = createAsyncThunk(
+    'updateProductInCart',
+    async ({ id, product }, thungArgs, thunkAPI) =>
+        await doAsync({
+            url: `${CART_URL}/${(id)}`,
+            method: 'put',
+            body: product,
+            ...thungArgs,
+            ...thunkAPI
+        }),
+);
+
 export const removeFromCart = createAsyncThunk(
     'removeFromCart',
     async (productId, thunkArgs, thunkAPI) =>

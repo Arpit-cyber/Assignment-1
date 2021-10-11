@@ -10,11 +10,21 @@ import { Dashboard } from "../components/Dashboard";
 import { OrdersComponent } from "../components/Orders";
 import { BrowserRouter } from "react-router-dom";
 import { CustomToast } from "../components/Toast";
+import { DeleteConfirmation } from '../components/DeleteConfirmation'
+import { MODALS } from '../constants'
+import { selectedModal$ } from '../store'
+import { useSelector } from 'react-redux';
+import { PlaceOrder } from '../components/PlaceOrder';
+import { ProductDetails } from '../components/ProductDetails';
 
 function App() {
+  const selectedModal = useSelector(selectedModal$);
+
   return (
     <BrowserRouter>
       <CustomToast />
+      {selectedModal === MODALS.DELETE_CONFIRMATION && <DeleteConfirmation />}
+      {selectedModal === MODALS.PLACE_ORDER && <PlaceOrder />}
       <div className="full-width">
         <NavBar />
         <div className="custom-container">
@@ -33,6 +43,9 @@ function App() {
             </Route>
             <Route path="/analysis">
               <AnalysisComponent />
+            </Route>
+            <Route path="/products/:id">
+              <ProductDetails />
             </Route>
           </Switch>
         </div>
