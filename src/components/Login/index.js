@@ -8,7 +8,7 @@ export const LoginScreen = () => {
 
     return (
         <div className="wrapper">
-            <Card>
+            <Card className="login-card">
                 <Card.Body className="d-flex flex-column align-items-center">
                     <h4 className="mb-30">Sign In</h4>
                     <Form.Control
