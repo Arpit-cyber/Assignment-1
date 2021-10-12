@@ -30,15 +30,18 @@ export const PlaceOrder = () => {
             orderAt: new Date().toISOString(),
         }
     
-        dispatch(placeOrder(order))
-        
-        productsInCart.forEach(({ id }) => {
-            dispatch(removeFromCart(id));
-        })
+        dispatch(placeOrder(order)).then(() => {
+            productsInCart.forEach(({ id }) => {
+                console.log('id ', id);
+                dispatch(removeFromCart(id));
+            })
 
-        handleReset()
-        dispatch(setAlert("Order placed"));
-        dispatch(fetchCart());
+            handleReset()
+            dispatch(setAlert("Order placed"));
+            dispatch(fetchCart());
+        })
+        
+
     }
 
     const Message = (

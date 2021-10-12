@@ -406,6 +406,10 @@ p {
   margin-bottom: 20px !important;
 }
 
+.mb-30 {
+  margin-bottom: 30px !important;
+}
+
 .centered-heading {
   margin: 20px 0;
   display: inline-flex;
@@ -559,4 +563,21 @@ p {
   .custom-column {
     width: inherit !important;
   }
+}
+
+.login-button {
+  background-color: transparent !important;
+  border: none !important;
+  color: #fff !important;
+  transition: all .2s ease-out;
+}
+
+.login-button:hover {
+  box-shadow: 0 1rem 2rem rgba(0,0,0, .5) !important;
+  transform: scale(1.05);
+}
+
+.login-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
