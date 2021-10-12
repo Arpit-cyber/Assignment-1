@@ -1,0 +1,33 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card {
+    width: 30vw !important;
+}
+
+.forgot-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+}
+
+.sign-in-btn {
+    width: 30%;
+}
+
+.signup-section {
+    display: flex;
+    align-items: baseline;
+}
+
+.links {
+    text-decoration: none !important;
+}

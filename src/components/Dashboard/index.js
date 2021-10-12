@@ -3,17 +3,15 @@ import { Row, Col, Image, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setPaginationFilters,
-  itemToBeSearch$,
   products$,
   isProductLoading$,
   paginationFilters$,
-  filters$,
   productsForPagination$,
 } from "../../store";
 import classnames from "classnames";
 import { Carousal } from "../Carousal";
 import { CardComponent } from "../Cards";
-import { fetchCart, fetchProducts, fetchProductsForPagination, fetchSales } from "../../services";
+import { fetchAllUsers, fetchCart, fetchProducts, fetchProductsForPagination, fetchSales } from "../../services";
 import { CustomDropdown } from "../Dropdown";
 import { Icons } from "../../resources";
 import Skeleton from "react-loading-skeleton";
@@ -31,11 +29,10 @@ export const Dashboard = () => {
   const totalProducts = useSelector(productsForPagination$);
   const paginationFilters = useSelector(paginationFilters$);
   const isProductLoading = useSelector(isProductLoading$);
-  const itemToBeSearch = useSelector(itemToBeSearch$);
   const [productsToBeDisplayed, setProductsToBeDisplayed] = useState(products);
-  const filters = useSelector(filters$);
 
   useEffect(() => {
+    dispatch(fetchAllUsers());
     dispatch(fetchSales());
     dispatch(fetchCart());
   }, [dispatch]);
@@ -55,22 +52,6 @@ export const Dashboard = () => {
   useEffect(() => {
     products && setProductsToBeDisplayed(products);
   }, [products]);
-
-  useEffect(() => {
-    if (itemToBeSearch)
-      setProductsToBeDisplayed(
-        products.filter((e) =>
-          e.name.toLowerCase().includes(itemToBeSearch.toLowerCase())
-        )
-      );
-    else if (filters.length > 0)
-      setProductsToBeDisplayed(
-        products.filter((e) =>
-          filters.some((filter) => filter.value.includes(e.category))
-        )
-      );
-    else setProductsToBeDisplayed(products);
-  }, [itemToBeSearch, products, filters]);
 
   const RenderColumns = () => {
     return productsToBeDisplayed.length > 0 ? (
