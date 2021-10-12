@@ -5,15 +5,14 @@ import {
   Form,
   Nav,
   Button,
-  Badge,
-  Image
+  Badge
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FaHeart, FaShoppingCart, FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { paginationFilters$, productsInCart$, setFilters, setPaginationFilters, setSearchItem } from "../../store";
-import { Icons } from '../../resources'
 import { fetchProducts } from "../../services";
+import { UserThumbnail } from "../common/UserThumbnail";
 
 const emptyString = "";
 
@@ -81,14 +80,10 @@ const NavBar = () => {
             </Button>
           </div>
         </Form>
-        <Nav className="ml-auto">
+        <Nav className="d-flex justify-content-center align-items-center ml-auto">
           <NavDropdown 
             title={
-              <Image
-                src={Icons.userAvatar}
-                alt="user-picture"
-                className="user-avatar"
-              />
+              <UserThumbnail user={{name: "Arpit Kumar"}} />
             } 
             id="nav-dropdown"
           >

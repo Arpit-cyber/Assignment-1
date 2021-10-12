@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Row, Col, Image, Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -8,18 +8,17 @@ import {
   isProductLoading$,
   paginationFilters$,
   filters$,
+  productsForPagination$,
 } from "../../store";
 import classnames from "classnames";
 import { Carousal } from "../Carousal";
 import { CardComponent } from "../Cards";
-import { fetchCart, fetchProducts, fetchSales } from "../../services";
+import { fetchCart, fetchProducts, fetchProductsForPagination, fetchSales } from "../../services";
 import { CustomDropdown } from "../Dropdown";
 import { Icons } from "../../resources";
 import Skeleton from "react-loading-skeleton";
 
 const MOCK_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8];
-
-const MOCK_PAGINATION = [1, 2, 3];
 
 const MOCK_FILTERS = [
   { label: "Laptop", value: "laptop" },
@@ -29,6 +28,7 @@ const MOCK_FILTERS = [
 export const Dashboard = () => {
   const dispatch = useDispatch();
   const products = useSelector(products$);
+  const totalProducts = useSelector(productsForPagination$);
   const paginationFilters = useSelector(paginationFilters$);
   const isProductLoading = useSelector(isProductLoading$);
   const itemToBeSearch = useSelector(itemToBeSearch$);
@@ -39,12 +39,18 @@ export const Dashboard = () => {
     dispatch(fetchSales());
     dispatch(fetchCart());
   }, [dispatch]);
-
+  
   useEffect(() => {
+    dispatch(fetchProductsForPagination({ name: paginationFilters?.name, category: paginationFilters?.category }));
     dispatch(fetchProducts(paginationFilters));
   }, [dispatch, paginationFilters]);
 
-  const pageCounts = Math.ceil(21 / 8);
+  const pageCounts = useMemo(() => {
+    const maxPages = Math.ceil(totalProducts.length / 8);
+    return Array.from({ length: maxPages }, (_, i) => i + 1);
+  }, [totalProducts]);
+
+  const totalPages = Math.ceil(totalProducts?.length / paginationFilters?.limit)
 
   useEffect(() => {
     products && setProductsToBeDisplayed(products);
@@ -113,7 +119,7 @@ export const Dashboard = () => {
     const filter = {
       ...paginationFilters,
       page:
-        paginationFilters?.page < pageCounts ? paginationFilters?.page + 1 : 1,
+        paginationFilters?.page < totalPages ? paginationFilters?.page + 1 : 1,
     };
 
     handleFetchProducts(filter);
@@ -170,8 +176,9 @@ export const Dashboard = () => {
             >
               &larr;
             </Button>
-            {MOCK_PAGINATION.map((e) => (
+            {pageCounts.map((e) => (
               <div
+                key={e}
                 className={classnames("pagination-item", {
                   "pagination-item-active": e === paginationFilters?.page,
                 })}
@@ -184,7 +191,7 @@ export const Dashboard = () => {
               variant="light"
               className="pagination-item-arrow"
               onClick={handleNext}
-              disabled={paginationFilters?.page === pageCounts}
+              disabled={paginationFilters?.page === totalPages}
             >
               &rarr;
             </Button>

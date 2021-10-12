@@ -18,6 +18,20 @@ export const fetchProducts = createAsyncThunk(
     }
 );
 
+export const fetchProductsForPagination = createAsyncThunk(
+    'productsForPaginations',
+    async (filters = {}, thungArgs, thunkAPI) =>  {
+        const filter = createFilterString(filters);
+        const qs = filter ? `?${filter}` : '';
+
+        return await doAsync({
+            url: `${PRODUCT_URL}${qs}`,
+            ...thungArgs,
+            ...thunkAPI
+        })
+    }
+);
+
 export const fetchViewedProducts = createAsyncThunk(
     'fetchViewedProducts',
     async (thungArgs, thunkAPI) =>  await doAsync({

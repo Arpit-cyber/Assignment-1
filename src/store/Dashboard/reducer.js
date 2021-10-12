@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCart, fetchOrders, fetchProducts, fetchSales, fetchViewedProducts } from "../../services";
+import { fetchCart, fetchOrders, fetchProducts, fetchProductsForPagination, fetchSales, fetchViewedProducts } from "../../services";
 
 const initialState = {
   products: [],
@@ -18,7 +18,8 @@ const initialState = {
   filters: [],
   viewedProducts: [],
   selectedModal: "",
-  itemToBeRemvoedFromCart: ""
+  itemToBeRemvoedFromCart: "",
+  productsForPagination: []
 };
 
 export const DashboardSlice = createSlice({
@@ -70,6 +71,9 @@ export const DashboardSlice = createSlice({
     });
     builder.addCase(fetchViewedProducts.fulfilled, (s, a) => {
       s.viewedProducts = a.payload;
+    });
+    builder.addCase(fetchProductsForPagination.fulfilled, (s, a) => {
+      s.productsForPagination = a.payload;
     });
   }
 });
