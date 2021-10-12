@@ -5,6 +5,8 @@ const dashboard$ = (s) => s[DashboardSlice.name];
 
 export const products$ = createSelector(dashboard$, (s) => s.products);
 
+export const productsForPagination$ = createSelector(dashboard$, (s) => s.productsForPagination);
+
 export const sales$ = createSelector(dashboard$, (s) => s.sales);
 
 export const productsInCart$ = createSelector(dashboard$, (s) => s.cart);

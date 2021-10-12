@@ -47,14 +47,6 @@ body {
   height: 500px;
   box-shadow: 8px 10px 8px #888888;
   margin-top: 20px;
-  transition: all .2s ease-out;
-}
-
-.custom-card:hover {
-  transform: scale(1.1);
-  position: relative;
-  z-index: 100;
-  box-shadow: 0rem 0rem 2rem rgb(0 0 0 / 30%);
 }
 
 .skeleton-custom-card {
@@ -212,9 +204,15 @@ p {
 }
 
 .user-avatar {
-  width: 30px; 
-  height: 30px; 
-  border-radius: 50%; 
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  background: lightblue;
+  color: #000;
 }
 
 .order-container {
@@ -310,6 +308,30 @@ p {
   justify-content: space-around;
   width: 13% !important;
   align-items: baseline;
+}
+
+@media (min-width: 767px) and (max-width: 1150px) {
+  .pagination-item-wrapper {
+    width: 20% !important;
+  }
+}
+
+@media (min-width: 590px) and (max-width: 767px) {
+  .pagination-item-wrapper {
+    width: 29% !important;
+  }
+}
+
+@media (min-width: 420px) and (max-width: 590px) {
+  .pagination-item-wrapper {
+    width: 39% !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .pagination-item-wrapper {
+    width: 49% !important;
+  }
 }
 
 .pagination-item {
