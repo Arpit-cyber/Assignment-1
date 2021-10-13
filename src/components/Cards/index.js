@@ -10,18 +10,29 @@ import {
   updateProductInCart,
   viewedProduct,
 } from "../../services";
-import { setAlert, productsInCart$, products$, updateProducts } from "../../store";
+import {
+  setAlert,
+  productsInCart$,
+  products$,
+  updateProducts,
+  user$,
+} from "../../store";
 import { AddButton } from "../common/AddButton";
 import { BuyButton } from "../common/BuyButton";
 import { CustomRating } from "../common/Rating";
+import { isEmpty } from "lodash";
+import classNames from "classnames";
 
 export const CardComponent = ({ product }) => {
   const dispatch = useDispatch();
   const productsInCart = useSelector(productsInCart$);
   const products = useSelector(products$);
   const history = useHistory();
+  const currentUser = useSelector(user$);
 
-  const productDetailsInCart = productsInCart?.find((e) => e.name === product.name);
+  const productDetailsInCart = productsInCart?.find(
+    (e) => e.name === product.name
+  );
 
   const handleAddCart = () => {
     const isProductAlreadyInCart = productsInCart?.some(
@@ -58,9 +69,11 @@ export const CardComponent = ({ product }) => {
   };
 
   const handleMarkAndRemoveFavorite = (product) => {
-    dispatch(markAndRemoveFavorite({ id: product.id, product }))
-    dispatch(updateProducts(products.map((e) => e.id === product.id ? product : e)))
-  }
+    dispatch(markAndRemoveFavorite({ id: product.id, product }));
+    dispatch(
+      updateProducts(products.map((e) => (e.id === product.id ? product : e)))
+    );
+  };
 
   return (
     <Card className="custom-card" key={product.id}>
@@ -73,8 +86,21 @@ export const CardComponent = ({ product }) => {
       />
       <Card.Body className="d-flex flex-column justify-content-between">
         <Card.Title className="truncate">{product.name}</Card.Title>
-        <div className="fav-container">
-          {product?.isFav ? (
+        <div
+          className={classNames("fav-container", {
+            "fav-container-disabled": isEmpty(currentUser),
+          })}
+        >
+          {isEmpty(currentUser) ? (
+            <FaRegHeart
+              className={classNames("fav-icon", {
+                "disabled-button": isEmpty(currentUser),
+              })}
+              onClick={() =>
+                handleMarkAndRemoveFavorite({ ...product, isFav: true })
+              }
+            />
+          ) : product?.isFav ? (
             <FaHeart
               className="fav-icon"
               onClick={() =>

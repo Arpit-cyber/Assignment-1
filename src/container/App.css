@@ -199,7 +199,7 @@ p {
 }
 
 .form-control:focus {
-  border-color: transparent !important;
+  border-color: lightgrey !important;
   box-shadow: none !important;
 }
 
@@ -276,6 +276,11 @@ p {
   box-shadow: 0 1px 2rem rgb(128 128 128 / 35%);
   cursor: pointer;
   transition: all .3s;
+}
+
+.fav-container-disabled:hover {
+  transform: scale(1) !important;
+  cursor: no-drop !important;
 }
 
 .fav-container:hover {
