@@ -16,7 +16,8 @@ export const UsersSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllUsers.fulfilled, (s, a) => {
-      s.users = a.payload; 
+      s.users = a.payload;
+      s.user = a.payload.filter((e) => e.isAuthenticated)[0] || initialState.user
     });
   }
 });

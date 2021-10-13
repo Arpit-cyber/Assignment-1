@@ -79,9 +79,9 @@ export const CartComponent = () => {
         <Col sm={12} md={5} className="mb-2">
           <Card>
             <Card.Body className="cart-card-body">
-              <p>My Cart ({productsInCart.length})</p>
+              <p>My Cart ({productsInCart?.length})</p>
               <hr />
-              {productsInCart.length > 0 ? (
+              {productsInCart?.length > 0 ? (
                 <>
                   {productsInCart.map((item, i) => (
                     <>
@@ -157,7 +157,7 @@ export const CartComponent = () => {
                           <p className="info">$ {item.price}</p>
                         </Col>
                       </Row>
-                      {productsInCart.length - 1 !== i && <hr />}
+                      {productsInCart?.length - 1 !== i && <hr />}
                     </>
                   ))}
                 </>
@@ -172,7 +172,7 @@ export const CartComponent = () => {
             <Card.Body className="price-card-body">
               <p>Price Detail</p>
               <hr />
-              {productsInCart.length > 0 ? (
+              {productsInCart?.length > 0 ? (
                 <>
                   {productsInCart.map((item) => (
                     <>

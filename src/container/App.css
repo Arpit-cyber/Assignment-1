@@ -581,3 +581,12 @@ p {
   outline: none !important;
   box-shadow: none !important;
 }
+
+.disabled-button {
+  opacity: .4 !important;
+  cursor: no-drop !important;
+}
+
+.disabled-button:disabled {
+  pointer-events: inherit !important;
+}

@@ -21,11 +21,11 @@ export const CardComponent = ({ product }) => {
   const products = useSelector(products$);
   const history = useHistory();
 
-  const productDetailsInCart = productsInCart.find((e) => e.id === product.id);
+  const productDetailsInCart = productsInCart?.find((e) => e.name === product.name);
 
   const handleAddCart = () => {
-    const isProductAlreadyInCart = productsInCart.some(
-      (item) => item.id === product.id
+    const isProductAlreadyInCart = productsInCart?.some(
+      (item) => item.name === product.name
     );
 
     if (isProductAlreadyInCart) {
