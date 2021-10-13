@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavDropdown, Navbar, Form, Nav, Button, Badge } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FaHeart, FaShoppingCart, FaSearch } from "react-icons/fa";
@@ -11,7 +11,7 @@ import {
   setSearchItem,
   user$,
 } from "../../store";
-import { fetchProducts } from "../../services";
+import { fetchAllUsers, fetchCart, fetchProducts, fetchSales, updateUser } from "../../services";
 import { UserThumbnail } from "../common/UserThumbnail";
 import { useHistory } from "react-router";
 
@@ -24,6 +24,12 @@ const NavBar = () => {
   const paginationFilters = useSelector(paginationFilters$);
   const currentUser = useSelector(user$);
   const [itemToBeSearch, setItemToBeSearch] = useState(emptyString);
+
+  useEffect(() => {
+    dispatch(fetchAllUsers());
+    dispatch(fetchSales());
+    dispatch(fetchCart());
+  }, [dispatch]);
 
   const handleReset = () => {
     setItemToBeSearch(emptyString);
@@ -50,6 +56,16 @@ const NavBar = () => {
     dispatch(setPaginationFilters(filter));
     dispatch(fetchProducts(filter));
   };
+
+  const handleLogout = () => {
+    dispatch(updateUser({
+      id: currentUser?.id,
+      user: { ...currentUser, isAuthenticated: false }
+    })).then(() => {
+      dispatch(fetchAllUsers())
+      history.push('/')
+    })
+  }
 
   return (
     <Navbar
@@ -83,7 +99,7 @@ const NavBar = () => {
             </Button>
           </div>
         </Form>
-        {currentUser.isAuthenticate ? (
+        {currentUser?.isAuthenticated ? (
           <Nav className="d-flex justify-content-center align-items-center ml-auto">
             <NavDropdown
               title={<UserThumbnail user={{ name: "Arpit Kumar" }} />}
@@ -95,11 +111,8 @@ const NavBar = () => {
               <LinkContainer to="/analysis">
                 <NavDropdown.Item>Analytics Report</NavDropdown.Item>
               </LinkContainer>
-              <LinkContainer to="#profile">
-                <NavDropdown.Item>Profile</NavDropdown.Item>
-              </LinkContainer>
               <LinkContainer to="#logout">
-                <NavDropdown.Item>Logout</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
               </LinkContainer>
             </NavDropdown>
             <LinkContainer to="/favorite">
@@ -111,7 +124,7 @@ const NavBar = () => {
               <Nav.Link>
                 <FaShoppingCart color="#0762f5" />
                 <Badge pill className="cart-count" bg="light">
-                  {productsInCart.length}
+                  {productsInCart?.length}
                 </Badge>
               </Nav.Link>
             </LinkContainer>

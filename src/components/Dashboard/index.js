@@ -43,7 +43,7 @@ export const Dashboard = () => {
   }, [dispatch, paginationFilters]);
 
   const pageCounts = useMemo(() => {
-    const maxPages = Math.ceil(totalProducts.length / 8);
+    const maxPages = Math.ceil(totalProducts?.length / 8);
     return Array.from({ length: maxPages }, (_, i) => i + 1);
   }, [totalProducts]);
 
@@ -54,7 +54,7 @@ export const Dashboard = () => {
   }, [products]);
 
   const RenderColumns = () => {
-    return productsToBeDisplayed.length > 0 ? (
+    return productsToBeDisplayed?.length > 0 ? (
       productsToBeDisplayed.map((product) => (
         <Col sm={12} md={4} lg={3} key={product.id}>
           <CardComponent product={product} />

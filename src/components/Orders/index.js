@@ -25,7 +25,7 @@ export const OrdersComponent = () => {
         setFilteredOrders((prev) => prev.filter((order) => order.orderAt > new Date(start).toISOString() && order.orderAt < new Date(end).toISOString()))
     }
 
-    const arrayToDisplay = filteredOrders.length > 0 ? filteredOrders : MOCK_ARRAY;
+    const arrayToDisplay = filteredOrders?.length > 0 ? filteredOrders : MOCK_ARRAY;
 
     return (
         <div className="order-container">

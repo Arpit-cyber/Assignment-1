@@ -17,7 +17,7 @@ export const FavoriteComponent = () => {
         dispatch(fetchProducts())
     }, [dispatch])
 
-    const arrayToDisplay = favoriteProducts.length > 0 ? favoriteProducts : MOCK_ARRAY;
+    const arrayToDisplay = favoriteProducts?.length > 0 ? favoriteProducts : MOCK_ARRAY;
 
     return (
         <div className="mh-5">
