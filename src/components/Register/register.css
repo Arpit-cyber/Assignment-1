@@ -12,11 +12,41 @@
     width: 30vw !important;
 }
 
+@media (max-width: 1130px) {
+    .register-card {
+        width: 40vw !important;
+    }
+}
+
+@media (max-width: 850px) {
+    .register-card {
+        width: 50vw !important;
+    }
+}
+
 .sign-up-btn {
     width: 30%;
 }
 
-.signup-section {
+@media (max-width: 1130px) {
+    .sign-up-btn {
+        width: 40% !important;
+    }
+}
+
+@media (max-width: 850px) {
+    .sign-up-btn {
+        width: 50% !important;
+    }
+}
+
+@media (max-width: 395px) {
+    .sign-up-btn {
+        width: 90% !important;
+    }
+}
+
+.signin-section {
     display: flex;
     width: 100%;
 }
@@ -31,12 +61,46 @@
     text-decoration: none !important;
 }
 
+.back-link:focus {
+    box-shadow: none !important;
+}
+
 .user-name-field-wrapper {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
+.user-name-field-wrapper > :first-child {
+    padding-left: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .user-name-field-wrapper > :last-child {
+        padding-left: 0 !important;
+    }
+}
+
+.user-name-field-wrapper > :last-child {
+    padding-right: 0 !important;
+}
+
 .ml-20 {
     margin-left: 20px !important;
+}
+
+.error-message {
+    width: 100%;
+    color: orangered;
+    margin: 5px 0 15px 0px;
+}
+
+.error-message-wrapper {
+    display: inline-flex;
+    width: 100%;
+}
+
+.error-field,
+.error-field:focus {
+    border: 1px solid orangered !important;
 }

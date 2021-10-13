@@ -12,6 +12,18 @@
     width: 30vw !important;
 }
 
+@media (max-width: 1130px) {
+    .login-card {
+        width: 40vw !important;
+    }
+}
+
+@media (max-width: 850px) {
+    .login-card {
+        width: 50vw !important;
+    }
+}
+
 .forgot-section {
     display: flex;
     justify-content: space-between;
@@ -19,8 +31,44 @@
     width: 100%;
 }
 
+@media (max-width: 610px) {
+    .forgot-section {
+        font-size: 12px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .links {
+        font-size: 12px !important;
+    }    
+
+    .signup-section {
+        font-size: 12px !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+}
+
 .sign-in-btn {
     width: 30%;
+}
+
+@media (max-width: 1130px) {
+    .sign-in-btn {
+        width: 40% !important;
+    }
+}
+
+@media (max-width: 850px) {
+    .sign-in-btn {
+        width: 50% !important;
+    }
+}
+
+@media (max-width: 395px) {
+    .sign-in-btn {
+        width: 90% !important;
+    }
 }
 
 .signup-section {
@@ -30,4 +78,19 @@
 
 .links {
     text-decoration: none !important;
+}
+
+.links:focus {
+    box-shadow: none !important;
+}
+
+.error-message {
+    width: 100%;
+    color: orangered;
+    margin: 5px 0 15px 10px;
+}
+
+.error-field,
+.error-field:focus {
+    border: 1px solid orangered !important;
 }
