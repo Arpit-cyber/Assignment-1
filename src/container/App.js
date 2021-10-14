@@ -18,6 +18,7 @@ import { PlaceOrder } from '../components/PlaceOrder';
 import { ProductDetails } from '../components/ProductDetails';
 import { LoginScreen } from '../components/Login';
 import { RegisterScreen } from '../components/Register';
+import { UserProfile } from '../components/UserProfile';
 
 function App() {
   const selectedModal = useSelector(selectedModal$);
@@ -54,6 +55,9 @@ function App() {
             </Route>
             <Route path="/register">
               <RegisterScreen />
+            </Route>
+            <Route path="/profile">
+              <UserProfile />
             </Route>
           </Switch>
         </div>

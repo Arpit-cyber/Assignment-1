@@ -4,6 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { FaHeart, FaShoppingCart, FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  isUserLoading$,
   paginationFilters$,
   productsInCart$,
   setFilters,
@@ -11,9 +12,16 @@ import {
   setSearchItem,
   user$,
 } from "../../store";
-import { fetchAllUsers, fetchCart, fetchProducts, fetchSales, updateUser } from "../../services";
+import {
+  fetchAllUsers,
+  fetchCart,
+  fetchProducts,
+  fetchSales,
+  updateUser,
+} from "../../services";
 import { UserThumbnail } from "../common/UserThumbnail";
 import { useHistory } from "react-router";
+import Skeleton from "react-loading-skeleton";
 
 const emptyString = "";
 
@@ -22,6 +30,7 @@ const NavBar = () => {
   const history = useHistory();
   const productsInCart = useSelector(productsInCart$);
   const paginationFilters = useSelector(paginationFilters$);
+  const isUserLoading = useSelector(isUserLoading$);
   const currentUser = useSelector(user$);
   const [itemToBeSearch, setItemToBeSearch] = useState(emptyString);
 
@@ -58,14 +67,16 @@ const NavBar = () => {
   };
 
   const handleLogout = () => {
-    dispatch(updateUser({
-      id: currentUser?.id,
-      user: { ...currentUser, isAuthenticated: false }
-    })).then(() => {
-      dispatch(fetchAllUsers())
-      history.push('/')
-    })
-  }
+    dispatch(
+      updateUser({
+        id: currentUser?.id,
+        user: { ...currentUser, isAuthenticated: false },
+      })
+    ).then(() => {
+      dispatch(fetchAllUsers());
+      history.push("/");
+    });
+  };
 
   return (
     <Navbar
@@ -73,6 +84,7 @@ const NavBar = () => {
       expand="lg"
       className="mb-1 bg-purple custom-navbar"
       variant="dark"
+      fixed
     >
       <LinkContainer to="/" onClick={handleReset}>
         <Navbar.Brand>E-Cart</Navbar.Brand>
@@ -99,7 +111,9 @@ const NavBar = () => {
             </Button>
           </div>
         </Form>
-        {currentUser?.isAuthenticated ? (
+        {isUserLoading ? (
+          <Skeleton height={50} />
+        ) : currentUser?.isAuthenticated ? (
           <Nav className="d-flex justify-content-center align-items-center ml-auto">
             <NavDropdown
               title={<UserThumbnail user={{ name: "Arpit Kumar" }} />}
@@ -111,8 +125,13 @@ const NavBar = () => {
               <LinkContainer to="/analysis">
                 <NavDropdown.Item>Analytics Report</NavDropdown.Item>
               </LinkContainer>
+              <LinkContainer to="/profile">
+                <NavDropdown.Item>Profile</NavDropdown.Item>
+              </LinkContainer>
               <LinkContainer to="#logout">
-                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogout}>
+                  Logout
+                </NavDropdown.Item>
               </LinkContainer>
             </NavDropdown>
             <LinkContainer to="/favorite">
@@ -130,7 +149,13 @@ const NavBar = () => {
             </LinkContainer>
           </Nav>
         ) : (
-          <Button variant="light" className="ml-auto login-button" onClick={() => history.push('/login')}>Login / Signup</Button>
+          <Button
+            variant="light"
+            className="ml-auto login-button"
+            onClick={() => history.push("/login")}
+          >
+            Login / Signup
+          </Button>
         )}
       </Navbar.Collapse>
     </Navbar>

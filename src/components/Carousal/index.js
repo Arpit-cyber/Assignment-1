@@ -8,7 +8,7 @@ export const Carousal = () => {
 
   return (
     <Carousel className="h-20">
-      {sales.map((item) => (
+      {sales?.map((item) => (
         <Carousel.Item key={item.id}>
           <img className="d-block w-100 h-20" src={item.img} alt={item.name} />
           <Carousel.Caption>

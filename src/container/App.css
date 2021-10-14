@@ -575,6 +575,7 @@ p {
   border: none !important;
   color: #fff !important;
   transition: all .2s ease-out;
+  height: 50px;
 }
 
 .login-button:hover {
