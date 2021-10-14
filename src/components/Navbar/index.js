@@ -136,7 +136,7 @@ const NavBar = () => {
             </NavDropdown>
             <LinkContainer to="/favorite">
               <Nav.Link>
-                <FaHeart />
+                <FaHeart color="#FF281B" />
               </Nav.Link>
             </LinkContainer>
             <LinkContainer to="/cart">
