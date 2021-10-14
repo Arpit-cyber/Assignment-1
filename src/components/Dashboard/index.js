@@ -19,6 +19,7 @@ import Skeleton from "react-loading-skeleton";
 const MOCK_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8];
 
 const MOCK_FILTERS = [
+  { label: "Select", value: "" },
   { label: "Laptop", value: "laptop" },
   { label: "Earphones", value: "earphones" },
 ];
