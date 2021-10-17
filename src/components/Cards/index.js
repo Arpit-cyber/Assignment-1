@@ -116,6 +116,7 @@ export const CardComponent = ({ product }) => {
             />
           )}
         </div>
+        <Card.Text className="f-12 ellipsis">{product.description}</Card.Text>
         <div className="star-container">
           <Card.Text className="f-12">Price: ₹ {product.price}</Card.Text>
           <CustomRating rating={product.rating} readonly={true} />
