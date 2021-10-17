@@ -11,7 +11,7 @@ import {
 import classnames from "classnames";
 import { Carousal } from "../Carousal";
 import { CardComponent } from "../Cards";
-import { fetchAllUsers, fetchCart, fetchProducts, fetchProductsForPagination, fetchSales } from "../../services";
+import { fetchProducts, fetchProductsForPagination } from "../../services";
 import { CustomDropdown } from "../Dropdown";
 import { Icons } from "../../resources";
 import Skeleton from "react-loading-skeleton";
@@ -31,12 +31,6 @@ export const Dashboard = () => {
   const paginationFilters = useSelector(paginationFilters$);
   const isProductLoading = useSelector(isProductLoading$);
   const [productsToBeDisplayed, setProductsToBeDisplayed] = useState(products);
-
-  useEffect(() => {
-    dispatch(fetchAllUsers());
-    dispatch(fetchSales());
-    dispatch(fetchCart());
-  }, [dispatch]);
   
   useEffect(() => {
     dispatch(fetchProductsForPagination({ name: paginationFilters?.name, category: paginationFilters?.category }));
