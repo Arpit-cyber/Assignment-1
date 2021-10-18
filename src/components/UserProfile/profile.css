@@ -15,6 +15,7 @@
 .content-wrapper {
     position: relative;
     height: 80vh;
+    margin-top: 20px;
 }
 
 @media only screen and (max-device-width: 767px) {
@@ -41,7 +42,7 @@
     }
 
     .content-wrapper {
-        margin-top: 130px;
+        margin-top: 260px;
         margin-bottom: 20px;
     }
 }
