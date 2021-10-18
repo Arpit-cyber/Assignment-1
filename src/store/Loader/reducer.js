@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { FETCH_CART, FETCH_PRODUCTS, FETCH_SALES, FETCH_USERS } from "../../constants";
+import { FETCH_CART, FETCH_ORDERS, FETCH_PRODUCTS, FETCH_SALES, FETCH_USERS } from "../../constants";
 
 const initialState = { 
     [FETCH_PRODUCTS]: 0,
     [FETCH_CART]: 0,
     [FETCH_SALES]: 0,
-    [FETCH_USERS]: 0
+    [FETCH_USERS]: 0,
+    [FETCH_ORDERS]: 0,
  };
 
 export const LoaderSlice = createSlice({

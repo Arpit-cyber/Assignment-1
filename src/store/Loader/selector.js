@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { FETCH_CART, FETCH_PRODUCTS, FETCH_SALES, FETCH_USERS } from '../../constants';
+import { FETCH_CART, FETCH_ORDERS, FETCH_PRODUCTS, FETCH_SALES, FETCH_USERS } from '../../constants';
 import { LoaderSlice } from './reducer';
 
 const busyIndicatorState$ = (s) => s[LoaderSlice.name];
@@ -11,3 +11,5 @@ export const isSalesLoading$ = createSelector(busyIndicatorState$, (s) => Boolea
 export const isCartLoading$ = createSelector(busyIndicatorState$, (s) => Boolean(s[FETCH_CART]));
 
 export const isUserLoading$ = createSelector(busyIndicatorState$, (s) => Boolean(s[FETCH_USERS]));
+
+export const isOrdersLoading$ = createSelector(busyIndicatorState$, (s) => Boolean(s[FETCH_ORDERS]));
