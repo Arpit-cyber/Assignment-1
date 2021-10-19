@@ -15,16 +15,20 @@ export const OrdersContainer = () => {
   const isOrdersLoading = useSelector(isOrdersLoading$);
 
   useEffect(() => {
-    if (orders?.length) setFilteredOrders(orderBy(orders, "orderAt", "asc"));
+    if (orders?.length) setFilteredOrders(orderBy(orders, "orderAt", "desc"));
     else dispatch(fetchOrders());
   }, [dispatch, orders]);
 
   const handleCallback = (start, end) => {
-    setFilteredOrders((prev) =>
-      prev.filter(
-        (order) =>
-          order.orderAt > new Date(start).toISOString() &&
-          order.orderAt < new Date(end).toISOString()
+    setFilteredOrders(
+      orderBy(
+        orders?.filter(
+          (order) =>
+            order.orderAt > new Date(start).toISOString() &&
+            order.orderAt < new Date(end).toISOString()
+        ),
+        "orderAt",
+        "desc"
       )
     );
   };
@@ -33,6 +37,10 @@ export const OrdersContainer = () => {
     filteredOrders?.length > 0 ? filteredOrders : MOCK_ARRAY;
 
   return (
-    <OrdersComponent handleCallback={handleCallback} products={arrayToDisplay} isOrdersLoading={isOrdersLoading} />
+    <OrdersComponent
+      handleCallback={handleCallback}
+      products={arrayToDisplay}
+      isOrdersLoading={isOrdersLoading}
+    />
   );
 };

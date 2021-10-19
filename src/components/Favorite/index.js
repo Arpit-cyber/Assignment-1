@@ -4,7 +4,6 @@ import { CardComponent } from "../Cards";
 import Skeleton from "react-loading-skeleton";
 
 export const FavoriteComponent = ({ isProductLoading, products }) => {
-
   const RenderSkeleton = () => (
     <Card className="skeleton-custom-card" key="s1">
       <Skeleton height="300px" />
@@ -14,14 +13,14 @@ export const FavoriteComponent = ({ isProductLoading, products }) => {
         <Skeleton height={38} />
       </Card.Body>
     </Card>
-  )
+  );
 
   return (
     <div className="mh-5">
       <h4 className="fav-heading">My Wishlist</h4>
       <Row className="centered-wishlist">
         {products.map((product) => (
-          <Col sm={12} md={4} lg={3} key={product.id}>
+          <Col sm={12} md={4} lg={3} key={product.id || product}>
             {isProductLoading ? (
               <RenderSkeleton />
             ) : (

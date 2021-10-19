@@ -16,12 +16,14 @@ import {
   products$,
   updateProducts,
   user$,
+  setSelectedModal,
+  setProductToBePurchase,
 } from "../../store";
 import { AddButton } from "../common/AddButton";
 import { BuyButton } from "../common/BuyButton";
 import { CustomRating } from "../common/Rating";
 import { isEmpty } from "lodash";
-import classNames from "classnames";
+import { MODALS } from "../../constants";
 
 export const CardComponent = ({ product }) => {
   const dispatch = useDispatch();
@@ -35,37 +37,50 @@ export const CardComponent = ({ product }) => {
   );
 
   const handleAddCart = () => {
-    const isProductAlreadyInCart = productsInCart?.some(
-      (item) => item.name === product.name
-    );
-
-    if (isProductAlreadyInCart) {
-      const data = {
-        id: productDetailsInCart.id,
-        product: {
-          ...productDetailsInCart,
-          count: productDetailsInCart.count + 1,
-        },
-      };
-      dispatch(updateProductInCart(data)).then(() => dispatch(fetchCart()));
+    if (isEmpty(currentUser)) {
+      history.push("/login");
     } else {
-      const updatedProduct = { ...product, count: 1 };
-      const productDetails = {
-        createdAt: product.createdAt,
-        name: product.name,
-        avatar: product.avatar,
-        description: product.description,
-        price: product.price,
-        rating: product.rating,
-        category: product.category,
-      };
-      dispatch(viewedProduct(productDetails));
-      dispatch(addToCart(updatedProduct)).then(() => {
-        dispatch(fetchCart());
-      });
-    }
+      const isProductAlreadyInCart = productsInCart?.some(
+        (item) => item.name === product.name
+      );
 
-    dispatch(setAlert("Item added to cart!"));
+      if (isProductAlreadyInCart) {
+        const data = {
+          id: productDetailsInCart.id,
+          product: {
+            ...productDetailsInCart,
+            count: productDetailsInCart.count + 1,
+          },
+        };
+        dispatch(updateProductInCart(data)).then(() => dispatch(fetchCart()));
+      } else {
+        const updatedProduct = { ...product, count: 1 };
+        const productDetails = {
+          createdAt: product.createdAt,
+          name: product.name,
+          avatar: product.avatar,
+          description: product.description,
+          price: product.price,
+          rating: product.rating,
+          category: product.category,
+        };
+        dispatch(viewedProduct(productDetails));
+        dispatch(addToCart(updatedProduct)).then(() => {
+          dispatch(fetchCart());
+        });
+      }
+
+      dispatch(setAlert("Item added to cart!"));
+    }
+  };
+
+  const handleBuy = () => {
+    if (isEmpty(currentUser)) {
+      history.push("/login");
+    } else {
+      dispatch(setProductToBePurchase(product));
+      dispatch(setSelectedModal(MODALS.BUY_PRODUCT));
+    }
   };
 
   const handleMarkAndRemoveFavorite = (product) => {
@@ -86,19 +101,11 @@ export const CardComponent = ({ product }) => {
       />
       <Card.Body className="d-flex flex-column justify-content-between">
         <Card.Title className="truncate">{product.name}</Card.Title>
-        <div
-          className={classNames("fav-container", {
-            "fav-container-disabled": isEmpty(currentUser),
-          })}
-        >
+        <div className="fav-container">
           {isEmpty(currentUser) ? (
             <FaRegHeart
-              className={classNames("fav-icon", {
-                "disabled-button": isEmpty(currentUser),
-              })}
-              onClick={() =>
-                handleMarkAndRemoveFavorite({ ...product, isFav: true })
-              }
+              className="fav-icon"
+              onClick={() => history.push("/login")}
             />
           ) : product?.isFav ? (
             <FaHeart
@@ -126,7 +133,7 @@ export const CardComponent = ({ product }) => {
             onClick={handleAddCart}
             isDisabled={productDetailsInCart?.count === 5}
           />
-          <BuyButton />
+          <BuyButton onClick={handleBuy} />
         </div>
       </Card.Body>
     </Card>

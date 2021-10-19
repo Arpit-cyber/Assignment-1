@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Row, Col, Button, Card, Image, ButtonGroup } from "react-bootstrap";
 import { MdDeleteForever } from "react-icons/md";
 import { setSelectedModal } from "../../store";
@@ -20,14 +20,14 @@ export const CartComponent = ({
 
   const RenderProductDetails = () =>
     productsInCart.map((item, i) => (
-      <>
+      <Fragment key={item.id}>
         <Row className="mb-3" key={item.id}>
           <Col>
             <Image src={item.avatar} alt={item.name} className="cart-image" />
           </Col>
           <Col className="d-flex justify-content-between flex-column">
             <div>
-              <p className="info m-0">{item.name}</p>
+              <h5 className="info info-heading m-0">{item.name}</h5>
               <p className="info">{item.description}</p>
             </div>
             <div className="cart-buttons">
@@ -90,13 +90,13 @@ export const CartComponent = ({
           </Col>
         </Row>
         {productsInCart?.length - 1 !== i && <hr />}
-      </>
+      </Fragment>
     ));
 
   const RenderPriceDetails = () => (
     <>
       {productsInCart.map((item) => (
-        <>
+        <Fragment key={item.id}>
           <Row key={item.id}>
             <Col sm={12} md={7}>
               <p>
@@ -108,13 +108,13 @@ export const CartComponent = ({
             </Col>
           </Row>
           <hr />
-        </>
+        </Fragment>
       ))}
       <div className="d-flex justify-content-center align-items-center">
         <p>Total Amount $: {getTotalAmount()}</p>
         <Button
           className="order-button border-0"
-          variant="danger"
+          variant="primary"
           onClick={() => dispatch(setSelectedModal(MODALS.PLACE_ORDER))}
         >
           Place Order

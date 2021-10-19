@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 *,
 *::before,
@@ -9,7 +9,7 @@
 
 body {
   font-size: 14px;
-  font-family: 'Roboto';
+  font-family: "Telus-Web-Reg";
 }
 
 .bg-purple {
@@ -25,8 +25,8 @@ body {
   top: -9px !important;
 }
 
-.h-20 {
-  height: 20em !important;
+.carousal-height {
+  height: 25em !important;
 }
 
 .f-12 {
@@ -58,7 +58,7 @@ body {
 }
 
 .custom-container {
-  margin-top: 62px;
+  margin: 66px 20px 0 20px;
 }
 
 .centered-cart {
@@ -77,7 +77,7 @@ body {
 }
 
 .navbar {
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 .text-align-center {
@@ -118,7 +118,6 @@ body {
 
 .price-card-body {
   padding: 20px 15px !important;
-  min-height: 400px;
   width: 100%;
 }
 
@@ -128,6 +127,18 @@ body {
 
 .ml-10 {
   margin-left: 10px;
+}
+
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+
+.mt-40 {
+  margin-top: 40px !important;
+}
+
+.mt-20 {
+  margin-top: 20px !important;
 }
 
 p {
@@ -140,6 +151,10 @@ p {
   font-size: 14px !important;
   font-weight: 500 !important;
   padding-top: 14px !important;
+}
+
+.info-heading {
+  font-weight: 600 !important;
 }
 
 .cart-image {
@@ -184,8 +199,14 @@ p {
 }
 
 @keyframes myfirst {
-  0%   {left: 0; top: 0;}
-  100% {left: 10%; top: 5%;}
+  0% {
+    left: 0;
+    top: 0;
+  }
+  100% {
+    left: 10%;
+    top: 5%;
+  }
 }
 
 .truncate {
@@ -272,7 +293,7 @@ p {
   right: 20px;
   box-shadow: 0 1px 2rem rgb(128 128 128 / 35%);
   cursor: pointer;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 
 .fav-container-disabled:hover {
@@ -349,7 +370,7 @@ p {
 }
 
 .pagination-item-active {
-  background-color: rgba(75,40,109);
+  background-color: rgba(75, 40, 109);
   color: #fff;
 }
 
@@ -368,7 +389,7 @@ p {
 
 .pagination-item-arrow:hover {
   transform: scale(1.1);
-  color: rgba(75,40,109) !important;
+  color: rgba(75, 40, 109) !important;
 }
 
 .pagination-item-arrow:focus {
@@ -396,7 +417,7 @@ p {
 }
 
 .accordion-button {
-  background-color: rgba(75,40,109, .3) !important;
+  background-color: rgba(75, 40, 109, 0.3) !important;
   font-weight: 600 !important;
 }
 
@@ -428,7 +449,7 @@ p {
 /********************** MODAL *************************/
 .custom-modal-heading {
   font-size: 1.2rem !important;
-  color: rgba(75, 40, 109, .7);
+  color: rgba(75, 40, 109, 0.7);
 }
 
 .custom-modal-content {
@@ -475,11 +496,8 @@ p {
 }
 
 .custom-navbar {
-  position: fixed !important;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 10;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .mh-5 {
@@ -527,9 +545,11 @@ p {
   background-color: transparent !important;
   align-items: center;
   display: flex !important;
+  width: -moz-fit-content;
   width: fit-content;
-  color: orangered !important;
+  color: rgb(75, 40, 109) !important;
   font-size: 25px !important;
+  border: none !important;
 }
 
 .cart-buttons {
@@ -571,12 +591,12 @@ p {
   background-color: transparent !important;
   border: none !important;
   color: #fff !important;
-  transition: all .2s ease-out;
+  transition: all 0.2s ease-out;
   height: 50px;
 }
 
 .login-button:hover {
-  box-shadow: 0 1rem 2rem rgba(0,0,0, .5) !important;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5) !important;
   transform: scale(1.05);
 }
 
@@ -586,7 +606,7 @@ p {
 }
 
 .disabled-button {
-  opacity: .4 !important;
+  opacity: 0.4 !important;
   cursor: no-drop !important;
 }
 
@@ -595,7 +615,7 @@ p {
 }
 
 .ellipsis {
-  width: 250px;
+  width: 100%;
   height: 40px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -604,4 +624,71 @@ p {
   -webkit-box-orient: vertical;
   margin-bottom: 0 !important;
   padding-top: 0 !important;
+}
+
+.btn-success {
+  min-width: 30%;
+  font-size: 14px;
+  background: none rgb(43, 128, 0) !important;
+  border-color: rgb(43, 128, 0) !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center !important;
+}
+
+.btn-outline-success {
+  min-width: 30%;
+  font-size: 14px;
+  border: 2px solid rgb(75, 40, 109) !important;
+  color: rgb(75, 40, 109) !important;
+  display: inline-flex !important;
+  justify-content: center;
+  align-items: center !important;
+}
+
+.btn-outline-success:hover {
+  background-color: transparent !important;
+}
+
+.btn-primary {
+  font-size: 14px;
+  min-width: 30%;
+  color: rgb(255, 255, 255);
+  background-color: rgb(75, 40, 109) !important;
+  border-color: rgb(75, 40, 109) !important;
+  display: inline-flex !important;
+  justify-content: center;
+  align-items: center !important;
+}
+
+.button-icon {
+  margin-right: 5px !important;
+}
+
+/******************* DATE PICKER *************************/
+.daterangepicker td.active,
+.daterangepicker td.active.start-date.in-range.available,
+.daterangepicker td.active.end-date.in-range.available,
+.daterangepicker td.active.start-date.in-range.available:hover {
+  background-color: rgb(75, 40, 109) !important;
+  border-color: transparent;
+  color: #fff;
+}
+
+.daterangepicker td.in-range {
+  background-color: rgba(75, 40, 109, 0.3) !important;
+  border-color: transparent;
+  color: #000;
+  border-radius: 0;
+}
+
+.daterangepicker select.monthselect,
+.daterangepicker select.yearselect {
+  border: 2px solid rgb(75, 40, 109);
+  border-radius: 3px;
+}
+
+.daterangepicker .ranges li.active {
+  background-color: rgb(75, 40, 109) !important;
+  color: #fff;
 }
