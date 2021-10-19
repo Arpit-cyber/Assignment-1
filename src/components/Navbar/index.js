@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { NavDropdown, Navbar, Form, Nav, Button, Badge } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FaHeart, FaShoppingCart, FaSearch } from "react-icons/fa";
@@ -20,7 +20,7 @@ import {
   updateUser,
 } from "../../services";
 import { UserThumbnail } from "../common/UserThumbnail";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import Skeleton from "react-loading-skeleton";
 
 const emptyString = "";
@@ -28,6 +28,7 @@ const emptyString = "";
 const NavBar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const { pathname } = useLocation();
   const productsInCart = useSelector(productsInCart$);
   const paginationFilters = useSelector(paginationFilters$);
   const isUserLoading = useSelector(isUserLoading$);
@@ -78,6 +79,13 @@ const NavBar = () => {
     });
   };
 
+  const shouldShowSearchBar = useMemo(
+    () =>
+      currentUser?.isAuthenticated ||
+      (pathname !== "/login" && pathname !== "/register"),
+    [currentUser, pathname]
+  );
+
   return (
     <Navbar
       collapseOnSelect
@@ -91,7 +99,7 @@ const NavBar = () => {
       </LinkContainer>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        {currentUser?.isAuthenticated && (
+        {shouldShowSearchBar ? (
           <Form className="d-flex">
             <div className="nav-search-container">
               <Form.Control
@@ -112,6 +120,8 @@ const NavBar = () => {
               </Button>
             </div>
           </Form>
+        ) : (
+          <div />
         )}
         {isUserLoading ? (
           <Skeleton height={50} />

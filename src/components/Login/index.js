@@ -54,73 +54,73 @@ export const LoginScreen = () => {
     }
   };
 
-  return (
-    !isUserLoading && (
-      <div className="wrapper">
-        <Card className="login-card">
-          <Card.Body className="d-flex flex-column align-items-center">
-            <h4 className="mb-30">Sign In</h4>
-            <Form.Control
-              required
-              type="email"
-              className={classNames({
-                "mb-20": !validation?.email,
-                "error-field": validation?.email,
-              })}
-              placeholder="Email Address"
-              value={userDetails?.email}
-              onChange={(e) =>
-                setUserDetails((prev) => ({ ...prev, email: e.target.value }))
-              }
-              onKeyDown={handleKeyDown}
-            />
-            {validation?.email && (
-              <div className="error-message">Email required</div>
-            )}
-            <Form.Control
-              type="password"
-              className={classNames({
-                "mb-20": !validation?.pass,
-                "error-field": validation?.pass,
-              })}
-              placeholder="Password"
-              value={userDetails?.pass}
-              onChange={(e) =>
-                setUserDetails((prev) => ({ ...prev, pass: e.target.value }))
-              }
-              onKeyDown={handleKeyDown}
-            />
-            {validation?.pass && (
-              <div className="error-message">Password required</div>
-            )}
-            <div className="mb-20 forgot-section">
-              <Form.Check type="checkbox" label="Remember Me" />
-              <Button variant="link" className="links">
-                Forget Password
-              </Button>
-            </div>
-
-            <Button
-              variant="primary"
-              className="mb-20 sign-in-btn"
-              onClick={handleLogin}
-            >
-              Sign In
+  return !isUserLoading ? (
+    <div className="wrapper">
+      <Card className="login-card">
+        <Card.Body className="d-flex flex-column align-items-center">
+          <h4 className="mb-30">Sign In</h4>
+          <Form.Control
+            required
+            type="email"
+            className={classNames({
+              "mb-20": !validation?.email,
+              "error-field": validation?.email,
+            })}
+            placeholder="Email Address"
+            value={userDetails?.email}
+            onChange={(e) =>
+              setUserDetails((prev) => ({ ...prev, email: e.target.value }))
+            }
+            onKeyDown={handleKeyDown}
+          />
+          {validation?.email && (
+            <div className="error-message">Email required</div>
+          )}
+          <Form.Control
+            type="password"
+            className={classNames({
+              "mb-20": !validation?.pass,
+              "error-field": validation?.pass,
+            })}
+            placeholder="Password"
+            value={userDetails?.pass}
+            onChange={(e) =>
+              setUserDetails((prev) => ({ ...prev, pass: e.target.value }))
+            }
+            onKeyDown={handleKeyDown}
+          />
+          {validation?.pass && (
+            <div className="error-message">Password required</div>
+          )}
+          <div className="mb-20 forgot-section">
+            <Form.Check type="checkbox" label="Remember Me" />
+            <Button variant="link" className="links">
+              Forget Password
             </Button>
+          </div>
 
-            <div className="signup-section">
-              Not a Member?
-              <Button
-                variant="link"
-                className="links"
-                onClick={() => history.push("/register")}
-              >
-                Register
-              </Button>
-            </div>
-          </Card.Body>
-        </Card>
-      </div>
-    )
+          <Button
+            variant="primary"
+            className="mb-20 sign-in-btn"
+            onClick={handleLogin}
+          >
+            Sign In
+          </Button>
+
+          <div className="signup-section">
+            Not a Member?
+            <Button
+              variant="link"
+              className="links"
+              onClick={() => history.push("/register")}
+            >
+              Register
+            </Button>
+          </div>
+        </Card.Body>
+      </Card>
+    </div>
+  ) : (
+    <div />
   );
 };
