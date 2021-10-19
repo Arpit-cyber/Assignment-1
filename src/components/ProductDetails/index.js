@@ -12,7 +12,7 @@ export const ProductDetails = ({
 }) => {
   return (
     <div className="mh-5">
-      {selectedProduct && (
+      {selectedProduct ? (
         <Row className="main-container">
           <Col sm={12} md={6} lg={4} className="d-flex justify-content-center">
             <div className="image-container">
@@ -42,6 +42,8 @@ export const ProductDetails = ({
             </div>
           </Col>
         </Row>
+      ) : (
+        <div />
       )}
     </div>
   );
