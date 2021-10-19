@@ -21,6 +21,7 @@ import { RegisterScreen } from "../components/Register";
 import { UserProfileContainer } from "./UserProfile";
 import { isEmpty } from "lodash";
 import { BuyProduct } from "../components/BuyProduct";
+import { Footer } from "../components/Footer";
 
 function App() {
   const selectedModal = useSelector(selectedModal$);
@@ -68,6 +69,7 @@ function App() {
             </PageRoute>
           </Switch>
         </div>
+        <Footer />
       </div>
     </BrowserRouter>
   );

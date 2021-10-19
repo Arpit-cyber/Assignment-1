@@ -12,6 +12,16 @@ body {
   font-family: "Telus-Web-Reg";
 }
 
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 6vh;
+  background-color: rgb(75, 40, 109);
+  color: #fff;
+}
+
 .bg-purple {
   background-color: rgb(75, 40, 109) !important;
 }
