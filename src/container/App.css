@@ -69,6 +69,7 @@ body {
 
 .custom-container {
   margin: 66px 20px 0 20px;
+  min-height: 87.7vh !important;
 }
 
 .centered-cart {
@@ -508,6 +509,7 @@ p {
 .custom-navbar {
   padding-left: 30px;
   padding-right: 30px;
+  min-height: 6vh;
 }
 
 .mh-5 {
