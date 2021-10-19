@@ -3,7 +3,7 @@ import { Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { showModal, showModal$ } from "../../../store";
 
-export const CustomModal = ({ onHide, title, children, size = "sm" }) => {
+export const CustomModal = ({ onHide, title, children, size }) => {
   const dispatch = useDispatch();
   const show = useSelector(showModal$);
 

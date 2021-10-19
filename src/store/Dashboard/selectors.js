@@ -32,6 +32,11 @@ export const countOfItems$ = createSelector(dashboard$, (s) => s.numberOfItems);
 
 export const alert$ = createSelector(dashboard$, (s) => s.alert);
 
+export const successMessage$ = createSelector(
+  dashboard$,
+  (s) => s.successMessage
+);
+
 export const itemToBeSearch$ = createSelector(
   dashboard$,
   (s) => s.itemToBeSearch

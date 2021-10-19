@@ -4,7 +4,7 @@ import { Card, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { fetchAllUsers, updateUser } from "../../services";
-import { allUsers$, isUserLoading$ } from "../../store";
+import { allUsers$, isUserLoading$, setAlert } from "../../store";
 import "./login.css";
 
 const emptyObject = {};
@@ -48,6 +48,8 @@ export const LoginScreen = () => {
           dispatch(fetchAllUsers());
           history.push("/");
         });
+      } else {
+        dispatch(setAlert("Invalid Credentials"));
       }
     }
   };

@@ -13,6 +13,7 @@ const initialState = {
   cart: [],
   numberOfItems: {},
   alert: "",
+  successMessage: "",
   sales: [],
   itemToBeSearch: "",
   orders: [],
@@ -64,6 +65,9 @@ export const DashboardSlice = createSlice({
     setAlert(s, a) {
       s.alert = a.payload || initialState.alert;
     },
+    setSuccessMessage(s, a) {
+      s.successMessage = a.payload || initialState.successMessage;
+    },
     setProductToBePurchase(s, a) {
       s.productToBePurchase = a.payload || initialState.productToBePurchase;
     },
@@ -101,4 +105,5 @@ export const {
   setFilters,
   updateProducts,
   setProductToBePurchase,
+  setSuccessMessage,
 } = DashboardSlice.actions;

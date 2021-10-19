@@ -10,7 +10,12 @@ import {
   updateProductInCart,
   viewedProduct,
 } from "../../services";
-import { products$, productsInCart$, setAlert, user$ } from "../../store";
+import {
+  products$,
+  productsInCart$,
+  setSuccessMessage,
+  user$,
+} from "../../store";
 
 export const ProductDetailsContainer = () => {
   const dispatch = useDispatch();
@@ -59,7 +64,7 @@ export const ProductDetailsContainer = () => {
         });
       }
 
-      dispatch(setAlert("Item added to cart!"));
+      dispatch(setSuccessMessage("Item added to cart!"));
     }
   };
 

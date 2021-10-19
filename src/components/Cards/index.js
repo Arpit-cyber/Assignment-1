@@ -11,7 +11,7 @@ import {
   viewedProduct,
 } from "../../services";
 import {
-  setAlert,
+  setSuccessMessage,
   productsInCart$,
   products$,
   updateProducts,
@@ -70,7 +70,7 @@ export const CardComponent = ({ product }) => {
         });
       }
 
-      dispatch(setAlert("Item added to cart!"));
+      dispatch(setSuccessMessage("Item added to cart!"));
     }
   };
 
