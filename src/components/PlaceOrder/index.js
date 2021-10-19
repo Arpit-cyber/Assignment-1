@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import {
   hideModal,
   productsInCart$,
-  setAlert,
+  setSuccessMessage,
   setSelectedModal,
 } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,7 +41,7 @@ export const PlaceOrder = () => {
       });
 
       handleReset();
-      dispatch(setAlert("Order placed"));
+      dispatch(setSuccessMessage("Order placed"));
       dispatch(fetchCart());
     });
   };

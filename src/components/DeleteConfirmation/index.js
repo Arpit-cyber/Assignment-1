@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import {
   hideModal,
   itemToBeRemvoedFromCart$,
-  setAlert,
+  setSuccessMessage,
   setItemToBeRemovedFromCart,
   setSelectedModal,
 } from "../../store";
@@ -25,7 +25,7 @@ export const DeleteConfirmation = () => {
     dispatch(removeFromCart(itemToBeRemvoedFromCart)).then(() => {
       dispatch(fetchCart());
       handleReset();
-      dispatch(setAlert("Item removed from cart!"));
+      dispatch(setSuccessMessage("Item removed from cart!"));
     });
   };
 

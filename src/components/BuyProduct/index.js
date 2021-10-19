@@ -5,7 +5,7 @@ import { fetchOrders, placeOrder } from "../../services";
 import {
   hideModal,
   productToBePurchase$,
-  setAlert,
+  setSuccessMessage,
   setProductToBePurchase,
   setSelectedModal,
 } from "../../store";
@@ -39,7 +39,7 @@ export const BuyProduct = () => {
 
     dispatch(placeOrder(order)).then(() => {
       handleReset();
-      dispatch(setAlert("Order placed"));
+      dispatch(setSuccessMessage("Order placed"));
       dispatch(fetchOrders());
     });
   };

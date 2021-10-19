@@ -673,6 +673,12 @@ p {
   align-items: center !important;
 }
 
+.btn-success:focus,
+.btn-primary:focus,
+.btn-outline-success:focus {
+  box-shadow: none !important;
+}
+
 .button-icon {
   margin-right: 5px !important;
 }
