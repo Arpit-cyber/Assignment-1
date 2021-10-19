@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCart, fetchOrders, fetchProducts, fetchProductsForPagination, fetchSales, fetchViewedProducts } from "../../services";
+import {
+  fetchCart,
+  fetchOrders,
+  fetchProducts,
+  fetchProductsForPagination,
+  fetchSales,
+  fetchViewedProducts,
+} from "../../services";
 
 const initialState = {
   products: [],
@@ -13,13 +20,14 @@ const initialState = {
     page: 1,
     limit: 8,
     category: "",
-    name: ""
+    name: "",
   },
   filters: [],
   viewedProducts: [],
   selectedModal: "",
   itemToBeRemvoedFromCart: "",
-  productsForPagination: []
+  productsForPagination: [],
+  productToBePurchase: {},
 };
 
 export const DashboardSlice = createSlice({
@@ -39,7 +47,8 @@ export const DashboardSlice = createSlice({
       s.itemToBeSearch = a.payload || initialState.itemToBeSearch;
     },
     setItemToBeRemovedFromCart(s, a) {
-      s.itemToBeRemvoedFromCart = a.payload || initialState.itemToBeRemvoedFromCart;
+      s.itemToBeRemvoedFromCart =
+        a.payload || initialState.itemToBeRemvoedFromCart;
     },
     setSelectedModal(s, a) {
       s.selectedModal = a.payload || initialState.selectedModal;
@@ -55,10 +64,13 @@ export const DashboardSlice = createSlice({
     setAlert(s, a) {
       s.alert = a.payload || initialState.alert;
     },
+    setProductToBePurchase(s, a) {
+      s.productToBePurchase = a.payload || initialState.productToBePurchase;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.fulfilled, (s, a) => {
-      s.products = a.payload; 
+      s.products = a.payload;
     });
     builder.addCase(fetchSales.fulfilled, (s, a) => {
       s.sales = a.payload;
@@ -75,7 +87,7 @@ export const DashboardSlice = createSlice({
     builder.addCase(fetchProductsForPagination.fulfilled, (s, a) => {
       s.productsForPagination = a.payload;
     });
-  }
+  },
 });
 
 export const {
@@ -87,5 +99,6 @@ export const {
   setSelectedModal,
   setItemToBeRemovedFromCart,
   setFilters,
-  updateProducts
+  updateProducts,
+  setProductToBePurchase,
 } = DashboardSlice.actions;

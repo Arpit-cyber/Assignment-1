@@ -4,13 +4,17 @@ import { useSelector } from "react-redux";
 import { sales$ } from "../../store";
 
 export const Carousal = () => {
-  const sales = useSelector(sales$)
+  const sales = useSelector(sales$);
 
   return (
-    <Carousel className="h-20">
+    <Carousel className="carousal-height">
       {sales?.map((item) => (
         <Carousel.Item key={item.id}>
-          <img className="d-block w-100 h-20" src={item.img} alt={item.name} />
+          <img
+            className="d-block w-100 carousal-height"
+            src={item.img}
+            alt={item.name}
+          />
           <Carousel.Caption>
             <h3>{item.desc}</h3>
           </Carousel.Caption>
@@ -18,4 +22,4 @@ export const Carousal = () => {
       ))}
     </Carousel>
   );
-}
+};

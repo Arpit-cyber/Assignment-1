@@ -84,33 +84,35 @@ const NavBar = () => {
       expand="lg"
       className="mb-1 bg-purple custom-navbar"
       variant="dark"
-      fixed
+      fixed="top"
     >
       <LinkContainer to="/" onClick={handleReset}>
         <Navbar.Brand>E-Cart</Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
-        <Form className="d-flex">
-          <div className="nav-search-container">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="search-input-field"
-              onChange={(e) => setItemToBeSearch(e.target.value)}
-              onKeyDown={handleKeyDown}
-              value={itemToBeSearch}
-            />
-            <Button
-              variant="light"
-              id="search-button"
-              className="search-button"
-              onClick={handleFetchProducts}
-            >
-              <FaSearch />
-            </Button>
-          </div>
-        </Form>
+        {currentUser?.isAuthenticated && (
+          <Form className="d-flex">
+            <div className="nav-search-container">
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="search-input-field"
+                onChange={(e) => setItemToBeSearch(e.target.value)}
+                onKeyDown={handleKeyDown}
+                value={itemToBeSearch}
+              />
+              <Button
+                variant="light"
+                id="search-button"
+                className="search-button"
+                onClick={handleFetchProducts}
+              >
+                <FaSearch />
+              </Button>
+            </div>
+          </Form>
+        )}
         {isUserLoading ? (
           <Skeleton height={50} />
         ) : currentUser?.isAuthenticated ? (
