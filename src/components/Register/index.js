@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { useState } from "react";
-import { Card, Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { fetchAllUsers, register } from "../../services";
