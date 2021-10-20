@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { CardComponent } from "../Cards";
 import Skeleton from "react-loading-skeleton";
+import "./favorite.css";
 
 export const FavoriteComponent = ({ isProductLoading, products }) => {
   const RenderSkeleton = () => (
@@ -15,7 +16,12 @@ export const FavoriteComponent = ({ isProductLoading, products }) => {
     </Card>
   );
 
-  return (
+  return products.length === 0 ? (
+    <div className="empty-wishlist">
+      <h3>Your Wishlist is currently empty</h3>
+      <p>Please add some products in your wishlist</p>
+    </div>
+  ) : (
     <div className="mh-5">
       <h4 className="fav-heading">My Wishlist</h4>
       <Row className="centered-wishlist">

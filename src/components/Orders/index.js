@@ -4,7 +4,7 @@ import "bootstrap-daterangepicker/daterangepicker.css";
 import Skeleton from "react-loading-skeleton";
 import moment from "moment";
 import { CustomDateRange } from "../common/DateRangePicker";
-import { Icons } from "../../resources";
+import { Images } from "../../resources";
 
 export const OrdersComponent = ({
   handleCallback,
@@ -27,7 +27,7 @@ export const OrdersComponent = ({
       <Accordion>
         {products.includes(1) && !isOrdersLoading ? (
           <div className="no-found-image">
-            <Image src={Icons.noResult} alt="No Result Found" />
+            <Image src={Images.noResult} alt="No Result Found" />
           </div>
         ) : (
           products.map((order) => {

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import React, { useState } from "react";
-import { Card, Form, Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { fetchAllUsers, updateUser } from "../../services";
@@ -45,6 +45,7 @@ export const LoginScreen = () => {
             user: { ...user, isAuthenticated: true },
           })
         ).then(() => {
+          localStorage.setItem("isAuthenticated", true);
           dispatch(fetchAllUsers());
           history.push("/");
         });
@@ -55,10 +56,11 @@ export const LoginScreen = () => {
   };
 
   return !isUserLoading ? (
-    <div className="wrapper">
-      <Card className="login-card">
-        <Card.Body className="d-flex flex-column align-items-center">
-          <h4 className="mb-30">Sign In</h4>
+    <div className="login-wrapper">
+      <div className="login-form-wrapper">
+        <h1 className="text-dark-theme login-form-heading">Login</h1>
+        <div className="field-wrapper">
+          <Form.Label>Email</Form.Label>
           <Form.Control
             required
             type="email"
@@ -76,6 +78,7 @@ export const LoginScreen = () => {
           {validation?.email && (
             <div className="error-message">Email required</div>
           )}
+          <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
             className={classNames({
@@ -92,33 +95,25 @@ export const LoginScreen = () => {
           {validation?.pass && (
             <div className="error-message">Password required</div>
           )}
-          <div className="mb-20 forgot-section">
-            <Form.Check type="checkbox" label="Remember Me" />
-            <Button variant="link" className="links">
-              Forget Password
-            </Button>
-          </div>
-
+        </div>
+        <Button
+          variant="success"
+          className="mb-20 signin-button"
+          onClick={handleLogin}
+        >
+          Login
+        </Button>
+        <div className="d-flex justify-content-center align-items-center">
+          If you don't have an account?{" "}
           <Button
-            variant="primary"
-            className="mb-20 sign-in-btn"
-            onClick={handleLogin}
+            variant="link"
+            className="signup-link-btn"
+            onClick={() => history.push("/register")}
           >
-            Sign In
+            Sign Up
           </Button>
-
-          <div className="signup-section">
-            Not a Member?
-            <Button
-              variant="link"
-              className="links"
-              onClick={() => history.push("/register")}
-            >
-              Register
-            </Button>
-          </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   ) : (
     <div />

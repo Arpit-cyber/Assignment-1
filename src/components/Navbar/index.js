@@ -1,5 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { NavDropdown, Navbar, Form, Nav, Button, Badge } from "react-bootstrap";
+import {
+  NavDropdown,
+  Navbar,
+  Form,
+  Nav,
+  Button,
+  Badge,
+  Image,
+} from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FaHeart, FaShoppingCart, FaSearch } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +30,8 @@ import {
 import { UserThumbnail } from "../common/UserThumbnail";
 import { useHistory, useLocation } from "react-router";
 import Skeleton from "react-loading-skeleton";
+import { Images } from "../../resources";
+import classNames from "classnames";
 
 const emptyString = "";
 
@@ -34,6 +44,10 @@ const NavBar = () => {
   const isUserLoading = useSelector(isUserLoading$);
   const currentUser = useSelector(user$);
   const [itemToBeSearch, setItemToBeSearch] = useState(emptyString);
+  const [prevSearchItem, setPrevSearchItem] = useState(emptyString);
+
+  const isLoginOrRegisterScreen =
+    pathname === "/login" || pathname === "/register";
 
   useEffect(() => {
     dispatch(fetchAllUsers());
@@ -56,15 +70,19 @@ const NavBar = () => {
   };
 
   const handleFetchProducts = () => {
-    const filter = {
-      ...paginationFilters,
-      page: 1,
-      name: itemToBeSearch,
-      category: "",
-    };
+    if (itemToBeSearch.trim() !== prevSearchItem) {
+      setPrevSearchItem(itemToBeSearch.trim());
 
-    dispatch(setPaginationFilters(filter));
-    dispatch(fetchProducts(filter));
+      const filter = {
+        ...paginationFilters,
+        page: 1,
+        name: itemToBeSearch.trim(),
+        category: "",
+      };
+
+      dispatch(setPaginationFilters(filter));
+      dispatch(fetchProducts(filter));
+    }
   };
 
   const handleLogout = () => {
@@ -74,28 +92,35 @@ const NavBar = () => {
         user: { ...currentUser, isAuthenticated: false },
       })
     ).then(() => {
+      localStorage.setItem("isAuthenticated", false);
+      localStorage.setItem("isLoggedOut", true);
       dispatch(fetchAllUsers());
-      history.push("/");
     });
   };
 
   const shouldShowSearchBar = useMemo(
-    () =>
-      currentUser?.isAuthenticated ||
-      (pathname !== "/login" && pathname !== "/register"),
-    [currentUser, pathname]
+    () => currentUser?.isAuthenticated || !isLoginOrRegisterScreen,
+    [currentUser, isLoginOrRegisterScreen]
   );
 
   return (
     <Navbar
       collapseOnSelect
       expand="lg"
-      className="mb-1 bg-purple custom-navbar"
+      className={classNames("mb-1 custom-navbar", {
+        "bg-purple": !isLoginOrRegisterScreen,
+      })}
       variant="dark"
       fixed="top"
     >
       <LinkContainer to="/" onClick={handleReset}>
-        <Navbar.Brand>E-Cart</Navbar.Brand>
+        <Navbar.Brand
+          className={classNames("brand-container", {
+            "text-dark-theme bold-text": isLoginOrRegisterScreen,
+          })}
+        >
+          <Image src={Images.logo} alt="logo" className="logo" /> E-Cart
+        </Navbar.Brand>
       </LinkContainer>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
@@ -140,7 +165,7 @@ const NavBar = () => {
               <LinkContainer to="/profile">
                 <NavDropdown.Item>Profile</NavDropdown.Item>
               </LinkContainer>
-              <LinkContainer to="#logout">
+              <LinkContainer to="/logout">
                 <NavDropdown.Item onClick={handleLogout}>
                   Logout
                 </NavDropdown.Item>
@@ -153,7 +178,7 @@ const NavBar = () => {
             </LinkContainer>
             <LinkContainer to="/cart">
               <Nav.Link>
-                <FaShoppingCart color="#0762f5" />
+                <FaShoppingCart color="#f2ecf8" />
                 <Badge pill className="cart-count" bg="light">
                   {productsInCart?.length}
                 </Badge>
@@ -161,13 +186,15 @@ const NavBar = () => {
             </LinkContainer>
           </Nav>
         ) : (
-          <Button
-            variant="light"
-            className="ml-auto login-button"
-            onClick={() => history.push("/login")}
-          >
-            Login / Signup
-          </Button>
+          !isLoginOrRegisterScreen && (
+            <Button
+              variant="light"
+              className="ml-auto login-button"
+              onClick={() => history.push("/login")}
+            >
+              Login / Signup
+            </Button>
+          )
         )}
       </Navbar.Collapse>
     </Navbar>

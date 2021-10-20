@@ -12,6 +12,29 @@ body {
   font-family: "Telus-Web-Reg";
 }
 
+.text-dark-theme {
+  color: rgb(75, 40, 109) !important;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.logo {
+  height: 30px;
+  margin-right: 10px;
+}
+
+.curson-pointer {
+  cursor: pointer;
+}
+
+.brand-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .footer {
   display: flex;
   justify-content: center;
@@ -54,7 +77,7 @@ body {
 .custom-card {
   width: 100%;
   padding: 10px;
-  height: 500px;
+  min-height: 500px;
   box-shadow: 8px 10px 8px #888888;
   margin-top: 20px;
 }
@@ -70,6 +93,12 @@ body {
 .custom-container {
   margin: 66px 20px 0 20px;
   min-height: 87.7vh !important;
+}
+
+.custom-container-for-login-signup {
+  padding: 66px 20px 0 20px;
+  background-color: #fff !important;
+  min-height: 94vh !important;
 }
 
 .centered-cart {
@@ -105,8 +134,8 @@ body {
   position: fixed;
 }
 
-.bg-grey {
-  background-color: #e7e5e5;
+.bg-white {
+  background-color: #fff;
 }
 
 .full-height {
@@ -285,12 +314,6 @@ p {
   width: 15px;
 }
 
-.star-container {
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .fav-container {
   height: 30px;
   width: 30px;
@@ -326,6 +349,12 @@ p {
   margin: 10px 5px 0 auto;
 }
 
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: rgb(75, 40, 109) !important;
+  color: #fff;
+}
+
 .no-found-image {
   display: flex;
   justify-content: center;
@@ -334,7 +363,7 @@ p {
 .pagination-container {
   display: flex;
   justify-content: center;
-  margin: 30px 0;
+  padding: 30px 0;
 }
 
 .pagination-item-wrapper {
@@ -383,6 +412,7 @@ p {
 .pagination-item-active {
   background-color: rgba(75, 40, 109);
   color: #fff;
+  pointer-events: none;
 }
 
 .pagination-item-arrow {
@@ -628,11 +658,11 @@ p {
 
 .ellipsis {
   width: 100%;
-  height: 40px;
+  height: 65px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   margin-bottom: 0 !important;
   padding-top: 0 !important;

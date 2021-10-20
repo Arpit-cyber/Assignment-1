@@ -103,7 +103,7 @@ export const CartComponent = ({
                 {item.name} x {item.count}
               </p>
             </Col>
-            <Col sm={12} md={5}>
+            <Col sm={12} md={5} className="d-flex justify-content-end">
               <p>$: {item.count * item.price}</p>
             </Col>
           </Row>

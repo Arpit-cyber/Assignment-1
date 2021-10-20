@@ -1,11 +1,10 @@
 import classNames from "classnames";
 import React, { useState } from "react";
-import { Card, Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { fetchAllUsers, register } from "../../services";
 import { isUserLoading$ } from "../../store";
-import "./register.css";
 
 const emptyObject = {};
 const emailRegex = /[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+$/;
@@ -18,26 +17,26 @@ export const RegisterScreen = () => {
   const [validation, setValidation] = useState(emptyObject);
 
   const handleRegistration = () => {
-    const { fname, lname, email, pass } = userDetails;
+    const { name, email, pass } = userDetails;
 
     setValidation(emptyObject);
 
-    if (!fname || !lname || !emailRegex.test(email) || !pass) {
+    if (!name || !emailRegex.test(email) || !pass) {
       setValidation({
-        fname: !fname,
-        lname: !lname,
+        name: !name,
         email: !emailRegex.test(email),
         pass: !pass,
       });
     } else {
       const user = {
-        name: fname + " " + lname,
+        name,
         email,
         pass,
         isAuthenticated: true,
       };
 
       dispatch(register(user)).then(() => {
+        localStorage.setItem("isAuthenticated", true);
         dispatch(fetchAllUsers());
         history.push("/");
       });
@@ -52,56 +51,32 @@ export const RegisterScreen = () => {
   };
 
   return !isUserLoading ? (
-    <div className="wrapper">
-      <Card className="register-card">
-        <Card.Body className="d-flex flex-column align-items-center">
-          <h4 className="mb-30">Sign Up</h4>
-          <Row className="user-name-field-wrapper">
-            <Col sm={12} md={6}>
-              <Form.Control
-                required
-                type="text"
-                placeholder="First Name"
-                className={classNames({
-                  "mb-20": !validation?.fname,
-                  "error-field": validation?.fname,
-                })}
-                value={userDetails?.fname}
-                onKeyDown={handleKeyDown}
-                onChange={(e) =>
-                  setUserDetails((prev) => ({
-                    ...prev,
-                    fname: e.target.value,
-                  }))
-                }
-              />
-              {validation?.fname && (
-                <div className="error-message">First Name required</div>
-              )}
-            </Col>
-            <Col sm={12} md={6}>
-              <Form.Control
-                required
-                type="text"
-                placeholder="Last Name"
-                className={classNames({
-                  "mb-20": !validation?.lname,
-                  "error-field": validation?.lname,
-                })}
-                value={userDetails?.lname}
-                onKeyDown={handleKeyDown}
-                onChange={(e) =>
-                  setUserDetails((prev) => ({
-                    ...prev,
-                    lname: e.target.value,
-                  }))
-                }
-              />
-              {validation?.lname && (
-                <div className="error-message">Last Name required</div>
-              )}
-            </Col>
-          </Row>
+    <div className="login-wrapper">
+      <div className="login-form-wrapper">
+        <h1 className="text-dark-theme login-form-heading">Sign up</h1>
+        <div className="field-wrapper">
+          <Form.Label>Full Name</Form.Label>
+          <Form.Control
+            required
+            type="text"
+            placeholder="Full Name"
+            className={classNames({
+              "mb-20": !validation?.name,
+              "error-field": validation?.name,
+            })}
+            value={userDetails?.name}
+            onKeyDown={handleKeyDown}
+            onChange={(e) =>
+              setUserDetails((prev) => ({
+                ...prev,
+                name: e.target.value,
+              }))
+            }
+          />
+          {validation?.name && (
+            <div className="error-message">Full Name required</div>
+          )}
+          <Form.Label>Email Address</Form.Label>
           <Form.Control
             type="email"
             required
@@ -119,6 +94,7 @@ export const RegisterScreen = () => {
           {validation?.email && (
             <div className="error-message">Email required</div>
           )}
+          <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
             required
@@ -136,26 +112,25 @@ export const RegisterScreen = () => {
           {validation?.pass && (
             <div className="error-message">Password required</div>
           )}
-
+        </div>
+        <Button
+          variant="success"
+          className="mb-20 signin-button"
+          onClick={handleRegistration}
+        >
+          Sign up
+        </Button>
+        <div className="d-flex justify-content-center align-items-center">
+          If you are already registered than
           <Button
-            variant="primary"
-            className="mb-20 mt-20 sign-up-btn"
-            onClick={handleRegistration}
+            variant="link"
+            className="signup-link-btn"
+            onClick={() => history.push("/login")}
           >
-            Sign Up
+            Log In
           </Button>
-
-          <div className="signin-section">
-            <Button
-              variant="link"
-              className="back-link"
-              onClick={() => history.push("/login")}
-            >
-              <span className="back-arrow">&larr;</span> Go Back to Login
-            </Button>
-          </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
   ) : (
     <div />

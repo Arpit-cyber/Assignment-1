@@ -24,6 +24,7 @@ import { BuyButton } from "../common/BuyButton";
 import { CustomRating } from "../common/Rating";
 import { isEmpty } from "lodash";
 import { MODALS } from "../../constants";
+import "./card.css";
 
 export const CardComponent = ({ product }) => {
   const dispatch = useDispatch();
@@ -84,10 +85,17 @@ export const CardComponent = ({ product }) => {
   };
 
   const handleMarkAndRemoveFavorite = (product) => {
-    dispatch(markAndRemoveFavorite({ id: product.id, product }));
-    dispatch(
-      updateProducts(products.map((e) => (e.id === product.id ? product : e)))
-    );
+    const successMessage = product?.isFav
+      ? "Item added to wishlist"
+      : "Item removed from wishlist";
+
+    dispatch(markAndRemoveFavorite({ id: product.id, product })).then(() => {
+      dispatch(
+        updateProducts(products.map((e) => (e.id === product.id ? product : e)))
+      );
+
+      dispatch(setSuccessMessage(successMessage));
+    });
   };
 
   return (
@@ -97,35 +105,33 @@ export const CardComponent = ({ product }) => {
         src={product.avatar}
         width="80px"
         height="300px"
+        className="curson-pointer"
         onClick={() => history.push(`/products/${product.id}`)}
       />
       <Card.Body className="d-flex flex-column justify-content-between">
-        <Card.Title className="truncate">{product.name}</Card.Title>
+        <Card.Title className="heading truncate">{product.name}</Card.Title>
         <div className="fav-container">
-          {isEmpty(currentUser) ? (
+          {isEmpty(currentUser) || !product?.isFav ? (
             <FaRegHeart
               className="fav-icon"
-              onClick={() => history.push("/login")}
+              onClick={() => {
+                isEmpty(currentUser)
+                  ? history.push("/login")
+                  : handleMarkAndRemoveFavorite({ ...product, isFav: true });
+              }}
             />
-          ) : product?.isFav ? (
+          ) : (
             <FaHeart
               className="fav-icon"
               onClick={() =>
                 handleMarkAndRemoveFavorite({ ...product, isFav: false })
               }
             />
-          ) : (
-            <FaRegHeart
-              className="fav-icon"
-              onClick={() =>
-                handleMarkAndRemoveFavorite({ ...product, isFav: true })
-              }
-            />
           )}
         </div>
-        <Card.Text className="f-12 ellipsis">{product.description}</Card.Text>
+        <Card.Text className="ellipsis desc">{product.description}</Card.Text>
         <div className="star-container">
-          <Card.Text className="f-12">Price: ₹ {product.price}</Card.Text>
+          <Card.Text className="desc">Price: ₹ {product.price}</Card.Text>
           <CustomRating rating={product.rating} readonly={true} />
         </div>
         <div className="d-flex flex-row justify-content-between">

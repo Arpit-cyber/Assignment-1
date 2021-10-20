@@ -1,96 +1,48 @@
-.wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.login-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
 }
 
-.login-card {
-    width: 30vw !important;
-}
-
-@media (max-width: 1130px) {
-    .login-card {
-        width: 40vw !important;
-    }
-}
-
-@media (max-width: 850px) {
-    .login-card {
-        width: 50vw !important;
-    }
-}
-
-.forgot-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    width: 100%;
-}
-
-@media (max-width: 610px) {
-    .forgot-section {
-        font-size: 12px !important;
-        flex-direction: column !important;
-        align-items: center !important;
-    }
-
-    .links {
-        font-size: 12px !important;
-    }    
-
-    .signup-section {
-        font-size: 12px !important;
-        flex-direction: column !important;
-        align-items: center !important;
-    }
-}
-
-.sign-in-btn {
-    width: 30%;
-}
-
-@media (max-width: 1130px) {
-    .sign-in-btn {
-        width: 40% !important;
-    }
-}
-
-@media (max-width: 850px) {
-    .sign-in-btn {
-        width: 50% !important;
-    }
-}
-
-@media (max-width: 395px) {
-    .sign-in-btn {
-        width: 90% !important;
-    }
-}
-
-.signup-section {
-    display: flex;
-    align-items: baseline;
-}
-
-.links {
-    text-decoration: none !important;
-}
-
-.links:focus {
-    box-shadow: none !important;
+.login-form-wrapper {
+  display: flex;
+  flex-direction: column !important;
+  min-height: 80vh;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .error-message {
-    width: 100%;
-    color: orangered;
-    margin: 5px 0 15px 10px;
+  width: 100%;
+  color: orangered;
+  margin: 5px 0 15px 10px;
 }
 
 .error-field,
 .error-field:focus {
-    border: 1px solid orangered !important;
+  border: 1px solid orangered !important;
+}
+
+.field-wrapper {
+  width: 40vh;
+}
+
+.login-form-heading {
+  font-size: 3rem;
+  margin-bottom: 30px;
+}
+
+.signin-button {
+  width: 50% !important;
+  height: 40px;
+  margin: 0 !important;
+}
+
+.signup-link-btn {
+  text-decoration: none !important;
+}
+
+.signup-link-btn:focus {
+  box-shadow: none !important;
 }
