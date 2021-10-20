@@ -4,6 +4,7 @@ import {
   productsInCart$,
   setItemToBeRemovedFromCart,
   setSelectedModal,
+  setSuccessMessage,
 } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -62,6 +63,10 @@ export const CartContainer = () => {
   };
 
   const handleMarkAndRemoveFavorite = (product) => {
+    const successMessage = product?.isFav
+      ? "Item added to wishlist"
+      : "Item removed from wishlist";
+
     dispatch(markAndRemoveFavorite({ id: product.id, product })).then(() =>
       dispatch(fetchProducts())
     );
@@ -70,7 +75,10 @@ export const CartContainer = () => {
         id: product.id,
         product,
       })
-    ).then(() => dispatch(fetchCart()));
+    ).then(() => {
+      dispatch(fetchCart());
+      dispatch(setSuccessMessage(successMessage));
+    });
   };
 
   return (

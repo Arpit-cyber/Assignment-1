@@ -7,19 +7,19 @@ import {
   isProductLoading$,
   paginationFilters$,
   productsForPagination$,
+  isSalesLoading$,
 } from "../../store";
 import classnames from "classnames";
 import { Carousal } from "../Carousal";
 import { CardComponent } from "../Cards";
 import { fetchProducts, fetchProductsForPagination } from "../../services";
 import { CustomDropdown } from "../Dropdown";
-import { Icons } from "../../resources";
+import { Images } from "../../resources";
 import Skeleton from "react-loading-skeleton";
 
 const MOCK_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8];
 
 const MOCK_FILTERS = [
-  { label: "Select", value: "" },
   { label: "Laptop", value: "laptop" },
   { label: "Earphones", value: "earphones" },
 ];
@@ -30,10 +30,16 @@ export const Dashboard = () => {
   const totalProducts = useSelector(productsForPagination$);
   const paginationFilters = useSelector(paginationFilters$);
   const isProductLoading = useSelector(isProductLoading$);
+  const isSalesLoading = useSelector(isSalesLoading$);
   const [productsToBeDisplayed, setProductsToBeDisplayed] = useState(products);
-  
+
   useEffect(() => {
-    dispatch(fetchProductsForPagination({ name: paginationFilters?.name, category: paginationFilters?.category }));
+    dispatch(
+      fetchProductsForPagination({
+        name: paginationFilters?.name,
+        category: paginationFilters?.category,
+      })
+    );
     dispatch(fetchProducts(paginationFilters));
   }, [dispatch, paginationFilters]);
 
@@ -42,7 +48,9 @@ export const Dashboard = () => {
     return Array.from({ length: maxPages }, (_, i) => i + 1);
   }, [totalProducts]);
 
-  const totalPages = Math.ceil(totalProducts?.length / paginationFilters?.limit)
+  const totalPages = Math.ceil(
+    totalProducts?.length / paginationFilters?.limit
+  );
 
   useEffect(() => {
     products && setProductsToBeDisplayed(products);
@@ -57,7 +65,7 @@ export const Dashboard = () => {
       ))
     ) : (
       <div className="no-found-image">
-        <Image src={Icons.noResult} alt="No Result Found" />
+        <Image src={Images.noResult} alt="No Result Found" />
       </div>
     );
   };
@@ -112,29 +120,30 @@ export const Dashboard = () => {
 
   return (
     <div className="mh-5">
-      {isProductLoading ? (
-        <Skeleton height={320} className="mb-20" />
+      {isSalesLoading ? (
+        <>
+          <Skeleton height={320} className="mb-20" />
+          <Skeleton height={38} />
+        </>
       ) : (
-        <Carousal />
-      )}
-      {isProductLoading ? (
-        <Skeleton height={38} />
-      ) : (
-        <CustomDropdown
-          options={MOCK_FILTERS}
-          placeholder="Filter By Category"
-          value={MOCK_FILTERS.find(
-            (e) => e.value === paginationFilters?.category
-          )}
-          onChange={(selectedOption) =>
-            handleFetchProducts({
-              ...paginationFilters,
-              page: 1,
-              name: "",
-              category: selectedOption.value,
-            })
-          }
-        />
+        <>
+          <Carousal />
+          <CustomDropdown
+            options={MOCK_FILTERS}
+            placeholder="Filter By Category"
+            value={MOCK_FILTERS.find(
+              (e) => e.value === paginationFilters?.category
+            )}
+            onChange={(selectedOption) =>
+              handleFetchProducts({
+                ...paginationFilters,
+                page: 1,
+                name: "",
+                category: selectedOption.value,
+              })
+            }
+          />
+        </>
       )}
       <div className="m-2">
         <Row>
