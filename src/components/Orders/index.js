@@ -5,6 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import moment from "moment";
 import { CustomDateRange } from "../common/DateRangePicker";
 import { Images } from "../../resources";
+import classes from "./order.module.css";
 
 export const OrdersComponent = ({
   handleCallback,
@@ -54,20 +55,27 @@ export const OrdersComponent = ({
                       {order?.orderItems?.map((item, i) => (
                         <Fragment key={item.id}>
                           <Row className="mb-3" key={item.id}>
-                            <Col>
+                            <Col sm={12} md={4}>
                               <Image
                                 src={item.avatar}
                                 alt={item.name}
-                                className="cart-image"
+                                className={classes.productImage}
                               />
                             </Col>
-                            <Col>
-                              <p className="info">{item.name}</p>
-                              <p className="info">Price: Rs. {item.price}</p>
-                              <p className="info">
+                            <Col sm={12} md={1} />
+                            <Col sm={12} md={5}>
+                              <p className={classes.productHeading}>
+                                {item.name}
+                              </p>
+                              <p className={classes.productDetails}>
+                                Price: Rs. {item.price}
+                              </p>
+                              <p className={classes.productDetails}>
                                 Quantity: {item?.quantity || 1}
                               </p>
-                              <p>{item.description}</p>
+                              <p className={classes.productDetails}>
+                                {item.description}
+                              </p>
                             </Col>
                           </Row>
                           {order.orderItems.length - 1 !== i && <hr />}
@@ -76,8 +84,10 @@ export const OrdersComponent = ({
                     </Card.Body>
                   </Card>
                   <div className="orders-price-container">
-                    <p>Price: </p>
-                    <p className="info">Rs. {order.totalAmount}</p>
+                    <p className={classes.productDetails}>Price: </p>
+                    <p className={classes.productDetails}>
+                      Rs. {order.totalAmount}
+                    </p>
                   </div>
                 </Accordion.Body>
               </Accordion.Item>

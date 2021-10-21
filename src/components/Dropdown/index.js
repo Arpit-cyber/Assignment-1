@@ -9,6 +9,7 @@ export const CustomDropdown = ({ options, placeholder, value, onChange }) => (
     value={value}
     onChange={onChange}
     className="custom-dropdown"
+    isClearable
     theme={(theme) => ({
       ...theme,
       colors: {

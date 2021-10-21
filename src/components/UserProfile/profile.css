@@ -76,6 +76,11 @@
   width: 80% !important;
   display: flex;
   flex-direction: column;
+  padding: 20px;
+  min-height: 500px;
+  box-shadow: rgb(0 0 0 / 10%) 0px 0px 16px 0px;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 .field-group {

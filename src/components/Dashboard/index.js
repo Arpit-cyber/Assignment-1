@@ -18,6 +18,7 @@ import { Images } from "../../resources";
 import Skeleton from "react-loading-skeleton";
 
 const MOCK_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8];
+const emptyString = "";
 
 const MOCK_FILTERS = [
   { label: "Laptop", value: "laptop" },
@@ -139,7 +140,7 @@ export const Dashboard = () => {
                 ...paginationFilters,
                 page: 1,
                 name: "",
-                category: selectedOption.value,
+                category: selectedOption?.value || emptyString,
               })
             }
           />
