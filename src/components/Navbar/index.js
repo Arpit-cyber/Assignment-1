@@ -95,6 +95,7 @@ const NavBar = () => {
       localStorage.setItem("isAuthenticated", false);
       localStorage.setItem("isLoggedOut", true);
       dispatch(fetchAllUsers());
+      history.push("/logout");
     });
   };
 
