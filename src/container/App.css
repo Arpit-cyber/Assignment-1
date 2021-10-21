@@ -79,6 +79,14 @@ body {
   width: 100%;
   padding: 10px;
   min-height: 500px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 0px 16px 0px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.custom-cart-card {
+  width: 100%;
+  padding: 0 10px;
   box-shadow: 8px 10px 8px #888888;
   margin-top: 20px;
   margin-bottom: 30px;
@@ -95,7 +103,7 @@ body {
 
 .custom-container {
   margin: 66px 20px 0 20px;
-  min-height: calc(100vh - 115px);
+  min-height: calc(100vh - 108px);
 }
 
 .custom-container-for-login-signup {
@@ -144,10 +152,6 @@ body {
 
 .full-height {
   height: 93vh;
-}
-
-body {
-  background-color: #e7e5e5 !important;
 }
 
 .pt-40 {
@@ -688,6 +692,23 @@ p {
   -webkit-box-orient: vertical;
   margin-bottom: 0 !important;
   padding-top: 0 !important;
+}
+
+.cart-ellipsis {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.analysis-card {
+  padding: 10px;
+  min-height: 500px;
+  box-shadow: rgb(0 0 0 / 30%) 0px 0px 16px 0px;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 .btn-success {

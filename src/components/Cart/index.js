@@ -28,7 +28,7 @@ export const CartComponent = ({
           <Col className="d-flex justify-content-between flex-column">
             <div>
               <h5 className="info info-heading m-0">{item.name}</h5>
-              <p className="info ellipsis">{item.description}</p>
+              <p className="info cart-ellipsis">{item.description}</p>
             </div>
             <div className="cart-buttons">
               <Button
@@ -133,7 +133,7 @@ export const CartComponent = ({
           {isCartLoading ? (
             <Skeleton height={468} />
           ) : (
-            <Card>
+            <Card className="custom-cart-card">
               <Card.Body className="cart-card-body">
                 <p>My Cart ({productsInCart?.length})</p>
                 <hr />
@@ -150,7 +150,7 @@ export const CartComponent = ({
           {isCartLoading ? (
             <Skeleton height={400} />
           ) : (
-            <Card>
+            <Card className="custom-cart-card">
               <Card.Body className="price-card-body">
                 <p>Price Detail</p>
                 <hr />
