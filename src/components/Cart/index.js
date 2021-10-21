@@ -28,7 +28,7 @@ export const CartComponent = ({
           <Col className="d-flex justify-content-between flex-column">
             <div>
               <h5 className="info info-heading m-0">{item.name}</h5>
-              <p className="info">{item.description}</p>
+              <p className="info ellipsis">{item.description}</p>
             </div>
             <div className="cart-buttons">
               <Button
@@ -94,39 +94,42 @@ export const CartComponent = ({
     ));
 
   const RenderPriceDetails = () => (
-    <>
+    <div className="d-flex flex-column">
       {productsInCart.map((item) => (
         <Fragment key={item.id}>
           <Row key={item.id}>
-            <Col sm={12} md={7}>
+            <Col
+              sm={12}
+              md={7}
+              className="d-flex justify-content-between align-items-center w-100"
+            >
               <p>
                 {item.name} x {item.count}
               </p>
-            </Col>
-            <Col sm={12} md={5} className="d-flex justify-content-end">
               <p>$: {item.count * item.price}</p>
             </Col>
           </Row>
           <hr />
         </Fragment>
       ))}
-      <div className="d-flex justify-content-center align-items-center">
-        <p>Total Amount $: {getTotalAmount()}</p>
-        <Button
-          className="order-button border-0"
-          variant="primary"
-          onClick={() => dispatch(setSelectedModal(MODALS.PLACE_ORDER))}
-        >
-          Place Order
-        </Button>
+      <div className="d-flex justify-content-between align-items-center">
+        <p className="pt-0">Total Amount</p>
+        <p className="pt-0">$: {getTotalAmount()}</p>
       </div>
-    </>
+      <Button
+        className="order-button border-0 mt-10"
+        variant="primary"
+        onClick={() => dispatch(setSelectedModal(MODALS.PLACE_ORDER))}
+      >
+        Place Order
+      </Button>
+    </div>
   );
 
   return (
-    <div className="mh-5 ">
-      <Row className="justify-content-center centered-cart">
-        <Col sm={12} md={5} className="mb-2">
+    <div className="mh-5 centered-cart">
+      <Row className="justify-content-center w-100">
+        <Col sm={12} md={6} className="mb-2">
           {isCartLoading ? (
             <Skeleton height={468} />
           ) : (

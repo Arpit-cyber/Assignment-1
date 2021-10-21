@@ -121,17 +121,18 @@ export const UserProfile = ({ isUserLoading, user }) => {
   return (
     <div>
       <Row>
-        <Col sm={0} md={1} />
-        <Col sm={12} md={4} className="profile-image-wrapper">
+        <Col sm={12} md={1} className="mb-20" />
+        <Col sm={12} md={4} className="profile-image-wrapper mb-20">
           <div className="profile-thumbnail-container">
             <RenderThumbnailSection />
           </div>
         </Col>
-        <Col sm={12} md={6} className="content-wrapper">
+        <Col sm={12} md={6} className="content-wrapper mb-20">
           <div className="form-container">
             {isUserLoading ? <UserDetailsSkeleton /> : <RenderForm />}
           </div>
         </Col>
+        <Col sm={12} md={1} className="mb-20" />
       </Row>
     </div>
   );
