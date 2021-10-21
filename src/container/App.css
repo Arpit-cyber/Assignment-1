@@ -103,7 +103,7 @@ body {
 
 .custom-container {
   margin: 66px 20px 0 20px;
-  min-height: calc(100vh - 129px);
+  min-height: calc(100vh - 108px);
 }
 
 .custom-container-for-login-signup {
