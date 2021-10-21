@@ -1,6 +1,6 @@
 .profile-image-wrapper {
   position: relative;
-  height: 80vh;
+  min-height: 80vh;
 }
 
 .profile-thumbnail-container {
@@ -14,11 +14,14 @@
 
 .content-wrapper {
   position: relative;
-  min-height: 80vh;
+  /* min-height: 80vh; */
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-@media only screen and (max-device-width: 767px) {
+@media (max-device-width: 767px) {
   .profile-image-wrapper {
     min-height: 40vh !important;
     margin-top: 20px !important;
@@ -42,8 +45,9 @@
   }
 
   .content-wrapper {
-    margin-top: 260px;
+    margin-top: 160px;
     margin-bottom: 20px;
+    /* min-height: 120vh; */
   }
 }
 
@@ -72,10 +76,6 @@
   width: 80% !important;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  transform: translate(50%, -50%);
 }
 
 .field-group {
