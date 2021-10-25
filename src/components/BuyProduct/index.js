@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, ButtonGroup, Col, Image, Row } from "react-bootstrap";
+import { Button, ButtonGroup, Col, Image, Row, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrders, placeOrder } from "../../services";
 import {
@@ -8,6 +8,7 @@ import {
   setSuccessMessage,
   setProductToBePurchase,
   setSelectedModal,
+  isPlacingOrder$,
 } from "../../store";
 import { CustomModal } from "../common/Modal";
 import "./buyProduct.css";
@@ -15,6 +16,7 @@ import "./buyProduct.css";
 export const BuyProduct = () => {
   const dispatch = useDispatch();
   const productToBePurchase = useSelector(productToBePurchase$);
+  const isPlacingOrder = useSelector(isPlacingOrder$);
   const [productCount, setProductCount] = useState(1);
 
   const handleReset = () => {
@@ -107,7 +109,17 @@ export const BuyProduct = () => {
           className="buy-product-btn"
           onClick={handleSubmit}
         >
-          Place Order
+          {isPlacingOrder ? (
+            <Spinner
+              as="span"
+              animation="border"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+          ) : (
+            "Place Order"
+          )}
         </Button>
       </div>
     </CustomModal>

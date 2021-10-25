@@ -5,6 +5,7 @@ import {
   FETCH_PRODUCTS,
   FETCH_SALES,
   FETCH_USERS,
+  PLACE_ORDERS,
 } from "../../constants";
 import { LoaderSlice } from "./reducer";
 
@@ -28,4 +29,8 @@ export const isUserLoading$ = createSelector(busyIndicatorState$, (s) =>
 
 export const isOrdersLoading$ = createSelector(busyIndicatorState$, (s) =>
   Boolean(s[FETCH_ORDERS])
+);
+
+export const isPlacingOrder$ = createSelector(busyIndicatorState$, (s) =>
+  Boolean(s[PLACE_ORDERS])
 );

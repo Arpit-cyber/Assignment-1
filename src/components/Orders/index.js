@@ -68,7 +68,7 @@ export const OrdersComponent = ({
                                 {item.name}
                               </p>
                               <p className={classes.productDetails}>
-                                Price: Rs. {item.price}
+                                Price: $ {item.price}
                               </p>
                               <p className={classes.productDetails}>
                                 Quantity: {item?.quantity || 1}
@@ -86,7 +86,7 @@ export const OrdersComponent = ({
                   <div className="orders-price-container">
                     <p className={classes.productDetails}>Price: </p>
                     <p className={classes.productDetails}>
-                      Rs. {order.totalAmount}
+                      $ {order.totalAmount}
                     </p>
                   </div>
                 </Accordion.Body>
