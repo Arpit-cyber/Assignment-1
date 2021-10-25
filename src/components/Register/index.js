@@ -66,12 +66,16 @@ export const RegisterScreen = () => {
             })}
             value={userDetails?.name}
             onKeyDown={handleKeyDown}
-            onChange={(e) =>
+            onChange={(e) => {
+              setValidation((prev) => ({
+                ...prev,
+                name: !e.target.value,
+              }));
               setUserDetails((prev) => ({
                 ...prev,
                 name: e.target.value,
-              }))
-            }
+              }));
+            }}
           />
           {validation?.name && (
             <div className="error-message">Full Name required</div>
@@ -87,9 +91,13 @@ export const RegisterScreen = () => {
             })}
             value={userDetails?.email}
             onKeyDown={handleKeyDown}
-            onChange={(e) =>
-              setUserDetails((prev) => ({ ...prev, email: e.target.value }))
-            }
+            onChange={(e) => {
+              setValidation((prev) => ({
+                ...prev,
+                email: !emailRegex.test(e.target.value),
+              }));
+              setUserDetails((prev) => ({ ...prev, email: e.target.value }));
+            }}
           />
           {validation?.email && (
             <div className="error-message">Email required</div>
@@ -105,9 +113,13 @@ export const RegisterScreen = () => {
             })}
             value={userDetails?.pass}
             onKeyDown={handleKeyDown}
-            onChange={(e) =>
-              setUserDetails((prev) => ({ ...prev, pass: e.target.value }))
-            }
+            onChange={(e) => {
+              setValidation((prev) => ({
+                ...prev,
+                pass: !e.target.value,
+              }));
+              setUserDetails((prev) => ({ ...prev, pass: e.target.value }));
+            }}
           />
           {validation?.pass && (
             <div className="error-message">Password required</div>

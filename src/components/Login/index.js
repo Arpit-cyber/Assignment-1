@@ -70,9 +70,13 @@ export const LoginScreen = () => {
             })}
             placeholder="Email Address"
             value={userDetails?.email}
-            onChange={(e) =>
-              setUserDetails((prev) => ({ ...prev, email: e.target.value }))
-            }
+            onChange={(e) => {
+              setValidation((prev) => ({
+                ...prev,
+                email: !emailRegex.test(e.target.value),
+              }));
+              setUserDetails((prev) => ({ ...prev, email: e.target.value }));
+            }}
             onKeyDown={handleKeyDown}
           />
           {validation?.email && (
@@ -87,9 +91,13 @@ export const LoginScreen = () => {
             })}
             placeholder="Password"
             value={userDetails?.pass}
-            onChange={(e) =>
-              setUserDetails((prev) => ({ ...prev, pass: e.target.value }))
-            }
+            onChange={(e) => {
+              setValidation((prev) => ({
+                ...prev,
+                pass: !e.target.value,
+              }));
+              setUserDetails((prev) => ({ ...prev, pass: e.target.value }));
+            }}
             onKeyDown={handleKeyDown}
           />
           {validation?.pass && (

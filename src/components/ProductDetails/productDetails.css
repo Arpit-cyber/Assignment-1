@@ -9,14 +9,15 @@
 }
 
 .main-container > *:not(:last-child) {
-  margin-bottom: 20px;
+  margin-bottom: 60px;
 }
 
 .image-container {
-  height: 30vh;
+  height: 55vh;
+  padding: 25px;
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0 1rem 3rem rgb(0 0 0 / 30%);
+  box-shadow: rgb(0 0 0 / 20%) 0px 0px 16px 0px;
   background-color: #fff;
 }
 

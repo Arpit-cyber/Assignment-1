@@ -31,7 +31,7 @@ export const ProductDetails = ({
               readonly={true}
               classes="mb-10"
             />
-            <h5 className="mb-10">₹ {selectedProduct?.price}</h5>
+            <h5 className="mb-10">$ {selectedProduct?.price}</h5>
             <p className="description mb-10">{selectedProduct?.description}</p>
             <div className="d-flex flex-row justify-content-between mt-40">
               <AddButton
