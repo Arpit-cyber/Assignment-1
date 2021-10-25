@@ -21,8 +21,10 @@ const MOCK_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8];
 const emptyString = "";
 
 const MOCK_FILTERS = [
-  { label: "Laptop", value: "laptop" },
-  { label: "Earphones", value: "earphones" },
+  { label: "Women's Clothing", value: "female_clothing" },
+  { label: "Men's Clothing", value: "men's clothing" },
+  { label: "Jewelery", value: "jewelery" },
+  { label: "Electronics", value: "electronics" },
 ];
 
 export const Dashboard = () => {
@@ -33,6 +35,12 @@ export const Dashboard = () => {
   const isProductLoading = useSelector(isProductLoading$);
   const isSalesLoading = useSelector(isSalesLoading$);
   const [productsToBeDisplayed, setProductsToBeDisplayed] = useState(products);
+
+  const selectedCategory = useMemo(() => {
+    return (
+      MOCK_FILTERS.find((e) => e.value === paginationFilters?.category) || null
+    );
+  }, [paginationFilters]);
 
   useEffect(() => {
     dispatch(
@@ -132,9 +140,7 @@ export const Dashboard = () => {
           <CustomDropdown
             options={MOCK_FILTERS}
             placeholder="Filter By Category"
-            value={MOCK_FILTERS.find(
-              (e) => e.value === paginationFilters?.category
-            )}
+            value={selectedCategory}
             onChange={(selectedOption) =>
               handleFetchProducts({
                 ...paginationFilters,

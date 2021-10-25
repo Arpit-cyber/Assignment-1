@@ -131,7 +131,7 @@ export const CardComponent = ({ product }) => {
         </div>
         <Card.Text className="ellipsis desc">{product.description}</Card.Text>
         <div className="star-container">
-          <Card.Text className="desc">Price: ₹ {product.price}</Card.Text>
+          <Card.Text className="desc">Price: $ {product.price}</Card.Text>
           <CustomRating rating={product.rating} readonly={true} />
         </div>
         <div className="d-flex flex-row justify-content-between">

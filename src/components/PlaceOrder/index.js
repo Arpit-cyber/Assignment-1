@@ -1,11 +1,12 @@
 import React from "react";
 import { CustomModal } from "../common/Modal";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import {
   hideModal,
   productsInCart$,
   setSuccessMessage,
   setSelectedModal,
+  isPlacingOrder$,
 } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart, placeOrder, removeFromCart } from "../../services";
@@ -13,6 +14,7 @@ import { fetchCart, placeOrder, removeFromCart } from "../../services";
 export const PlaceOrder = () => {
   const dispatch = useDispatch();
   const productsInCart = useSelector(productsInCart$);
+  const isPlacingOrder = useSelector(isPlacingOrder$);
 
   const getTotalAmount = () =>
     productsInCart
@@ -50,12 +52,22 @@ export const PlaceOrder = () => {
     <CustomModal onHide={handleReset} title="Confirm Order">
       <>
         <div className="place-order-message-container">
-          <p>Your total amount is Rs. {getTotalAmount()}.</p>
+          <p>Your total amount is $ {getTotalAmount()}.</p>
           <p>Please confirm to place order.</p>
         </div>
         <div className="custom-modal-button-group">
           <Button variant="success" onClick={handleSubmit}>
-            Confirm
+            {isPlacingOrder ? (
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+            ) : (
+              "Confirm"
+            )}
           </Button>
           <Button variant="outline-success" onClick={handleReset}>
             Close

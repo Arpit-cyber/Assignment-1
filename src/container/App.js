@@ -73,25 +73,26 @@ function App() {
 
 const PageRoute = ({ path, children }) => {
   const isRedirectingToLoginOrRegister =
-    path === "/login" || path === "/register" || path === "/logout";
+    path === "/login" || path === "/register";
   const isAuthenticated = localStorage.getItem("isAuthenticated");
   const isLoggedOut = localStorage.getItem("isLoggedOut");
 
   if (isAuthenticated === "true") {
-    if (isRedirectingToLoginOrRegister) return <Redirect to="/" />;
+    if (isRedirectingToLoginOrRegister || path === "/logout")
+      return <Redirect to="/" />;
     return <Route path={path}>{children}</Route>;
   } else {
     if (path !== "/" && path !== "/products/:id") {
-      if (
-        isRedirectingToLoginOrRegister ||
-        (path === "/logout" && isLoggedOut === "true")
-      ) {
+      if (isRedirectingToLoginOrRegister) {
         return (
           <Route path={path}>
             {path === "/register" && <RegisterScreen />}
             {path === "/login" && <LoginScreen />}
-            {path === "/logout" && <LogoutScreen />}
           </Route>
+        );
+      } else if (path === "/logout" && isLoggedOut === "true") {
+        return (
+          <Route path={path}>{path === "/logout" && <LogoutScreen />}</Route>
         );
       } else {
         return (
